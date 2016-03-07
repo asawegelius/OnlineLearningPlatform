@@ -53,7 +53,7 @@ none
 ### Date:
 07-03-16
 ### Time:
-21:30-23
+21:30-23:00
 ### Faciliator:
 Åsa Wegelius
 ### Notes:
