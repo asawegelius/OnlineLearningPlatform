@@ -22,7 +22,7 @@ It has been decided that two channels of communications will be used. Facebook f
 It has been decided that the next meeting will be on the 16.02.16 at school.
 ______________________________________________________________________________________________________________________________________
 ### Meeting Attended by: 
-Youssef Alamood, Adrian Lungeanu, Ionut Vieru, Tudor Stoica
+Youssef Alamood, Adrian Lungeanu, Ionut Vieru, Tudor Stoica, Åsa Wegelius
 ### Absent from meeting:
 none
 ### Date:
@@ -33,10 +33,15 @@ none
 Åsa Wegelius
 ### Notes:
 We need to make a comparison on between apache and tomcat webserver
+
 Adrian writes swat on business side
+
 Youssef write swat on technology site
+
 Adrian makes a crush course on scrum tommorow
+
 Åsa will make budgetery document
+
 Ionut could you make uml diagram for the  the requriments
 
 ______________________________________________________________________________________________________________________________________
