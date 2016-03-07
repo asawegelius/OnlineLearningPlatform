@@ -47,16 +47,26 @@ Ionut could you make uml diagram for the  the requriments
 ______________________________________________________________________________________________________________________________________
 
 ### Meeting Attended by: 
-
+Adrian Lungeanu, Ionut Vieru, Tudor Stoica, Åsa Wegelius, Clovis Lebret
 ### Absent from meeting:
-
+none
 ### Date:
-
+07-03-16
 ### Time:
-
+21:30-23
 ### Faciliator:
-
+Åsa Wegelius
 ### Notes:
+Tudor and Åsa will rewrite Quality Management Strategy to fit our project
+
+No one will take tasks from the Backlog if they don't intend to make them
+
+If you realize you will not have time to make a task you have taken, return it in time, not the delivery day
+
+We will have a meeting at KEA 08-03-16 to discuss architecture for the Solution Document that shall be delivered 11-03-16.
+
+We will use [Scrummy ](https://scrumy.com/OnlineLearningPlatform) as Scrum board so we can update it  from home.
+
 
 
 ______________________________________________________________________________________________________________________________________
