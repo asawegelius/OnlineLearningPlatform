@@ -109,15 +109,15 @@ I will look at the architecture from three different perspectives. The structure
 
 #### The application structure
 The frontend is a browser interface, the View. The Rest API is the communication interface between the frontend and the backend. The backend have a controller layer and a model layer. The persistence objects is a subset of the model layer. Hibernate is the ORM, that is, handles the object-relational-mapping between the application and the relational database (MySQL).
-[Application](http://wegelius.se/bilder/OLP.png)
+![Application](http://wegelius.se/bilder/OLP.png "Application overview")
 
 #### The system structure
 The system consists of three separate restful services, one for Students, one for Content Providers and one for Administrators.  
-[System](http://wegelius.se/bilder/Handlers.png)
+![System](http://wegelius.se/bilder/Handlers.png "System overview")
 
 #### Tomcat cluster
 Tomcat have a recomended limit of 500 simultanious users. This is the perspective of if there is a need to handle more.
-[Cluster](http://wegelius.se/bilder/LoadBalancer.png)
+![Cluster](http://wegelius.se/bilder/LoadBalancer.png "cluster overview")
 
 ###5.4	Server setup
 
