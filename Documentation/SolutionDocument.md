@@ -4,7 +4,7 @@
 
 | version   | Revision        | date    |	Implemented by| 
 | --------- |:---------------:| :-----: |--------------:| 
-|           |                 |         |               |
+|   1.0.0   | ch 5.6          |08-03-16 | Åsa Wegelius  |
 |           |                 |         |               |
 |           |                 |         |               |
 
@@ -118,16 +118,21 @@ eg.]_
 _[What should the system be able to do. Behavior or functions of the system]_
 
 ###5.6	Non-functional requirements
+####Usability
+![Color palette for the user interface](http://wegelius.se/bilder/OnlineLearningPlatformPalette.jpg "Color Palette")
+#### Design Constraints
+#####	Frontend
+>The web-based interface shall run on Explorer, Chrome, Safari.
+>Languages: JSP, HTML5, JavaScript
 
-_[How do we measure that the system works as it should.Specifies criteria that can be used to judge the operation of a system._
+####	Backend
+>Java, Java Servlet API
 
-_fx._
-* _How many requests/second a system can handle_
-* _Number of users per hour_
-* _Response time for 90% of the requests_
-* _Startup time_
-* _Request size and round trips_
-* _Recovery time from backup]_
+####	Server
+>Apache Tomcat 8
+
+####	Database
+<MySQL
 
 ###5.7	Capacity recommendations
 
