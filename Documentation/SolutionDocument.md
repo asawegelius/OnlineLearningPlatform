@@ -137,9 +137,11 @@ The system shall support English, Danish, Swedish and Arabic
 * Check and remove spam comments, form submissions and user accounts
 * Check for any broken links
 * Check for 404 errors and resolve these by fixing links or redirecting
+
 ##### Website Maintenance monthly check, downtime atm 6h
 * Check website loading speed. If more than 3 seconds then tweek/check the server
 * Review security scans and resolve any issues
+
 ##### Website Maintenance quarterly check, downtime atm 6h
 * Test the website to ensure that it looks and displays properly on the most popular browsers and mobile devices
 * Check backup health by restoring the most recent backup to a separate web server
