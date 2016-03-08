@@ -130,6 +130,20 @@ Users and Power Users shall need a browser and an internet connection to access 
 The system shall support English, Danish, Swedish and Arabic
 
 #### Reliability
+##### Website Maintenance weekly check, downtime atm 2h
+* All pages on the front end of the website are loading without errors
+* Check all forms to ensure they are working properly
+* Review and resolve any issues with emails sent from the web server
+* Check and remove spam comments, form submissions and user accounts
+* Check for any broken links
+* Check for 404 errors and resolve these by fixing links or redirecting
+##### Website Maintenance monthly check, downtime atm 6h
+* Check website loading speed. If more than 3 seconds then tweek/check the server
+* Review security scans and resolve any issues
+##### Website Maintenance quarterly check, downtime atm 6h
+* Test the website to ensure that it looks and displays properly on the most popular browsers and mobile devices
+* Check backup health by restoring the most recent backup to a separate web server
+* Check the uptime logs. If uptime is less than 99.9% then check/tweek the server
 
 #### Supportability
 ##### Coding Standards
@@ -142,7 +156,7 @@ The system shall support English, Danish, Swedish and Arabic
 #####	Frontend
 The web-based interface shall run on Explorer, Chrome, Safari.
 
-Languages: JSP, HTML5, JavaScript, CSS, LESS, MySQL
+Languages: JSP, HTML5, JavaScript, CSS, LESS
 
 #####	Backend
 Java, Java Servlet API
