@@ -105,9 +105,20 @@ _[Detailed description of the in the following sub sections]_
 _[Explain technical terms used so that the business can understand it.]_
 
 ###5.3	Architecture overview
+I will look at the architecture from three different perspectives. The structure of the applications, the structure of the system and the structure of a Tomcat cluster.
 
-_[Description of components involved and drawing of architecture]_
- 
+#### The application structure
+The frontend is a browser interface, the View. The Rest API is the communication interface between the frontend and the backend. The backend have a controller layer and a model layer. The persistence objects is a subset of the model layer. Hibernate is the ORM, that is, handles the object-relational-mapping between the application and the relational database (MySQL).
+[Application](http://wegelius.se/bilder/OLP.png)
+
+#### The system structure
+The system consists of three separate restful services, one for Students, one for Content Providers and one for Administrators.  
+[System](http://wegelius.se/bilder/Handlers.png)
+
+#### Tomcat cluster
+Tomcat have a recomended limit of 500 simultanious users. This is the perspective of if there is a need to handle more.
+[Cluster](http://wegelius.se/bilder/LoadBalancer.png)
+
 ###5.4	Server setup
 
 _[Description of servers setup and sizing, include a drawing of setup
