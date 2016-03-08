@@ -119,20 +119,39 @@ _[What should the system be able to do. Behavior or functions of the system]_
 
 ###5.6	Non-functional requirements
 ####Usability
+#####Color Palette for the User Interface:  
 ![Color palette for the user interface](http://wegelius.se/bilder/OnlineLearningPlatformPalette.jpg "Color Palette")
+##### Training
+A user shall not require any training to use the system. It shall be intuitive.
+A power user (Content Provider) need to know how to create videos
+#####Accessibility
+Users and Power Users shall need a browser and an internet connection to access the system
+##### Localization
+The system shall support English, Danish, Swedish and Arabic
+
+#### Reliability
+
+#### Supportability
+##### Coding Standards
+* [Java Coding Standards](http://www.oracle.com/technetwork/java/codeconvtoc-136057.html)
+* [HTML(5) & CSS Style Guide and Coding Conventions](http://www.w3schools.com/html/html5_syntax.asp)
+* [JavaScript Style Guide and Coding Conventions](http://www.w3schools.com/js/js_conventions.asp)
+* [CSS and LESS Coding Standards](http://www.runopencode.com/index.php/how-we-code/css-and-less-coding-standards)
+
 #### Design Constraints
 #####	Frontend
->The web-based interface shall run on Explorer, Chrome, Safari.
->Languages: JSP, HTML5, JavaScript
+The web-based interface shall run on Explorer, Chrome, Safari.
 
-####	Backend
->Java, Java Servlet API
+Languages: JSP, HTML5, JavaScript, CSS, LESS, MySQL
 
-####	Server
->Apache Tomcat 8
+#####	Backend
+Java, Java Servlet API
 
-####	Database
-<MySQL
+#####	Server
+Apache Tomcat 8
+
+#####	Database
+MySQL
 
 ###5.7	Capacity recommendations
 
