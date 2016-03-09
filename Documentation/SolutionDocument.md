@@ -2,11 +2,11 @@
 
 ###1.2	Revision History
 
-| version   | Revision        | date    |	Implemented by| 
-| --------- |:---------------:| :-----: |--------------:| 
-|   1.0.0   | ch 5.6          |08-03-16 | Åsa Wegelius  |
-|   1.0.1   | 5.3,5.4,6,7,8   |09-03-16 | Åsa Wegelius  |
-|   1.0.2   | 5.8             |09-03-16 | Clovis Lebret |
+| version   | Revision          | date    |	Implemented by| 
+| --------- |:-----------------:| :-----: |--------------:| 
+|   1.0.0   | ch 5.6            |08-03-16 | Åsa Wegelius  |
+|   1.0.1   | 5.3,5.4,6,7,3.4   |09-03-16 | Åsa Wegelius  |
+|   1.0.2   | 5.8               |09-03-16 | Clovis Lebret |
 
 ###1.3	Approvals
 
@@ -56,11 +56,7 @@
 7.	Failover and scalability  
   7.2	Technical implementation plan  
   7.3	Solution implementation components (work breakdown structure)  
-18.	Cost  
-  18.2	Platform cost  
-  18.3	License and support  
-  18.4	Operational Cost  
-19. Risks  
+8. Risks  
 
 
 ##3.	General
@@ -81,18 +77,27 @@ _Cheaper...]_
 
 ###3.4	Cost summary
 
-_[High level cost elements that the project will carry:_ 
+###8.2.	Platform cost
+The system will run on Wegelius private server at no cost. If or when the system will outgrow its current location is impossible to foresee and the future platform cost is therefore not feasible to tell.    
 
-* _Hosting_
-* _Software licenses_
-* _Operations costs_
-* _Software development hours_
-* _…_
+###8.3.	License and support 
+|Company           	                          |License/Service     |Amount/year         |
+|--------------------------------------------:|:------------------:|-------------------:|	
+| [DNS Made Easy](http://www.dnsmadeeasy.com/)|                    | $29.95             |	
+|                                             |                    |                    |
+|                                             |                    |                    |	
+|                                             |                    |     Total: $29.95  |
 
-_High level cost elements that the project will not carry as it can use existing architecture..._
+###8.4.	Operational Cost
+|Operational Expense          |Amount/year                           |
+|----------------------------:|-------------------------------------:|	
+| Weekly maintenance          | 2 man-hours/week = 104               |	
+| Monthly maintenance         | 4 man-hours/month = 48               |
+| Quarterly maintenance       | 4 man-hours/quarter = 16             |	
+|                             |                                      |
+|                             |                                      |
+|                             |            Total: 168 man-hours/year |
 
-* _Share hosting with other projects_
-* _…]_
 
 ##4.	Recommendation and next steps
 
@@ -222,31 +227,7 @@ _[How should the system be implemented with timeline.]_
 #### Course Content
 ![Course Content](http://wegelius.se/bilder/Cont_WBS.png "Course Content")
 
-##8.	Cost
-
-###8.2.	Platform cost
-The system will run on Wegelius private server at no cost. If or when the system will outgrow its current location is impossible to foresee and the future platform cost is therefore not feasible to tell.    
-
-###8.3.	License and support 
-|Company           	                          |License/Service     |Amount/year         |
-|--------------------------------------------:|:------------------:|-------------------:|	
-| [DNS Made Easy](http://www.dnsmadeeasy.com/)|                    | $29.95             |	
-|                                             |                    |                    |
-|                                             |                    |                    |	
-|                                             |                    |     Total: $29.95  |
-
-###8.4.	Operational Cost
-|Operational Expense          |Amount/year                           |
-|----------------------------:|-------------------------------------:|	
-| Weekly maintenance          | 2 man-hours/week = 104               |	
-| Monthly maintenance         | 4 man-hours/month = 48               |
-| Quarterly maintenance       | 4 man-hours/quarter = 16             |	
-|                             |                                      |
-|                             |                                      |
-|                             |            Total: 168 man-hours/year |
-
-
-##9.	Risks
+##8.	Risks
 
 _[What risks are there in the project.]_
 
