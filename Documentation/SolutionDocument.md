@@ -5,7 +5,7 @@
 | version   | Revision        | date    |	Implemented by| 
 | --------- |:---------------:| :-----: |--------------:| 
 |   1.0.0   | ch 5.6          |08-03-16 | Åsa Wegelius  |
-|   1.0.1   | 5.3,5.4,7.2     |09-03-16 | Åsa Wegelius  |
+|   1.0.1   | 5.3,5.4,6,7.2   |09-03-16 | Åsa Wegelius  |
 |           |                 |         |               |
 
 ###1.3	Approvals
@@ -185,8 +185,7 @@ MySQL
 _[How does the system scale and how do we measure it under SPT.]_
 
 ##6.	Impact on other system
-
-_[How does the new system impact other system or infrastructure as the company.]_
+__SpeedVoter__ are installed on the same hardware server but runs in a different web server. Speedvoter is an e-voting system with about 300 000 users. We will continuous monitor the performance to see that the server capacity can handle both. 
 
 ##7.	Failover and scalability
 
