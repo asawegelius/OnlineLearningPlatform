@@ -202,22 +202,22 @@ The setup to handle failovers is use of a synchronized backup server. We will us
 _[How should the system be implemented with timeline.]_
 
 ###7.3	Solution implementation components (work breakdown structure)
-![Total WBS](http://wegelius.se/bilder/OLP_WBS.jpg "total WBS")
+![Total WBS](http://wegelius.se/bilder/WBS_OLP.png "total WBS")
 
 #### Management
-![Project Management](http://wegelius.se/bilder/PM_WBS.jpg "Project Management WBS")
+![Project Management](http://wegelius.se/bilder/PM_WBS.png "Project Management WBS")
 
 #### Requirements
-![Requirements](http://wegelius.se/bilder/Req_WBS.jpg "Requirements WBS")
+![Requirements](http://wegelius.se/bilder/Req_WBS.png "Requirements WBS")
 
 #### Preparation
-![Preparations](http://wegelius.se/bilder/Prep_WBS.jpg "Preparations")
+![Preparations](http://wegelius.se/bilder/Prep_WBS.png "Preparations")
 
 #### Development
-![Development](http://wegelius.se/bilder/Dev_WBS.jpg "Development")
+![Development](http://wegelius.se/bilder/Dev_WBS.png "Development")
 
 #### Course Content
-![Course Content](http://wegelius.se/bilder/Cont_WBS.jpg "Course Content")
+![Course Content](http://wegelius.se/bilder/Cont_WBS.png "Course Content")
 
 ##8.	Cost
 
