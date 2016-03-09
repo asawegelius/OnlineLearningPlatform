@@ -183,7 +183,10 @@ MySQL
 ###5.7	Capacity recommendations
 
 _[How does the system scale and how do we measure it under SPT.]_
+
 When manipulating scalable system, it's important to take in consideration the available capacity on the long term. Since we will be using a mysql database as a storage solution, we will be provided options that limit the resources used by the backup process, in order to minimize backup overhead for busy or huge databases, or specify behaviors of the process if he has to encounter resource issues. On the future we might also imagine partitioning/sharding the database to additional server, making sure the system sustain.
+
+As for the capacity planning, it's very difficult to answer such a vast question of scalability. We might consider using MySQL Cluster, which is a highly scalable, real-time and provides automatic data partitioning with load balancing.
 
 ##6.	Impact on other system
 __SpeedVoter__ are installed on the same hardware server but runs in a different web server. Speedvoter is an e-voting system with about 300 000 users. We will continuous monitor the performance to see that the server capacity can handle both. 
