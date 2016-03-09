@@ -228,12 +228,12 @@ _[How should the system be implemented with timeline.]_
 The system will run on Wegelius private server at no cost. If or when the system will outgrow its current location is impossible to foresee and the future platform cost is therefore not feasible to tell.    
 
 ###8.3.	License and support 
-|Company           	                          |License/Service     |Amount/year        |
-|--------------------------------------------:|:------------------:|------------------:|	
-| [DNS Made Easy](http://www.dnsmadeeasy.com/)|                    |                   |	
-|                                             |                    |                   |
-|                                             |                    |                   |	
-|                                             |                    |                   |
+|Company           	                          |License/Service     |Amount/year         |
+|--------------------------------------------:|:------------------:|-------------------:|	
+| [DNS Made Easy](http://www.dnsmadeeasy.com/)|                    | $29.95             |	
+|                                             |                    |                    |
+|                                             |                    |                    |	
+|                                             |                    |     Total: $29.95  |
 
 ###8.4.	Operational Cost
 |Operational Expense          |Amount/year                           |
