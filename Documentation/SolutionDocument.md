@@ -5,7 +5,7 @@
 | version   | Revision        | date    |	Implemented by| 
 | --------- |:---------------:| :-----: |--------------:| 
 |   1.0.0   | ch 5.6          |08-03-16 | Åsa Wegelius  |
-|           |                 |         |               |
+|   1.0.1   | 5.3,5.4,7.2     |09-03-16 | Åsa Wegelius  |
 |           |                 |         |               |
 
 ###1.3	Approvals
