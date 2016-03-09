@@ -193,7 +193,7 @@ __SpeedVoter__ are installed on the same hardware server but runs in a different
 
 ##7.	Failover and scalability
 
-The setup to handle failovers is use of a synchronized backup server. We will use a service called [DNS Made Easy](http://www.dnsmadeeasy.com/) to monitor the server. Then it is just to write a simple script that checks your database too and make the service check it to ensure that all is ok. It is a fairly straight forward solution. 
+The setup to handle failovers is use of a synchronized backup server. We will use a service called [DNS Made Easy](http://www.dnsmadeeasy.com/) to monitor the server. Then it is just to write a simple script that checks your database too and make the service use the script to ensure that all is ok. It is a fairly straight forward solution. 
 
 ![Failover setup](http://wegelius.se/bilder/FailoverSetup.png "Failover setup")
 
