@@ -197,26 +197,22 @@ _[How does the system scale and how does it handle failover.]_
 _[How should the system be implemented with timeline.]_
 
 ###7.3	Solution implementation components (work breakdown structure)
+![Total WBS](http://wegelius.se/bilder/OLP_WBS.jpg "total WBS")
 
-_[What steps do you need to do to implement the product or project_
-_eg._
-####Preparation
-1. _Analysis of requirements_
-2. _..._
-3. _Create installation manuals_
-4. _Performance testing_
+#### Management
+![Project Management](http://wegelius.se/bilder/PM_WBS.jpg "Project Management WBS")
 
-####Development of software
-1. _Web service development_
-2. _..._
-3. _Frontend development_
+#### Requirements
+![Requirements](http://wegelius.se/bilder/Req_WBS.jpg "Requirements WBS")
 
-####Hardware setup
-1. _Install Hypervisor_
-2. _Create VM’s for project_
-3. _Install webservers and databases_
-4. _SPT test of basic setup_
-5. _...]_
+#### Preparation
+![Preparations](http://wegelius.se/bilder/Prep_WBS.jpg "Preparations")
+
+#### Development
+![Development](http://wegelius.se/bilder/Dev_WBS.jpg "Development")
+
+#### Course Content
+![Course Content](http://wegelius.se/bilder/Cont_WBS.jpg "Course Content")
 
 ##8.	Cost
 
