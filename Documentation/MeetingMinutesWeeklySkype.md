@@ -22,7 +22,7 @@ It has been decided that two channels of communications will be used. Facebook f
 It has been decided that the next meeting will be on the 16.02.16 at school.
 ______________________________________________________________________________________________________________________________________
 ### Meeting Attended by: 
-Youssef Alamood, Adrian Lungeanu, Ionut Vieru, Tudor Stoica
+Youssef Alamood, Adrian Lungeanu, Ionut Vieru, Tudor Stoica, Åsa Wegelius
 ### Absent from meeting:
 none
 ### Date:
@@ -33,25 +33,40 @@ none
 Åsa Wegelius
 ### Notes:
 We need to make a comparison on between apache and tomcat webserver
+
 Adrian writes swat on business side
+
 Youssef write swat on technology site
+
 Adrian makes a crush course on scrum tommorow
+
 Åsa will make budgetery document
+
 Ionut could you make uml diagram for the  the requriments
 
 ______________________________________________________________________________________________________________________________________
 
 ### Meeting Attended by: 
-
+Adrian Lungeanu, Ionut Vieru, Tudor Stoica, Åsa Wegelius, Clovis Lebret
 ### Absent from meeting:
-
+none
 ### Date:
-
+07-03-16
 ### Time:
-
+21:30-23:00
 ### Faciliator:
-
+Åsa Wegelius
 ### Notes:
+Tudor and Åsa will rewrite Quality Management Strategy to fit our project
+
+No one will take tasks from the Backlog if they don't intend to make them
+
+If you realize you will not have time to make a task you have taken, return it in time, not the delivery day
+
+We will have a meeting at KEA 08-03-16 to discuss architecture for the Solution Document that shall be delivered 11-03-16.
+
+We will use [Scrummy ](https://scrumy.com/OnlineLearningPlatform) as Scrum board so we can update it  from home.
+
 
 
 ______________________________________________________________________________________________________________________________________
