@@ -7,7 +7,7 @@
 |   1.0.0   | ch 5.6            |08-03-16 | Åsa Wegelius  |
 |   1.0.1   | 5.3,5.4,6,7,3.4   |09-03-16 | Åsa Wegelius  |
 |   1.0.2   | 5.8               |09-03-16 | Clovis Lebret |
-
+|   1.0.3   | 3.4, 4, 5.4       |10-03-16 | Åsa Wegelius  |          
 ###1.3	Approvals
 
 | version   | Revision        | date    |	Implemented by| 
@@ -100,8 +100,8 @@ The system will run on Wegelius private server at no cost. If or when the system
 
 
 ##4.	Recommendation and next steps
+The idea with internet is that the more we share the smarter we get. This platform shares the same idea. All hardware is in place since we can share the setup SpeedVoter uses in the start-up phase. The only thing needed is the man-hour our team is prepared to deliver to make this dream come through. 
 
-_[Why should we do this project and when should it start. What needs to happen to do this project and what steps does the project involve.]_
 ##5.	Detailed solution description
 _[Detailed description of the in the following sub sections]_
 
