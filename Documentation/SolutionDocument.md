@@ -120,7 +120,7 @@ The idea with internet is that the more we share the smarter we get. This platfo
 
 ###5.2	Technical dictionary
 |   Term      | Meaning                                                                                                         |  
-| ----------- |:---------------------------------------------------------------------------------------------------------------:| 
+| ----------- |-----------------------------------------------------------------------------------------------------------------| 
 | API         |Application programming interface                                                                                |
 | DNS         | Domain Name System, a hierarchical decentralized naming system for computers, services or any resources connected to the internet |
 | Failover    |A backup operation that automatically switches to a standby database, server or network if the primary system fails or is temporarily shut down for servicing.| 
