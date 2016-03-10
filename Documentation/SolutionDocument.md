@@ -72,6 +72,10 @@ Around 40% of the population have an internet access today. This is just those t
 
 We will give all those that want to share their knowledge and all those that want to learn more a platform where they can connect. It will be designed to support an increasing amount of languages. 
 
+The platform will be an online site with access to variation of courses on subjects which are introduced by experts in those areas. After going through each part of the course the student can review and exam himself or herself on the learning by going through multiple choice tests.  
+
+People and enterprises interested in using the platform are paying a subscription per user which is going to be specified later on.
+
 We will offer a platform that is:
 * Easy to access. All with a browser and a login can use it.
 * For those with knowledge they want to share but are not English speaking.
@@ -110,10 +114,9 @@ The system will run on Wegelius private server at no cost. If or when the system
 
 
 ##4.	Recommendation and next steps
-The idea with internet is that the more we share the smarter we get. This platform shares the same idea. All hardware is in place since we can share the setup SpeedVoter uses in the start-up phase. The only thing needed is the man-hour our team is prepared to deliver to make this dream come through. 
+The idea with internet is that the more we share the smarter we get. This platform shares the same idea. All hardware is in place since we can share the setup SpeedVoter uses in the start-up phase. The only thing needed is the man-hour our team is prepared to deliver to make this idea come through. 
 
 ##5.	Detailed solution description
-_[Detailed description of the in the following sub sections]_
 
 ###5.2	Technical dictionary
 
