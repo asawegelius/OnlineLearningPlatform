@@ -256,7 +256,7 @@ _[What risks are there in the project.]_
 
 |Item#	    |Area       	|Description	     |Rank (RF=i*p)      |Mitigation		|Solution 		|
 |-----------|:-----------------:|:------------------:|:-----------------:|:--------------------:|----------------------:|	
-|           |                   |                    |                   |                      |                       |	
+| #1        | Team Management   |                    |                   |                      |                       |	
 |           |                   |                    |                   |                      |                       |	
 |           |                   |                    |                   |                      |                       |	
 |           |                   |                    |                   |                      |                       |
