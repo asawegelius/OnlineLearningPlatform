@@ -2,12 +2,12 @@
 
 ###1.2	Revision History
 
-| version   | Revision          | date    |	Implemented by| 
-| --------- |:-----------------:| :-----: |--------------:| 
-|   1.0.0   | ch 5.6            |08-03-16 | Åsa Wegelius  |
-|   1.0.1   | 5.3,5.4,6,7,3.4   |09-03-16 | Åsa Wegelius  |
-|   1.0.2   | 5.8               |09-03-16 | Clovis Lebret |
-|   1.0.3   | 3.2,3.3,3.4,4,5.4 |10-03-16 | Åsa Wegelius  |   
+| version   | Revision               | date    |	Implemented by| 
+| --------- |------------------------| :-----: |--------------| 
+|   1.0.0   | ch 5.6                 |08-03-16 | Åsa Wegelius  |
+|   1.0.1   | 5.3,5.4,6,7,3.4        |09-03-16 | Åsa Wegelius  |
+|   1.0.2   | 5.8                    |09-03-16 | Clovis Lebret |
+|   1.0.3   | 3.2,3.3,3.4,4, 5.2,5.4 |10-03-16 | Åsa Wegelius  |   
 
 ###1.3	Approvals
 
@@ -119,8 +119,16 @@ The idea with internet is that the more we share the smarter we get. This platfo
 ##5.	Detailed solution description
 
 ###5.2	Technical dictionary
-
-_[Explain technical terms used so that the business can understand it.]_
+|   Term      | Meaning                                                                                                         |  
+| ----------- |:---------------------------------------------------------------------------------------------------------------:| 
+| API         |Application programming interface                                                                                |
+| DNS         | Domain Name System, a hierarchical decentralized naming system for computers, services or any resources connected to the internet |
+| Failover    |A backup operation that automatically switches to a standby database, server or network if the primary system fails or is temporarily shut down for servicing.| 
+|Load Balancer|Distributes workloads across multiple computing resources, such as computers, a computer cluster, network links, central processing units or disk drives.|
+|Persistence  |What you save in a data storage to outlive the process that created it.|
+|Rest API	    |An architectural style, and an approach to communications that is often used in the development of Web services  |
+|Sharding     |A type of database partitioning that separates very large databases the into smaller, faster, more easily managed parts called data shards.|
+|Web Service  |An application provides a service to other applications and communicates it via a defined protocol over internet.|
 
 ###5.3	Architecture overview
 I will look at the architecture from three different perspectives. The structure of the applications, the structure of the system and the structure of a Tomcat cluster.
