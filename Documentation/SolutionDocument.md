@@ -7,7 +7,8 @@
 |   1.0.0   | ch 5.6            |08-03-16 | Åsa Wegelius  |
 |   1.0.1   | 5.3,5.4,6,7,3.4   |09-03-16 | Åsa Wegelius  |
 |   1.0.2   | 5.8               |09-03-16 | Clovis Lebret |
-|   1.0.3   | 3.4, 4, 5.4       |10-03-16 | Åsa Wegelius  |          
+|   1.0.3   | 3.2,3.3,3.4,4,5.4 |10-03-16 | Åsa Wegelius  |   
+
 ###1.3	Approvals
 
 | version   | Revision        | date    |	Implemented by| 
@@ -60,20 +61,29 @@
 
 
 ##3.	General
+The physical classroom is losing its monopoly as the only learning method, since the arrival of world wide web students can access information and learn from everywhere they are in the world just by having an internet connection and an online learning platform that help them learn long variety of subjects from economic to programming languages to philosophy and literature.  With online learning platform students can learn and implement their learning on their own pace and time.
 
-_[General description of solution at a high level eg. Flow of the process you want to build a solution for, the sample below is for   medical transcription]_
- 
+In this project we will develop the backbone of an online education platform. It will support three roles, Admin, Content Provider and Student.  Admin administer the system, Content Provider produces and update courses and Student takes courses. The outcome of the project will be a prototype that fulfil this functions and can be extended to a further advanced learning platform.
 
 ###3.2	Solution summary
+About 2 billion out of 7 billion humans speaks English today. A platform restricted to English rules out 5 billion humans.
 
-_[In short this project will …. improve/make it cheaper/give new options for …]_
+Around 40% of the population have an internet access today. This is just those that have their own personal internet connection. There are other ways to access internet, e.g. from a friend’s home, from your job, from a cafe.
+
+We will give all those that want to share their knowledge and all those that want to learn more a platform where they can connect. It will be designed to support an increasing amount of languages. 
+
+We will offer a platform that is:
+* Easy to access. All with a browser and a login can use it.
+* For those with knowledge they want to share but are not English speaking.
+* For those that want to study but don’t know English.  
+
 
 ###3.3	Deliverables summary
 
-_[What this project will deliver that can be measured afterwards:_  
-_Better..._  
--Improved..._  
-_Cheaper...]_  
+* Browser interfaces for Students, Content Providers and Admin
+* Web services for Students, Content Providers and Admin
+* Databases for Users and Courses
+ 
 
 ###3.4	Cost summary
 
