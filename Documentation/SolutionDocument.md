@@ -128,9 +128,11 @@ Tomcat have a recomended limit of 500 simultanious users. This is the perspectiv
 ![Cluster](http://wegelius.se/bilder/LoadBalancer.png "cluster overview")
 
 ###5.4	Server setup
+The system uses two databases, one with users and one with courses. The reason is that user information takes little space and can be stored at one location but courses contains videos which both require lots of space and as the product scales streaming uses an abnormal amount of bandwidth. So it will eventually require to be distributed, first to continent and then to countries.
 
-_[Description of servers setup and sizing, include a drawing of setup
-eg.]_
+The system is located at two servers, the primary server and the secondary (backup) server.
+
+![Server setup](http://wegelius.se/bilder/FailoverSetup.png "Server setup")
 
 ###5.5	Functional requirements
 
