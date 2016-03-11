@@ -57,13 +57,13 @@
   5.4	Server setup  
   5.5	Functional requirements  
   5.6	Non-functional requirements  
-  5.7	Capacity recommendations  
+  5.7	Capacity recommendations 
 6.	Impact on other system  
 7.	Failover and scalability
 8.	Technical implementation plan  
-  8.2 Development Environment
-  8.3 Solution implementation components (work breakdown structure) 
-  8.4 Gantt Chart Plan
+  8.2	TDevelopment Environment  
+  8.3	Solution implementation components (work breakdown structure)  
+  8.4	Gantt Chart Plan  
 9. Risks  
 
 
