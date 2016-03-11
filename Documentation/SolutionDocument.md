@@ -8,22 +8,25 @@
 |   1.0.1   | 5.3,5.4,6,7,3.4        |09-03-16 | Åsa Wegelius  |
 |   1.0.2   | 5.8                    |09-03-16 | Clovis Lebret |
 |   1.0.3   | 3.2,3.3,3.4,4, 5.2,5.4 |10-03-16 | Åsa Wegelius  |   
+|   1.0.4   | Ch. 5.5 from Ionut Vieru System Requirement |10-03-16 | Åsa Wegelius  |  
+|   1.0.5   | Ch. 9 Risks            |10-03-16 | Tudor Stoica  |
 
 ###1.3	Approvals
 
-| version   | Revision        | date    |	Implemented by| 
-| --------- |:---------------:| :-----: |--------------:| 
-|           |                 |         |               |
-|           |                 |         |               |
-|           |                 |         |               |
+
+| version   | Name            | title              |	Date    | 
+| --------- |----------------:| ------------------ |----------| 
+|           |                 |                    |          |
+|           |                 |                    |          |
+|           |                 |                    |          |
 
 ###1.4	Distribution
 
-| version   | Revision        | date    |	Implemented by| 
-| --------- |:---------------:| :-----: |--------------:| 
-|           |                 |         |               |
-|           |                 |         |               |
-|           |                 |         |               |
+| version   | Name            | title              |	Date    | 
+| --------- |----------------:| ------------------ |----------| 
+| 1.0.5     | Jarl Tuxen      | Steering Committee | 11-03-16 |
+|           |                 |                    |          |
+|           |                 |                    |          |
 
 ###1.5	Confidentiality Rating
 
@@ -39,7 +42,9 @@
 1.	Solution Document History  
   1.2	Revision History  
   1.3	Approvals  
-  1.4	Distribution  
+  1.4	Distribution 
+  1.5 Confidentiality Rating
+  1.6 Link to online version
 2.	Table of Contents  
 3.	General  
   3.2	Solution summary  
@@ -55,9 +60,11 @@
   5.7	Capacity recommendations  
 6.	Impact on other system  
 7.	Failover and scalability  
-  7.2	Technical implementation plan  
-  7.3	Solution implementation components (work breakdown structure)  
-8. Risks  
+8	Technical implementation plan  
+  8.2 Development Environment
+  8.3 Solution implementation components (work breakdown structure) 
+  8.4 Gantt Chart Plan
+9. Risks  
 
 
 ##3.	General
@@ -213,8 +220,6 @@ MySQL
 
 ###5.7	Capacity recommendations
 
-_[How does the system scale and how do we measure it under SPT.]_
-
 When manipulating scalable system, it's important to take in consideration the available capacity on the long term. Since we will be using a mysql database as a storage solution, we will be provided options that limit the resources used by the backup process, in order to minimize backup overhead for busy or huge databases, or specify behaviors of the process if he has to encounter resource issues. On the future we might also imagine partitioning/sharding the database to additional server, making sure the system sustain.
 
 As for the capacity planning, it's very difficult to answer such a vast question of scalability. We might consider using MySQL Cluster, which is a highly scalable, real-time and provides automatic data partitioning with load balancing.
@@ -228,11 +233,35 @@ The setup to handle failovers is use of a synchronized backup server. We will us
 
 ![Failover setup](http://wegelius.se/bilder/FailoverSetup.png "Failover setup")
 
-###7.2	Technical implementation plan
+##8	Technical implementation plan
 
-_[How should the system be implemented with timeline.]_
+###8.2 Development Environment
+|item                         |Applied for                    |
+|-----------------------------|-------------------------------|
+|__Methods:__                 |                               |
+|Use Case                     |Requirement capturing          |
+|User Story                   |Requirement capturing          |
+|Supplementary Specification  |Requirement capturing          |
+|Class diagram                |Data modeling                  |
+|Backlog                      |Requirement capturing          |
+|                             |                               |
+|__Tools:__                   |                               |
+|NetBeans                     |Construction                   |
+|MySQL Workbench              |Construction                   |
+|GitHub                       |Version control                |
+|Draw.io                      |Modeling                       |
+|Pencil Project               |GUI modeling (mockups)         |
+|                             ||
+|__Languages:__               ||
+|Java                         |backend                        |
+|MySQL                        |DBMS                           |
+|HTML5                        |frontend                       |
+|JavaScript                   |frontend                       |
+|CSS                          |frontend                       |
+|LESS                         |frontend                       |
 
-###7.3	Solution implementation components (work breakdown structure)
+
+###8.3	Solution implementation components (work breakdown structure)
 ![Total WBS](http://wegelius.se/bilder/WBS_OLP.png "total WBS")
 
 #### Management
@@ -254,10 +283,13 @@ _[How should the system be implemented with timeline.]_
 
 _[What risks are there in the project.]_
 
-|Item#	    |Area       	|Description	     |Rank (RF=i*p)      |Mitigation		|Solution 		|
-|-----------|:-----------------:|:------------------:|:-----------------:|:--------------------:|----------------------:|	
-| #1        | Team Management   |                    |                   |                      |                       |	
-|           |                   |                    |                   |                      |                       |	
-|           |                   |                    |                   |                      |                       |	
-|           |                   |                    |                   |                      |                       |
+|Item#	    |Area       	      |Description	       |Rank (RF=i*p)|Mitigation		|Solution 		|
+|-----------|-------------------|--------------------|-------------------|----------------------|----------------------:|	
+| 1.        | Performance       |Lack of sufficient hardware to assure performance in real time | 9=3*3       |Evaluate the possibility to acquire preformat and scalable infrastructure |Migrate the application in a Cloud Infrastructure |	
+| 2.        | Security          |Bad intended users can break the application with penetration tools.| 6=3*2       | Implement a security audit mechanism |Develop and implement security solution|	
+| 3.        | Development       |Lack of time to develop the application | 3=3*1       | Evaluate the developing time allocated to each team member | Outsource the development process |	
+| 4.        | Software          |Users might not agree with the graphical user interface| 3=3*1       |  Prepare a UI survey |Ask an Web Design Specialist|
+
+__Impact__ scale is from 1 to 3: the lowest impact of the risk is 1 and the highest impact is 3
+__Probability__ scale is from 1 to 3: the lowest probability the risk to occur is 1 and the highest probability the risk to occur is 3
 
