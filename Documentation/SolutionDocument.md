@@ -59,8 +59,8 @@
   5.6	Non-functional requirements  
   5.7	Capacity recommendations  
 6.	Impact on other system  
-7.	Failover and scalability  
-8	Technical implementation plan  
+7.	Failover and scalability
+8.	Technical implementation plan  
   8.2 Development Environment
   8.3 Solution implementation components (work breakdown structure) 
   8.4 Gantt Chart Plan
@@ -291,5 +291,6 @@ The setup to handle failovers is use of a synchronized backup server. We will us
 | 4.        | Software          |Users might not agree with the graphical user interface| 3=3*1       |  Prepare a UI survey |Ask an Web Design Specialist|
 
 __Impact__ scale is from 1 to 3: the lowest impact of the risk is 1 and the highest impact is 3
+
 __Probability__ scale is from 1 to 3: the lowest probability the risk to occur is 1 and the highest probability the risk to occur is 3
 
