@@ -3,7 +3,7 @@
 ###1.2	Revision History
 
 | version   | Revision               | date    |	Implemented by| 
-| --------- |------------------------| :-----: |--------------| 
+| --------- |------------------------| ------- |--------------| 
 |   1.0.0   | ch 5.6                 |08-03-16 | Åsa Wegelius  |
 |   1.0.1   | 5.3,5.4,6,7,3.4        |09-03-16 | Åsa Wegelius  |
 |   1.0.2   | 5.8                    |09-03-16 | Clovis Lebret |
@@ -15,7 +15,7 @@
 
 
 | version   | Name            | title              |	Date    | 
-| --------- |----------------:| ------------------ |----------| 
+| --------- |-----------------| ------------------ |----------| 
 |           |                 |                    |          |
 |           |                 |                    |          |
 |           |                 |                    |          |
@@ -23,7 +23,7 @@
 ###1.4	Distribution
 
 | version   | Name            | title              |	Date    | 
-| --------- |----------------:| ------------------ |----------| 
+| --------- |-----------------| ------------------ |----------| 
 | 1.0.5     | Jarl Tuxen      | Steering Committee | 11-03-16 |
 |           |                 |                    |          |
 |           |                 |                    |          |
@@ -279,9 +279,9 @@ The setup to handle failovers is use of a synchronized backup server. We will us
 #### Course Content
 ![Course Content](http://wegelius.se/bilder/Cont_WBS.png "Course Content")
 
-##8.	Risks
-
-_[What risks are there in the project.]_
+###8.4 Gantt Chart Plan
+![Gantt Chart](http://wegelius.se/bilder/GanttChartProjectPlan.png "Gantt Chart")
+##9.	Risks
 
 |Item#	    |Area       	      |Description	       |Rank (RF=i*p)|Mitigation		|Solution 		|
 |-----------|-------------------|--------------------|-------------------|----------------------|----------------------:|	
