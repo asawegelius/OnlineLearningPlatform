@@ -164,7 +164,30 @@ The system is located at two servers, the primary server and the secondary (back
 
 ###5.5	Functional requirements
 
-_[What should the system be able to do. Behavior or functions of the system]_
+Administrator - should be able to:
+* login into the system
+* register Content Providers
+* create, edit, remove courses and description of the courses
+* add/remove videos
+* add, edit, delete exercises files
+* create/edit/remove payment plans
+
+Content Providers - should be able to:
+* login into the system
+* create, edit, remove courses and description of the courses they own
+* add, edit, delete exercises files they own
+* add/remove videos and courses they own
+
+Regular users - should be able to:
+* register into the system
+* login into the system / logout
+* edit profile (personal info, password, etc.)
+* choose payment plans and make payments
+* view courses and videos
+* create playlists
+* view progress of the courses, history, related or recommended videos
+* submit done exercises and receive result
+* search for specific courses
 
 ###5.6	Non-functional requirements
 ####Usability
