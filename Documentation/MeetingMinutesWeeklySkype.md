@@ -71,6 +71,22 @@ We will use [Scrummy ](https://scrumy.com/OnlineLearningPlatform) as Scrum board
 
 ______________________________________________________________________________________________________________________________________
 ### Meeting Attended by: 
+Adrian Lungeanu, Ionut Vieru, Tudor Stoica, Åsa Wegelius
+### Absent from meeting:
+Clovis Lebret
+### Date:
+14-03-16
+### Time:
+21:10-21:45
+### Faciliator:
+Åsa Wegelius
+### Notes:
+* In the PM sprints we have ahead we will implement it so we can work from distance so those not in class can participate. That is, we will have the online scrum board we decided on last meeting and the ones in class will syncronize between the Taskboard in class and the online board.
+* We will not have time to implement a service relevant for this project in time for the System Integration assignment. We will therefore treat the assignment as somthing outside this group work where each one decide themselves what they want to deliver and solve the task themselves.
+* The presentation in Development of Large Systems will be divided in four parts; Hadoop Common, Hadoop Distributed File System (HDFS™), Hadoop YARN and Hadoop MapReduce. We are four that shall do the presentation so each one of us take on part.
+
+______________________________________________________________________________________________________________________________________
+### Meeting Attended by: 
 
 ### Absent from meeting:
 
@@ -98,5 +114,19 @@ ________________________________________________________________________________
 
 
 ______________________________________________________________________________________________________________________________________
+### Meeting Attended by: 
+
+### Absent from meeting:
+
+### Date:
+
+### Time:
+
+### Faciliator:
+
+### Notes:
+
+______________________________________________________________________________________________________________________________________
+
 
 
