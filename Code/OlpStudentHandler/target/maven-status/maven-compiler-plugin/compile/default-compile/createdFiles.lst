@@ -1,0 +1,8 @@
+Main.class
+se\wegelius\olpstudenthandler\dao\HibernateUtil.class
+se\wegelius\olpstudenthandler\dao\IOlpDao.class
+se\wegelius\olpstudenthandler\model\CourseBranch.class
+se\wegelius\olpstudenthandler\model\CourseType.class
+se\wegelius\olpstudenthandler\dao\CourseBranchDao.class
+se\wegelius\olpstudenthandler\dao\OlpDao.class
+se\wegelius\olpstudenthandler\model\Course.class
