@@ -34,7 +34,10 @@ public class CourseBranchDaoTest {
         CourseBranchDao dao = new CourseBranchDao();
         Set<CourseBranch> testBranch = dao.getAll();
         for (CourseBranch b : testBranch) {
-            dao.delete(b);
+            if(b.getCourseBranchName().equals("Test Branch"))
+                dao.delete(b);
+             if(b.getCourseBranchName().equals("New Branch"))
+                dao.delete(b);          
         }
     }
 
