@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 20, 2016 4:31:11 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="se.wegelius.olpstudenthandler.model.MultipleChoiceQuestion" table="multiple_choice_question" catalog="onlinelearningplatform" optimistic-lock="version">
+        <id name="multipleChoiceQuestionId" type="java.lang.Integer">
+            <column name="multiple_choice_question_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="course" class="se.wegelius.olpstudenthandler.model.Course" fetch="select">
+            <column name="mcq_course_fk" not-null="true" />
+        </many-to-one>
+        <many-to-one name="lecture" class="se.wegelius.olpstudenthandler.model.Lecture" fetch="select">
+            <column name="mcq_lecture_fk" not-null="true" />
+        </many-to-one>
+        <property name="mcqName" type="string">
+            <column name="mcq_name" length="45" />
+        </property>
+        <property name="mcqQuestion" type="string">
+            <column name="mcq_question" length="45" />
+        </property>
+        <set name="multipleChoiceAnswers" table="multiple_choice_answer" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="mca_question_fk" not-null="true" />
+            </key>
+            <one-to-many class="se.wegelius.olpstudenthandler.model.MultipleChoiceAnswer" />
+        </set>
+        <set name="multipleChoiceOptionses" table="multiple_choice_options" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="mco_question_fk" />
+            </key>
+            <one-to-many class="se.wegelius.olpstudenthandler.model.MultipleChoiceOptions" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -7,19 +7,19 @@ package se.wegelius.olpstudenthandler.dao;
 
 import se.wegelius.olpstudenthandler.model.CourseBranch;
 import java.util.Set;
+import org.hibernate.Query;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
 /**
  *
  * @author asawe
  */
 public class CourseBranchDaoTest {
-
-    CourseBranchDao dao;
 
     public CourseBranchDaoTest() {
     }
@@ -30,19 +30,64 @@ public class CourseBranchDaoTest {
     }
 
     @AfterClass
-    public static void tearDownClass() {
+    public static void tearDownClass() {      
+        CourseBranchDao dao = new CourseBranchDao();
+        Set<CourseBranch> testBranch = dao.getAll();
+        for (CourseBranch b : testBranch) {
+            dao.delete(b);
+        }
     }
 
     @Before
     public void setUp() {
-        dao = new CourseBranchDao();
     }
 
     @After
     public void tearDown() {
-        if (dao != null) {
-            if (dao.sessionFactory != null) {
-                dao.sessionFactory.close();
+    }
+
+    /**
+     *
+     */
+    @Test
+    public void testAddCourseBranch() {
+        CourseBranchDao dao = new CourseBranchDao();
+        // create a test branch...
+        int sum = dao.count();
+        CourseBranch cb = new CourseBranch();
+        cb.setCourseBranchName("Test Branch");
+        dao.saveOrUpdate(cb);
+        int newSum = dao.count();
+        System.out.println("newSum = " + newSum + " sum = " + sum);
+        assertTrue(sum == (newSum - 1));
+    }
+
+    /**
+     *
+     */
+    @Test
+    public void testGetAll() {
+        CourseBranchDao dao = new CourseBranchDao();
+        int sum = dao.count();
+        Set<CourseBranch> testBranch = dao.getAll();
+        assertTrue(testBranch.size() == sum);
+    }
+
+    /**
+     *
+     */
+    @Test
+    public void testFindById() {
+        CourseBranchDao dao = new CourseBranchDao();
+        CourseBranch cb = new CourseBranch();
+        cb.setCourseBranchName("New Branch");
+        dao.saveOrUpdate(cb);
+        Set<CourseBranch> testBranch = dao.getAll();
+        for (CourseBranch b : testBranch) {
+            if (b.getCourseBranchName().equals("New Branch")) {
+                // find by id
+                CourseBranch tb = dao.findByID(b.getCourseBranchId());
+                assertTrue(tb.getCourseBranchName().equals("New Branch"));
             }
         }
     }
@@ -50,24 +95,13 @@ public class CourseBranchDaoTest {
     /**
      *
      */
-    @org.junit.Test
-    public void testCourseBranch() {
-       
-        // create a test branch...
-        int sum = dao.count();
-        dao.save(new CourseBranch("Test Branch"));
-        int newSum = dao.count();   
-        System.out.println("newSum = " + newSum + " sum = " + sum);
-        //assertTrue(sum == (newSum-1));
-        // find by name
-        CourseBranch testBranch = dao.findByName("Test Branch");
-        assertTrue(testBranch.getBranchName().equals("Test Branch"));
-        // find by id
-        CourseBranch tb = dao.findByID(testBranch.getBranchId());
-        assertTrue(tb.getBranchName().equals("Test Branch"));
-
-        //delete the test branch
-        dao.delete(testBranch);
-        assertTrue(sum == dao.count());
+    @Test
+    public void testGetAllAndDelete() {
+        CourseBranchDao dao = new CourseBranchDao();
+        Set<CourseBranch> testBranch = dao.getAll();
+        for (CourseBranch b : testBranch) {
+            dao.delete(b);
+        }
+        assertTrue(dao.count() == 0);
     }
 }

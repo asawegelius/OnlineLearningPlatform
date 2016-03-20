@@ -171,35 +171,6 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
 	}
 
 	/**
-	 * Find an entity by its name
-	 * 
-	 * @param name
-	 *            the entity's name
-	 * @return the entity
-	 */
-	@SuppressWarnings("unchecked")
-        @Override
-	public T findByName(String name) {
-		Session session = sessionFactory.openSession();
-		Criteria crit = null;
-		try {
-			session.beginTransaction();
-			crit = session.createCriteria(type);
-			crit.add(Restrictions.eq("name", name));
-			session.getTransaction().commit();
-		} catch (HibernateException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				session.close();
-			} catch (HibernateException e) {
-				e.printStackTrace();
-			}
-		}
-		return (T) crit.uniqueResult();
-	}
-
-	/**
 	 * Get all entities
 	 * 
 	 * @return a Set of all entities

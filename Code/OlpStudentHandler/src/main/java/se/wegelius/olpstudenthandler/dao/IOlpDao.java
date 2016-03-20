@@ -36,14 +36,7 @@ public interface IOlpDao<T, ID extends Serializable> {
 	 */
 	T findByID(ID id);
 
-	/**
-	 * Find an entity by its name
-	 * 
-	 * @param name
-	 *            the entity's name
-	 * @return the entity
-	 */
-	T findByName(String name);
+
 
 	/**
 	 * Get all entities
