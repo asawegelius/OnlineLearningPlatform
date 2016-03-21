@@ -102,7 +102,6 @@ Adrian Holm
 * Clovis will strart coding on the server and he estimates that he will finish by the end of the week
 * It has been discused that we might have time to take more for this sprint and it has been decided that we will wait for next week to see how it goes, and then take a decision if we have time for more or not.
 * Clovis will contact Tudor and Ionut via facebook in regards to the other project.
-* 
 ______________________________________________________________________________________________________________________________________
 ### Meeting Attended by: 
 
