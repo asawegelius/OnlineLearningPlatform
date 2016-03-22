@@ -14,8 +14,8 @@ import se.wegelius.olpstudenthandler.model.CourseType;
  */
 public class CourseTypeDao  extends OlpDao<CourseType, Integer> {
     
-    public CourseTypeDao(SessionFactory sessionFactory, Class<CourseType> type) {
-        super(sessionFactory, type);
+    public CourseTypeDao( Class<CourseType> type) {
+        super(type);
     }
 
     /**

@@ -14,8 +14,8 @@ import org.hibernate.SessionFactory;
  */
 public class CourseBranchDao extends OlpDao<CourseBranch, Integer> {
 
-    public CourseBranchDao(SessionFactory sessionFactory, Class<CourseBranch> type) {
-        super(sessionFactory, type);
+    public CourseBranchDao(Class<CourseBranch> type) {
+        super(type);
     }
 
     /**

@@ -12,10 +12,7 @@ import java.util.Set;
 import java.lang.reflect.ParameterizedType;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
 
 
 /**
@@ -31,18 +28,15 @@ import org.hibernate.criterion.Restrictions;
 public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
 
 	private final Class<T> type;
-	protected SessionFactory sessionFactory;
 
 	@SuppressWarnings("unchecked")
 	public OlpDao() {
 		this.type = (Class<T>) ((ParameterizedType) getClass()
 				.getGenericSuperclass()).getActualTypeArguments()[0];
-		this.sessionFactory = HibernateUtil.getSessionFactory();
 	}
 
-	public OlpDao(SessionFactory sessionFactory, Class<T> type) {
+	public OlpDao( Class<T> type) {
 		super();
-		this.sessionFactory = sessionFactory;
 		this.type = type;
 	}
 
@@ -54,7 +48,7 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
 	 */
         @Override
 	public void save(T entity) {
-		Session session = sessionFactory.openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
 			session.save(entity);
@@ -68,6 +62,7 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
                             e.printStackTrace();
 			}
 		}
+                session.close();
 	}
 
 	/**
@@ -78,7 +73,7 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
 	 */
         @Override
 	public void update(T entity) {
-		Session session = sessionFactory.openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
 			session.update(entity);
@@ -92,6 +87,7 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
 				e.printStackTrace();
 			}
 		}
+                session.close();
 	}
 
 	/**
@@ -102,7 +98,7 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
 	 */
         @Override
 	public void saveOrUpdate(T entity) {
-		Session session = sessionFactory.openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
 			session.saveOrUpdate(entity);
@@ -126,7 +122,7 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
 	 */
         @Override
 	public void merge(T entity) {
-		Session session = sessionFactory.openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
 			session.merge(entity);
@@ -140,6 +136,7 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
 				e.printStackTrace();
 			}
 		}
+                session.close();
 	}
 
 	/**
@@ -152,7 +149,7 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
 	@SuppressWarnings("unchecked")
         @Override
 	public T findByID(ID id) {
-		Session session = sessionFactory.openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		T obj = null;
 		try {
 			session.beginTransaction();
@@ -178,7 +175,7 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
 	@SuppressWarnings("unchecked")
         @Override
 	public Set<T> getAll() {
-		Session session = sessionFactory.openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		List<T> objects = null;
 		try {
 			session.beginTransaction();
@@ -208,7 +205,7 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
 	 */
 	@SuppressWarnings("unchecked")
 	public Set<T> getAll(String query) {
-		Session session = sessionFactory.openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		List<T> objects = null;
 		try {
 			session.beginTransaction();
@@ -223,6 +220,7 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
 				e.printStackTrace();
 			}
 		}
+                session.close();
 		if( objects != null)
 			return new HashSet<>(objects);
 		return null;
@@ -239,7 +237,7 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
 	@SuppressWarnings("unchecked")
         @Override
 	public Set<T> getAll(String queryString, Object... params) {
-		Session session = sessionFactory.openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		Query query = session.createQuery(queryString);
 		List<T> objects = null;
 		for (int i = 0; i < params.length; i++) {
@@ -256,6 +254,7 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
 				e.printStackTrace();
 			}
 		}
+                session.close();
 		if( objects != null)
 			return new HashSet<>(objects);
 		return null;
@@ -269,7 +268,7 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
 	 */
         @Override
 	public void delete(T entity) {
-		Session session = sessionFactory.openSession();
+		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			session.beginTransaction();
 			session.delete(entity);
