@@ -5,6 +5,7 @@
  */
 package se.wegelius.olpstudenthandler.dao;
 
+import javax.ws.rs.Path;
 import org.hibernate.SessionFactory;
 import se.wegelius.olpstudenthandler.model.CourseType;
 
@@ -12,6 +13,7 @@ import se.wegelius.olpstudenthandler.model.CourseType;
  *
  * @author asawe
  */
+@Path("/courseType")
 public class CourseTypeDao  extends OlpDao<CourseType, Integer> {
     
     public CourseTypeDao( Class<CourseType> type) {

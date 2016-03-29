@@ -10,6 +10,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.lang.reflect.ParameterizedType;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+import static org.hibernate.CacheMode.GET;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Query;
@@ -204,6 +209,9 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
 	 * @return a Set of the entities
 	 */
 	@SuppressWarnings("unchecked")
+        @GET
+        @Path("/getall")
+        @Produces(MediaType.APPLICATION_XML)
 	public Set<T> getAll(String query) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		List<T> objects = null;
