@@ -5,7 +5,7 @@
  */
 package se.wegelius.olpstudenthandler.dao;
 
-import se.wegelius.olpstudenthandler.model.CourseBranch;
+import se.wegelius.olpstudenthandler.model.persistance.CourseBranch;
 import java.util.Set;
 import org.hibernate.Query;
 import org.junit.After;

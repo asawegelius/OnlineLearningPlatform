@@ -1,4 +1,4 @@
-package se.wegelius.olpstudenthandler.model;
+package se.wegelius.olpstudenthandler.model.persistance;
 // Generated Mar 20, 2016 4:31:10 PM by Hibernate Tools 4.3.1
 
 

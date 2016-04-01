@@ -1,48 +1,47 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Mar 20, 2016 4:31:11 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="se.wegelius.olpstudenthandler.model.Course" table="course" catalog="onlinelearningplatform" optimistic-lock="version">
-        <id name="courseId" type="java.lang.Integer">
-            <column name="course_id" />
-            <generator class="identity" />
-        </id>
-        <many-to-one name="contentProvider" class="se.wegelius.olpstudenthandler.model.ContentProvider" fetch="select">
-            <column name="c_content_provider_fk" not-null="true" />
-        </many-to-one>
-        <many-to-one name="courseBranch" class="se.wegelius.olpstudenthandler.model.CourseBranch" fetch="select">
-            <column name="c_course_branch_fk" not-null="true" />
-        </many-to-one>
-        <many-to-one name="courseType" class="se.wegelius.olpstudenthandler.model.CourseType" fetch="select">
-            <column name="c_course_type_fk" not-null="true" />
-        </many-to-one>
-        <property name="courseName" type="string">
-            <column name="course_name" length="45" />
-        </property>
-        <property name="courseDescription" type="string">
-            <column name="course_description" length="500" />
-        </property>
-        <property name="released" type="date">
-            <column name="released" length="10" />
-        </property>
-        <property name="language" type="string">
-            <column name="language" length="45" />
-        </property>
-        <property name="skillLevel" type="string">
-            <column name="skill_level" length="45" />
-        </property>
-        <set name="multipleChoiceQuestions" table="multiple_choice_question" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="mcq_course_fk" not-null="true" />
-            </key>
-            <one-to-many class="se.wegelius.olpstudenthandler.model.MultipleChoiceQuestion" />
-        </set>
-        <set name="lectures" table="lecture" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="l_course_fk" not-null="true" />
-            </key>
-            <one-to-many class="se.wegelius.olpstudenthandler.model.Lecture" />
-        </set>
-    </class>
+  <class catalog="onlinelearningplatform" name="se.wegelius.olpstudenthandler.model.persistance.Course" optimistic-lock="version" table="course">
+    <id name="courseId" type="java.lang.Integer">
+      <column name="course_id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="se.wegelius.olpstudenthandler.model.persistance.ContentProvider" fetch="select" name="contentProvider">
+      <column name="c_content_provider_fk" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.wegelius.olpstudenthandler.model.persistance.CourseBranch" fetch="select" name="courseBranch">
+      <column name="c_course_branch_fk" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.wegelius.olpstudenthandler.model.persistance.CourseType" fetch="select" name="courseType">
+      <column name="c_course_type_fk" not-null="true"/>
+    </many-to-one>
+    <property name="courseName" type="string">
+      <column length="45" name="course_name"/>
+    </property>
+    <property name="courseDescription" type="string">
+      <column length="500" name="course_description"/>
+    </property>
+    <property name="released" type="date">
+      <column length="10" name="released"/>
+    </property>
+    <property name="language" type="string">
+      <column length="45" name="language"/>
+    </property>
+    <property name="skillLevel" type="string">
+      <column length="45" name="skill_level"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="multipleChoiceQuestions" table="multiple_choice_question">
+      <key>
+        <column name="mcq_course_fk" not-null="true"/>
+      </key>
+      <one-to-many class="se.wegelius.olpstudenthandler.model.persistance.MultipleChoiceQuestion"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="lectures" table="lecture">
+      <key>
+        <column name="l_course_fk" not-null="true"/>
+      </key>
+      <one-to-many class="se.wegelius.olpstudenthandler.model.persistance.Lecture"/>
+    </set>
+  </class>
 </hibernate-mapping>

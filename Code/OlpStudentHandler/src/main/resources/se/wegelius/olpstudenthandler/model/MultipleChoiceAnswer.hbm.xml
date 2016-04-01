@@ -1,21 +1,20 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Mar 20, 2016 4:31:11 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="se.wegelius.olpstudenthandler.model.MultipleChoiceAnswer" table="multiple_choice_answer" catalog="onlinelearningplatform" optimistic-lock="version">
-        <id name="multipleChoiceAnswerId" type="java.lang.Integer">
-            <column name="multiple_choice_answer_id" />
-            <generator class="identity" />
-        </id>
-        <many-to-one name="multipleChoiceOptions" class="se.wegelius.olpstudenthandler.model.MultipleChoiceOptions" fetch="select">
-            <column name="mca_option_fk" not-null="true" />
-        </many-to-one>
-        <many-to-one name="multipleChoiceQuestion" class="se.wegelius.olpstudenthandler.model.MultipleChoiceQuestion" fetch="select">
-            <column name="mca_question_fk" not-null="true" />
-        </many-to-one>
-        <property name="mcaExplanation" type="string">
-            <column name="mca_explanation" length="45" />
-        </property>
-    </class>
+  <class catalog="onlinelearningplatform" name="se.wegelius.olpstudenthandler.model.persistance.MultipleChoiceAnswer" optimistic-lock="version" table="multiple_choice_answer">
+    <id name="multipleChoiceAnswerId" type="java.lang.Integer">
+      <column name="multiple_choice_answer_id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="se.wegelius.olpstudenthandler.model.persistance.MultipleChoiceOptions" fetch="select" name="multipleChoiceOptions">
+      <column name="mca_option_fk" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.wegelius.olpstudenthandler.model.persistance.MultipleChoiceQuestion" fetch="select" name="multipleChoiceQuestion">
+      <column name="mca_question_fk" not-null="true"/>
+    </many-to-one>
+    <property name="mcaExplanation" type="string">
+      <column length="45" name="mca_explanation"/>
+    </property>
+  </class>
 </hibernate-mapping>

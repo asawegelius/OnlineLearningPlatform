@@ -1,27 +1,26 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Mar 20, 2016 4:31:11 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="se.wegelius.olpstudenthandler.model.CourseBranch" table="course_branch" catalog="onlinelearningplatform" optimistic-lock="version">
-        <id name="courseBranchId" type="java.lang.Integer">
-            <column name="course_branch_id" />
-            <generator class="identity" />
-        </id>
-        <property name="courseBranchName" type="string">
-            <column name="course_branch_name" length="45" not-null="true" unique="true" />
-        </property>
-        <set name="courses" table="course" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="c_course_branch_fk" not-null="true" />
-            </key>
-            <one-to-many class="se.wegelius.olpstudenthandler.model.Course" />
-        </set>
-        <set name="courseTypes" table="course_type" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="ct_course_branch_fk" />
-            </key>
-            <one-to-many class="se.wegelius.olpstudenthandler.model.CourseType" />
-        </set>
-    </class>
+  <class catalog="onlinelearningplatform" name="se.wegelius.olpstudenthandler.model.persistance.CourseBranch" optimistic-lock="version" table="course_branch">
+    <id name="courseBranchId" type="java.lang.Integer">
+      <column name="course_branch_id"/>
+      <generator class="identity"/>
+    </id>
+    <property name="courseBranchName" type="string">
+      <column length="45" name="course_branch_name" not-null="true" unique="true"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="courses" table="course">
+      <key>
+        <column name="c_course_branch_fk" not-null="true"/>
+      </key>
+      <one-to-many class="se.wegelius.olpstudenthandler.model.persistance.Course"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="courseTypes" table="course_type">
+      <key>
+        <column name="ct_course_branch_fk"/>
+      </key>
+      <one-to-many class="se.wegelius.olpstudenthandler.model.persistance.CourseType"/>
+    </set>
+  </class>
 </hibernate-mapping>

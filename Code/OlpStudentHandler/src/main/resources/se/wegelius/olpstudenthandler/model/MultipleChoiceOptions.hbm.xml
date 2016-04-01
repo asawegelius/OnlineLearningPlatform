@@ -1,27 +1,26 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Mar 20, 2016 4:31:11 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="se.wegelius.olpstudenthandler.model.MultipleChoiceOptions" table="multiple_choice_options" catalog="onlinelearningplatform" optimistic-lock="version">
-        <id name="multipleChoiceOptionsId" type="java.lang.Integer">
-            <column name="multiple_choice_options_id" />
-            <generator class="identity" />
-        </id>
-        <many-to-one name="multipleChoiceQuestion" class="se.wegelius.olpstudenthandler.model.MultipleChoiceQuestion" fetch="select">
-            <column name="mco_question_fk" />
-        </many-to-one>
-        <property name="mcoSequence" type="string">
-            <column name="mco_sequence" length="45" />
-        </property>
-        <property name="mcoTheOption" type="string">
-            <column name="mco_the_option" length="45" />
-        </property>
-        <set name="multipleChoiceAnswers" table="multiple_choice_answer" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="mca_option_fk" not-null="true" />
-            </key>
-            <one-to-many class="se.wegelius.olpstudenthandler.model.MultipleChoiceAnswer" />
-        </set>
-    </class>
+  <class catalog="onlinelearningplatform" name="se.wegelius.olpstudenthandler.model.persistance.MultipleChoiceOptions" optimistic-lock="version" table="multiple_choice_options">
+    <id name="multipleChoiceOptionsId" type="java.lang.Integer">
+      <column name="multiple_choice_options_id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="se.wegelius.olpstudenthandler.model.persistance.MultipleChoiceQuestion" fetch="select" name="multipleChoiceQuestion">
+      <column name="mco_question_fk"/>
+    </many-to-one>
+    <property name="mcoSequence" type="string">
+      <column length="45" name="mco_sequence"/>
+    </property>
+    <property name="mcoTheOption" type="string">
+      <column length="45" name="mco_the_option"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="multipleChoiceAnswers" table="multiple_choice_answer">
+      <key>
+        <column name="mca_option_fk" not-null="true"/>
+      </key>
+      <one-to-many class="se.wegelius.olpstudenthandler.model.persistance.MultipleChoiceAnswer"/>
+    </set>
+  </class>
 </hibernate-mapping>

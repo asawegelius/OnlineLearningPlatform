@@ -1,36 +1,35 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Mar 20, 2016 4:31:11 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="se.wegelius.olpstudenthandler.model.MultipleChoiceQuestion" table="multiple_choice_question" catalog="onlinelearningplatform" optimistic-lock="version">
-        <id name="multipleChoiceQuestionId" type="java.lang.Integer">
-            <column name="multiple_choice_question_id" />
-            <generator class="identity" />
-        </id>
-        <many-to-one name="course" class="se.wegelius.olpstudenthandler.model.Course" fetch="select">
-            <column name="mcq_course_fk" not-null="true" />
-        </many-to-one>
-        <many-to-one name="lecture" class="se.wegelius.olpstudenthandler.model.Lecture" fetch="select">
-            <column name="mcq_lecture_fk" not-null="true" />
-        </many-to-one>
-        <property name="mcqName" type="string">
-            <column name="mcq_name" length="45" />
-        </property>
-        <property name="mcqQuestion" type="string">
-            <column name="mcq_question" length="45" />
-        </property>
-        <set name="multipleChoiceAnswers" table="multiple_choice_answer" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="mca_question_fk" not-null="true" />
-            </key>
-            <one-to-many class="se.wegelius.olpstudenthandler.model.MultipleChoiceAnswer" />
-        </set>
-        <set name="multipleChoiceOptionses" table="multiple_choice_options" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="mco_question_fk" />
-            </key>
-            <one-to-many class="se.wegelius.olpstudenthandler.model.MultipleChoiceOptions" />
-        </set>
-    </class>
+  <class catalog="onlinelearningplatform" name="se.wegelius.olpstudenthandler.model.persistance.MultipleChoiceQuestion" optimistic-lock="version" table="multiple_choice_question">
+    <id name="multipleChoiceQuestionId" type="java.lang.Integer">
+      <column name="multiple_choice_question_id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="se.wegelius.olpstudenthandler.model.persistance.Course" fetch="select" name="course">
+      <column name="mcq_course_fk" not-null="true"/>
+    </many-to-one>
+    <many-to-one class="se.wegelius.olpstudenthandler.model.persistance.Lecture" fetch="select" name="lecture">
+      <column name="mcq_lecture_fk" not-null="true"/>
+    </many-to-one>
+    <property name="mcqName" type="string">
+      <column length="45" name="mcq_name"/>
+    </property>
+    <property name="mcqQuestion" type="string">
+      <column length="45" name="mcq_question"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="multipleChoiceAnswers" table="multiple_choice_answer">
+      <key>
+        <column name="mca_question_fk" not-null="true"/>
+      </key>
+      <one-to-many class="se.wegelius.olpstudenthandler.model.persistance.MultipleChoiceAnswer"/>
+    </set>
+    <set fetch="select" inverse="true" lazy="true" name="multipleChoiceOptionses" table="multiple_choice_options">
+      <key>
+        <column name="mco_question_fk"/>
+      </key>
+      <one-to-many class="se.wegelius.olpstudenthandler.model.persistance.MultipleChoiceOptions"/>
+    </set>
+  </class>
 </hibernate-mapping>

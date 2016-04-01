@@ -6,7 +6,7 @@
 package se.wegelius.olpstudenthandler.dao;
 
 import javax.ws.rs.Path;
-import se.wegelius.olpstudenthandler.model.CourseBranch;
+import se.wegelius.olpstudenthandler.model.persistance.CourseBranch;
 import org.hibernate.SessionFactory;
 
 /**
