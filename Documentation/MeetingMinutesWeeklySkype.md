@@ -117,6 +117,43 @@ ________________________________________________________________________________
 
 
 ______________________________________________________________________________________________________________________________________
+### Meeting Attended by: Adrian Holm, Åsa Wegelius,, Tudor Stoica
+
+### Absent from meeting:
+Ionut Vieru, Clovis Lebret
+
+### Date:
+04-04-16
+### Time:
+21:00 - 22:00
+
+### Faciliator:
+Åsa Wegelius
+
+### Notes:
+Todays main subjects were the presenation on Hadoop and the Sprint review/retrospective on Friday.
+
+The four persons involved in the Hadoop presentation are Åsa Wegelius, Tudor Stoica, Ionut Vieru, Clovis Lebret.
+We decided to make a google slide on google drive where we can put together everyones slides to one slide show.
+There are four modules in Hadoop so we decided to present one module each.
+Tudor Stoica decided on Hadoop Common and Åsa Wegelius decided on Hadoop Distributed File System. That leaves Yarn and MapReduce for the others to choose from. We will have a meeting online in advance before the presentation. It will have to be online since Tudor Stoika comes home again on 17-04-16 and the presentation is on 18-04-16.
+
+We have a sprint review and retrospective on Friday. We decided that Åsa can develop the user interface if Clovis uploads his work on the services on GitHub. Then we have all parts done for the sprint until then. 
+
+______________________________________________________________________________________________________________________________________
+### Meeting Attended by: 
+
+### Absent from meeting:
+
+### Date:
+
+### Time:
+
+### Faciliator:
+
+### Notes:
+
+______________________________________________________________________________________________________________________________________
 ### Meeting Attended by: 
 
 ### Absent from meeting:
