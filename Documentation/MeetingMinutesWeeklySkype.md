@@ -103,6 +103,7 @@ Adrian Holm
 * It has been discused that we might have time to take more for this sprint and it has been decided that we will wait for next week to see how it goes, and then take a decision if we have time for more or not.
 * Clovis will contact Tudor and Ionut via facebook in regards to the other project.
 ______________________________________________________________________________________________________________________________________
+
 ### Meeting Attended by: 
 
 ### Absent from meeting:
@@ -117,7 +118,8 @@ ________________________________________________________________________________
 
 
 ______________________________________________________________________________________________________________________________________
-### Meeting Attended by: Adrian Holm, Åsa Wegelius,, Tudor Stoica
+### Meeting Attended by: 
+Adrian Holm, Åsa Wegelius,, Tudor Stoica
 
 ### Absent from meeting:
 Ionut Vieru, Clovis Lebret
