@@ -141,6 +141,7 @@ Tudor Stoica decided on Hadoop Common and Åsa Wegelius decided on Hadoop Distri
 We have a sprint review and retrospective on Friday. We decided that Åsa can develop the user interface if Clovis uploads his work on the services on GitHub. Then we have all parts done for the sprint until then. 
 
 ______________________________________________________________________________________________________________________________________
+
 ### Meeting Attended by: 
 
 ### Absent from meeting:
