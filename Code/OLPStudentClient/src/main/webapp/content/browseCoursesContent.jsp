@@ -12,26 +12,28 @@
 //-->
 </script>
 <!-- Begin container -->
-<div class="container">
-
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span2">
-                <!--Sidebar content-->
-                <ul class="custom-side-nav" role="navigation" title="Link List">
-                    <li role="menuitem"><a href="#">Link 1</a></li>
-                    <li role="menuitem"><a href="#">Link 2</a></li>
-                    <li class="divider"></li>
-                    <li role="menuitem"><a href="#">Link 3</a></li>
-                    <li role="menuitem"><a href="#">Link 4</a></li>
-                </ul>
-            </div>
-            <div class="span10">
-                <!--Body content-->
-            </div>
-        </div>
+<div class="container-fluid">
+  <div class="row-fluid">
+    <div class="span2 left">
+      <!--Sidebar content-->
+      <div class="list-group">
+  <a href="#" class="list-group-item active">
+    Topics
+  </a>
+  <a href="#" class="list-group-item">Development</a>
+  <a href="#" class="list-group-item">IT & Software</a>
+  <a href="#" class="list-group-item">Design</a>
+  <a href="#" class="list-group-item">Business</a>
+  <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+  <a href="#" class="list-group-item">Morbi leo risus</a>
+  <a href="#" class="list-group-item">Porta ac consectetur ac</a>
+  <a href="#" class="list-group-item">Vestibulum at eros</a>
+</div>
     </div>
-
-</div>      
+    <div class="span10 content">
+      <!--Body content-->
+    </div>
+  </div>
+</div>
 
 <!-- End container -->

@@ -8,6 +8,7 @@
 
     <footer class="footer">
         <div class="container">
+            <p>Online Learning Platform </p>
             <p class="text-muted">&copy; 2016 OLP</p>
         </div>
     </footer>
