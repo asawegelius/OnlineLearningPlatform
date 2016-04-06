@@ -1,4 +1,4 @@
-package se.wegelius.olpstudenthandler.model.persistance;
+package se.wegelius.olp.model;
 // Generated Mar 20, 2016 4:31:10 PM by Hibernate Tools 4.3.1
 
 
@@ -17,7 +17,7 @@ public class Lecture  implements java.io.Serializable {
      private String lectureName;
      private String video;
      private Date duration;
-     private Set<MultipleChoiceQuestion> multipleChoiceQuestions = new HashSet<>(0);
+     private Set<MultipleChoiceQuestion> multipleChoiceQuestions = new HashSet<MultipleChoiceQuestion>(0);
 
     public Lecture() {
     }
