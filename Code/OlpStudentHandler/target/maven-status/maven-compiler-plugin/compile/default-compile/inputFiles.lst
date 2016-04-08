@@ -11,6 +11,7 @@ C:\Users\Kellog's\Documents\OnlineLearningPlatform\Code\OlpStudentHandler\src\ma
 C:\Users\Kellog's\Documents\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\dao\CourseTypeDao.java
 C:\Users\Kellog's\Documents\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\dao\HibernateUtil.java
 C:\Users\Kellog's\Documents\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\persistance\LecturePersistance.java
+C:\Users\Kellog's\Documents\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\service\CourseTypeService.java
 C:\Users\Kellog's\Documents\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\persistance\CourseBranchPersistance.java
 C:\Users\Kellog's\Documents\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\dao\OlpDao.java
 C:\Users\Kellog's\Documents\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\persistance\MultipleChoiceOptionsPersistance.java
