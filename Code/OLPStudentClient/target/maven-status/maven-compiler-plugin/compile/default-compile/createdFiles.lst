@@ -1,8 +1,10 @@
 se\wegelius\olp\model\CourseType.class
 se\wegelius\olp\model\Lecture.class
-se\wegelius\olp\model\MultipleChoiceQuestion.class
+se\wegelius\olp\client\CourseBranchClient$1.class
+se\wegelius\olp\client\CourseBranchClient.class
 se\wegelius\olp\model\ContentProvider.class
 se\wegelius\olp\model\MultipleChoiceOptions.class
+se\wegelius\olp\model\CourseBranch.class
+se\wegelius\olp\model\MultipleChoiceQuestion.class
 se\wegelius\olp\model\Course.class
 se\wegelius\olp\model\MultipleChoiceAnswer.class
-se\wegelius\olp\model\CourseBranch.class

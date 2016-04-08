@@ -370,7 +370,7 @@ $navbar-padding-horizontal:        floor(($grid-gutter-width / 2)) !default;
 $navbar-padding-vertical:          (($navbar-height - $line-height-computed) / 2) !default;
 $navbar-collapse-max-height:       340px !default;
 
-$navbar-default-color:             #777 !default;
+$navbar-default-color:             $jaffa !default;
 $navbar-default-bg:                lighten($kidnapper, 6.5%) !default;
 $navbar-default-border:            darken($navbar-default-bg, 6.5%) !default;
 
@@ -396,12 +396,12 @@ $navbar-default-toggle-border-color:       #ddd !default;
 
 //=== Inverted navbar
 // Reset inverted navbar basics
-$navbar-inverse-color:                      lighten($gray-light, 15%) !default;
-$navbar-inverse-bg:                         #222 !default;
+$navbar-inverse-color:                      lighten($kidnapper, 15%) !default;
+$navbar-inverse-bg:                         $jaffa !default;
 $navbar-inverse-border:                     darken($navbar-inverse-bg, 10%) !default;
 
 // Inverted navbar links
-$navbar-inverse-link-color:                 lighten($gray-light, 15%) !default;
+$navbar-inverse-link-color:                 lighten($kidnapper, 15%) !default;
 $navbar-inverse-link-hover-color:           #fff !default;
 $navbar-inverse-link-hover-bg:              transparent !default;
 $navbar-inverse-link-active-color:          $navbar-inverse-link-hover-color !default;

@@ -5,18 +5,16 @@
  */
 package se.wegelius.olpstudenthandler.dao;
 
-import javax.ws.rs.Path;
-import se.wegelius.olpstudenthandler.model.persistance.CourseBranch;
-import org.hibernate.SessionFactory;
+import se.wegelius.olpstudenthandler.model.persistance.CourseBranchPersistance;
 
 /**
  *
  * @author asawe
  */
-@Path("/courseType")
-public class CourseBranchDao extends OlpDao<CourseBranch, Integer> {
 
-    public CourseBranchDao(Class<CourseBranch> type) {
+public class CourseBranchDao extends OlpDao<CourseBranchPersistance, Integer> {
+
+    public CourseBranchDao(Class<CourseBranchPersistance> type) {
         super(type);
     }
 

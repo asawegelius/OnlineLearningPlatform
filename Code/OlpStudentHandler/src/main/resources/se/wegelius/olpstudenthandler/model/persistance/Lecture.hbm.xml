@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 7, 2016 10:41:12 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+  <class catalog="onlinelearningplatform" name="se.wegelius.olpstudenthandler.model.persistance.LecturePersistance" optimistic-lock="version" table="lecture">
+    <id name="lectureId" type="java.lang.Integer">
+      <column name="lecture_id"/>
+      <generator class="identity"/>
+    </id>
+    <many-to-one class="se.wegelius.olpstudenthandler.model.persistance.CoursePersistance" fetch="select" name="course">
+      <column name="l_course_fk" not-null="true"/>
+    </many-to-one>
+    <property name="lectureName" type="string">
+      <column length="45" name="lecture_name"/>
+    </property>
+    <property name="video" type="string">
+      <column length="45" name="video"/>
+    </property>
+    <property name="duration" type="time">
+      <column length="8" name="duration"/>
+    </property>
+    <set fetch="select" inverse="true" lazy="true" name="multipleChoiceQuestions" table="multiple_choice_question">
+      <key>
+        <column name="mcq_lecture_fk" not-null="true"/>
+      </key>
+      <one-to-many class="se.wegelius.olpstudenthandler.model.persistance.MultipleChoiceQuestionPersistance"/>
+    </set>
+  </class>
+</hibernate-mapping>

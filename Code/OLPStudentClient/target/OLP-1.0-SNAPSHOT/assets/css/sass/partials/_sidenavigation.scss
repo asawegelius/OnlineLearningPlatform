@@ -1,3 +1,8 @@
+/*
+    Document   : sidenavigation.scss
+    Created on : Apr 6, 2016, 2:26:05 PM
+    Author     : asawe
+
 @import "../modules/colors";
 @import "../modules/theme";
 // We use this to control padding.
@@ -65,3 +70,135 @@ $side-nav-divider-color: scale-color(#fff, $lightness: 10%);
     }
 }
 
+*/
+
+
+.navbar-fixed-left {
+    width: 140px;
+    position: fixed;
+    padding-top: 50px;
+    //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+    border-radius: 0;
+    height: 100%;
+    background-color: $kidnapper;
+    border-color:$kidnapper;
+    .navbar-nav > li {
+        float: none;
+        width: 139px;
+        > .dropdown-menu {
+            margin-top: -50px;
+            margin-left: 140px;
+        }
+    }
+
+
+    .navbar-brand {
+        float: left;
+        color: $blaze_orange;
+        padding: $navbar-padding-vertical $navbar-padding-horizontal;
+        font-size: $font-size-large;
+        line-height: $line-height-computed;
+        height: $navbar-height;
+
+        &:hover,
+            &:focus {
+            text-decoration: none;
+        }
+
+        > img {
+            display: block;
+        }
+
+        @media (min-width: $grid-float-breakpoint) {
+            .navbar > .container &,
+            .navbar > .container-fluid & {
+                margin-left: -$navbar-padding-horizontal;
+            }
+        }
+    }
+    
+    .navbar-nav {
+        > li > a {
+            color: $jaffa;
+            &:hover,
+                &:focus {
+                color: darken($jaffa, 6.5%);
+                background-color: lighten($kidnapper, 6.5%);
+            }
+        }
+        > .active > a {
+            &,
+            &:hover,
+                &:focus {
+                color: $jaffa;
+                background-color: $kidnapper;
+            }
+        }
+        > .disabled > a {
+            &,
+            &:hover,
+                &:focus {
+                color: $jaffa;;
+                background-color: darken($kidnapper, 6.5%);
+            }
+        }
+    }
+
+    .navbar-toggle {
+        border-color: darken($kidnapper, 6.5%);
+        &:hover,
+            &:focus {
+            background-color: $kidnapper;
+        }
+        .icon-bar {
+            background-color: $kidnapper;
+        }
+    }
+
+    .dropdown-menu {
+
+        background-color:$kidnapper;
+        > li > a {
+            color: $jaffa;
+            background-color:$kidnapper;
+            &:hover,
+                &:focus {
+                color:  darken($jaffa, 6.5%);
+                background-color: lighten($kidnapper, 6.5%);
+            }
+        }
+        > .active > a {
+            &,
+            &:hover,
+                &:focus {
+                color:  darken($jaffa, 6.5%);
+                background-color: lighten($kidnapper, 6.5%);
+            }
+        }
+        > .disabled > a {
+            &,
+            &:hover,
+                &:focus {
+                color: $navbar-default-link-disabled-color;
+                background-color: $navbar-default-link-disabled-bg;
+            }
+        }
+
+    }
+
+    // Dropdown menu items
+    .navbar-nav {
+        > .open > a {
+            &,
+            &:hover,
+                &:focus {
+                background-color: darken($jaffa, 6.5%);
+                color: lighten($kidnapper, 6.5%);
+            }
+        }
+
+        + .container {
+            padding-left: 160px;
+        }
+    }
+}

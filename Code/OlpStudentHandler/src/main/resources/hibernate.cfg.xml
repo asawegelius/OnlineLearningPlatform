@@ -6,13 +6,14 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/onlinelearningplatform</property>
     <property name="hibernate.connection.username">olp</property>
     <property name="hibernate.connection.password">olppassword1</property>
-    <mapping resource="se/wegelius/olpstudenthandler/model/CourseBranch.hbm.xml"/>
-    <mapping resource="se/wegelius/olpstudenthandler/model/ContentProvider.hbm.xml"/>
-    <mapping resource="se/wegelius/olpstudenthandler/model/MultipleChoiceOptions.hbm.xml"/>
-    <mapping resource="se/wegelius/olpstudenthandler/model/MultipleChoiceQuestion.hbm.xml"/>
-    <mapping resource="se/wegelius/olpstudenthandler/model/Course.hbm.xml"/>
-    <mapping resource="se/wegelius/olpstudenthandler/model/CourseType.hbm.xml"/>
-    <mapping resource="se/wegelius/olpstudenthandler/model/MultipleChoiceAnswer.hbm.xml"/>
-    <mapping resource="se/wegelius/olpstudenthandler/model/Lecture.hbm.xml"/>
+    <property name="hibernate.current_session_context_class">org.hibernate.context.ThreadLocalSessionContext</property> 
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/MultipleChoiceOptions.hbm.xml"/>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/ContentProvider.hbm.xml"/>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/MultipleChoiceAnswer.hbm.xml"/>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/MultipleChoiceQuestion.hbm.xml"/>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/CourseBranch.hbm.xml"/>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/Lecture.hbm.xml"/>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/CourseType.hbm.xml"/>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/Course.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
