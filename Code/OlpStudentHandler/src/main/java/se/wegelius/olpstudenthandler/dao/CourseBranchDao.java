@@ -5,6 +5,7 @@
  */
 package se.wegelius.olpstudenthandler.dao;
 
+<<<<<<< HEAD
 import java.util.Set;
 import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
@@ -19,16 +20,24 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import se.wegelius.olpstudenthandler.model.CourseBranch;
+=======
+import se.wegelius.olpstudenthandler.model.persistance.CourseBranchPersistance;
+>>>>>>> c552211380ade5e5649b08e44b79937ae8823355
 
 /**
  *
  * @author asawe
  */
+<<<<<<< HEAD
 
 @Path("/courseBranch")
 public class CourseBranchDao extends OlpDao<CourseBranch, Integer> {
+=======
+>>>>>>> c552211380ade5e5649b08e44b79937ae8823355
 
-    public CourseBranchDao(Class<CourseBranch> type) {
+public class CourseBranchDao extends OlpDao<CourseBranchPersistance, Integer> {
+
+    public CourseBranchDao(Class<CourseBranchPersistance> type) {
         super(type);
     }
 

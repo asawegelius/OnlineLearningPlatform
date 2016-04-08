@@ -3,7 +3,7 @@ import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import se.wegelius.olpstudenthandler.model.CourseBranch;
+import se.wegelius.olpstudenthandler.model.persistance.CourseBranchPersistance;
 import se.wegelius.olpstudenthandler.dao.CourseBranchDao;
 import se.wegelius.olpstudenthandler.dao.HibernateUtil;
 

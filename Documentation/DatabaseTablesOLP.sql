@@ -11,14 +11,12 @@ CREATE TABLE `course_branch` (
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `course_type` (
-  `course_type_id` int(10) unsigned NOT NULL,
+  `course_type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `course_type_name` varchar(45) NOT NULL,
   `ct_course_branch_fk` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`course_type_id`),
-  UNIQUE KEY `course_type_name_UNIQUE` (`course_type_name`),
-  KEY `ct_course_branch_fk_idx` (`ct_course_branch_fk`),
-  CONSTRAINT `ct_course_branch_fk` FOREIGN KEY (`ct_course_branch_fk`) REFERENCES `course_branch` (`course_branch_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `ct_course_branch_fk_idx` (`ct_course_branch_fk`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `content_provider` (
   `content_provider_id` int(10) unsigned NOT NULL AUTO_INCREMENT,

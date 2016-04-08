@@ -18,18 +18,17 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import se.wegelius.olpstudenthandler.model.CourseType;
+import se.wegelius.olpstudenthandler.model.persistance.CourseTypePersistance;
 
 /**
  *
  * @author asawe
  */
-@Path("/courseType")
-public class CourseTypeDao  extends OlpDao<CourseType, Integer> {
+public class CourseTypeDao  extends OlpDao<CourseTypePersistance, Integer> {
     
     CourseBranchDao CBD = new CourseBranchDao();
     
-    public CourseTypeDao( Class<CourseType> type) {
+    public CourseTypeDao( Class<CourseTypePersistance> type) {
         super(type);
     }
 
@@ -42,13 +41,13 @@ public class CourseTypeDao  extends OlpDao<CourseType, Integer> {
     
     @GET
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-    public Set<CourseType> GetTypeXML() {
+    public Set<CourseTypePersistance> GetTypeXML() {
         return super.getAll();
     }
     
     @GET
     @Produces({ MediaType.TEXT_XML })
-    public Set<CourseType> GetTypeHTML() {
+    public Set<CourseTypePersistance> GetTypeHTML() {
     return super.getAll();
     }
     
@@ -56,7 +55,7 @@ public class CourseTypeDao  extends OlpDao<CourseType, Integer> {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces({ MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON })
-    public CourseType GetTypeByIdXML(@PathParam("id") int id) {
+    public CourseTypePersistance GetTypeByIdXML(@PathParam("id") int id) {
         return super.findByID(id);
     }
     
@@ -64,7 +63,7 @@ public class CourseTypeDao  extends OlpDao<CourseType, Integer> {
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces({ MediaType.TEXT_XML })
-    public CourseType GetTypeByIdHTML
+    public CourseTypePersistance GetTypeByIdHTML
         (@PathParam("id") int id
     ) {
         return super.findByID(id);
@@ -78,7 +77,7 @@ public class CourseTypeDao  extends OlpDao<CourseType, Integer> {
            @FormParam("id") int id,
            @FormParam("name") String name
     ) {
-        CourseType newCT = new CourseType(id, name);
+        CourseTypePersistance newCT = new CourseTypePersistance(id, name);
         super.save(newCT);
         	return Response
 			.status(Response.Status.CREATED)// 201
@@ -96,7 +95,7 @@ public class CourseTypeDao  extends OlpDao<CourseType, Integer> {
     public Response deleteCourseType (
             @PathParam("id") int id
     ) {
-        CourseType CT = super.findByID(id);
+        CourseTypePersistance CT = super.findByID(id);
         super.delete(CT);
         return Response
 			.status(Response.Status.CREATED)// 201
@@ -117,7 +116,7 @@ public class CourseTypeDao  extends OlpDao<CourseType, Integer> {
             @PathParam("branchFK") int branchFK
     ) {
         
-        CourseType CT = new CourseType(id, name);
+        CourseTypePersistance CT = new CourseTypePersistance(id, name);
         CT.setCourseBranch(CBD.findByID(branchFK));
         super.saveOrUpdate(CT);
        

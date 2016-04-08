@@ -5,15 +5,14 @@
  */
 package se.wegelius.olpstudenthandler.dao;
 
-import se.wegelius.olpstudenthandler.model.CourseBranch;
+import se.wegelius.olpstudenthandler.model.persistance.CourseBranchPersistance;
 import java.util.Set;
-import org.hibernate.Query;
 import org.junit.After;
 import org.junit.AfterClass;
-import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
 /**
  *
@@ -32,8 +31,8 @@ public class CourseBranchDaoTest {
     @AfterClass
     public static void tearDownClass() {      
         CourseBranchDao dao = new CourseBranchDao();
-        Set<CourseBranch> testBranch = dao.getAll();
-        for (CourseBranch b : testBranch) {
+        Set<CourseBranchPersistance> testBranch = dao.getAll();
+        for (CourseBranchPersistance b : testBranch) {
             if(b.getCourseBranchName().equals("Test Branch"))
                 dao.delete(b);
              if(b.getCourseBranchName().equals("New Branch"))
@@ -57,7 +56,7 @@ public class CourseBranchDaoTest {
         CourseBranchDao dao = new CourseBranchDao();
         // create a test branch...
         int sum = dao.count();
-        CourseBranch cb = new CourseBranch();
+        CourseBranchPersistance cb = new CourseBranchPersistance();
         cb.setCourseBranchName("Test Branch");
         dao.saveOrUpdate(cb);
         int newSum = dao.count();
@@ -72,7 +71,7 @@ public class CourseBranchDaoTest {
     public void testGetAll() {
         CourseBranchDao dao = new CourseBranchDao();
         int sum = dao.count();
-        Set<CourseBranch> testBranch = dao.getAll();
+        Set<CourseBranchPersistance> testBranch = dao.getAll();
         assertTrue(testBranch.size() == sum);
     }
 
@@ -82,29 +81,18 @@ public class CourseBranchDaoTest {
     @Test
     public void testFindById() {
         CourseBranchDao dao = new CourseBranchDao();
-        CourseBranch cb = new CourseBranch();
+        CourseBranchPersistance cb = new CourseBranchPersistance();
         cb.setCourseBranchName("New Branch");
         dao.saveOrUpdate(cb);
-        Set<CourseBranch> testBranch = dao.getAll();
-        for (CourseBranch b : testBranch) {
+        Set<CourseBranchPersistance> testBranch = dao.getAll();
+        for (CourseBranchPersistance b : testBranch) {
             if (b.getCourseBranchName().equals("New Branch")) {
                 // find by id
-                CourseBranch tb = dao.findByID(b.getCourseBranchId());
+                CourseBranchPersistance tb = dao.findByID(b.getCourseBranchId());
                 assertTrue(tb.getCourseBranchName().equals("New Branch"));
             }
         }
     }
 
-    /**
-     *
-     */
-    @Test
-    public void testGetAllAndDelete() {
-        CourseBranchDao dao = new CourseBranchDao();
-        Set<CourseBranch> testBranch = dao.getAll();
-        for (CourseBranch b : testBranch) {
-            dao.delete(b);
-        }
-        assertTrue(dao.count() == 0);
-    }
+
 }
