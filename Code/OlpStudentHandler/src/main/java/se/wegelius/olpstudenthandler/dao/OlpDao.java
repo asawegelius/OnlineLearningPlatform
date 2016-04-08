@@ -209,9 +209,6 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
 	 * @return a Set of the entities
 	 */
 	@SuppressWarnings("unchecked")
-        @GET
-        @Path("/getall")
-        @Produces(MediaType.APPLICATION_XML)
 	public Set<T> getAll(String query) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		List<T> objects = null;
