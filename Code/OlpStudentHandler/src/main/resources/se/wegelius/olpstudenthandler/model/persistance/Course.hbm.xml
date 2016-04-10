@@ -31,13 +31,13 @@
     <property name="skillLevel" type="string">
       <column length="45" name="skill_level"/>
     </property>
-    <set fetch="select" inverse="true" lazy="true" name="multipleChoiceQuestions" table="multiple_choice_question">
+    <set fetch="select" inverse="true" lazy="false" name="multipleChoiceQuestions" table="multiple_choice_question">
       <key>
         <column name="mcq_course_fk" not-null="true"/>
       </key>
       <one-to-many class="se.wegelius.olpstudenthandler.model.persistance.MultipleChoiceQuestionPersistance"/>
     </set>
-    <set fetch="select" inverse="true" lazy="true" name="lectures" table="lecture">
+    <set fetch="select" inverse="true" lazy="false" name="lectures" table="lecture">
       <key>
         <column name="l_course_fk" not-null="true"/>
       </key>

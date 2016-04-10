@@ -13,7 +13,7 @@
     <property name="ctCourseBranchFk" type="java.lang.Integer">
       <column name="ct_course_branch_fk"/>
     </property>
-    <set fetch="select" inverse="true" lazy="true" name="courses" table="course">
+    <set fetch="select" inverse="true" lazy="false" name="courses" table="course">
       <key>
         <column name="c_course_type_fk" not-null="true"/>
       </key>

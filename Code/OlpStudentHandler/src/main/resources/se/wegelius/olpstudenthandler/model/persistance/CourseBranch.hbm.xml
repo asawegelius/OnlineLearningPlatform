@@ -14,7 +14,7 @@
       <key>
         <column name="c_course_branch_fk" not-null="true"/>
       </key>
-      <one-to-many class="se.wegelius.olpstudenthandler.model.persistance.CoursePersistance"/>
+      <one-to-many class="se.wegelius.olpstudenthandler.model.persistance.CoursePersistance" />
     </set>
   </class>
 </hibernate-mapping>

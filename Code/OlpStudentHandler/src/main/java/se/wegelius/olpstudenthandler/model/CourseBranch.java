@@ -2,6 +2,7 @@ package se.wegelius.olpstudenthandler.model;
 // Generated Mar 20, 2016 4:31:10 PM by Hibernate Tools 4.3.1
 
 
+
 import java.util.HashSet;
 import java.util.Set;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -16,8 +17,6 @@ public class CourseBranch  implements java.io.Serializable {
 
      private Integer courseBranchId;
      private String courseBranchName;
-     private Set<Course> courses = new HashSet<Course>(0);
-     private Set<CourseType> courseTypes = new HashSet<CourseType>(0);
 
     public CourseBranch() {
     }
@@ -26,16 +25,12 @@ public class CourseBranch  implements java.io.Serializable {
     public CourseBranch(String courseBranchName) {
         this.courseBranchName = courseBranchName;
     }
-    public CourseBranch(String courseBranchName, Set<Course> courses, Set<CourseType> courseTypes) {
-       this.courseBranchName = courseBranchName;
-       this.courses = courses;
-       this.courseTypes = courseTypes;
-    }
+    
+    public CourseBranch(CourseBranchPersistance branch){
+        System.out.println("in CourseBranch trying to get branch name from persistance " + branch.getCourseBranchName());
+        this.courseBranchId = branch.getCourseBranchId();
+        this.courseBranchName = branch.getCourseBranchName();
 
-    public CourseBranch(CourseBranchPersistance p) {
-        this.courseBranchId = p.getCourseBranchId();
-        this.courseBranchName = p.getCourseBranchName();
-        //this.courses = p.getNonPersistantCourses();
     }
    
     public Integer getCourseBranchId() {
@@ -52,22 +47,6 @@ public class CourseBranch  implements java.io.Serializable {
     public void setCourseBranchName(String courseBranchName) {
         this.courseBranchName = courseBranchName;
     }
-    public Set<Course> getCourses() {
-        return this.courses;
-    }
-    
-    public void setCourses(Set<Course> courses) {
-        this.courses = courses;
-    }
-    public Set<CourseType> getCourseTypes() {
-        return this.courseTypes;
-    }
-    
-    public void setCourseTypes(Set<CourseType> courseTypes) {
-        this.courseTypes = courseTypes;
-    }
-
-
 
 
 }

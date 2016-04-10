@@ -6,6 +6,7 @@ Main.class
 se\wegelius\olpstudenthandler\dao\IOlpDao.class
 se\wegelius\olpstudenthandler\model\CourseBranch.class
 se\wegelius\olpstudenthandler\model\persistance\LecturePersistance.class
+se\wegelius\olpstudenthandler\dao\ContentProviderDao.class
 se\wegelius\olpstudenthandler\model\persistance\MultipleChoiceAnswerPersistance.class
 se\wegelius\olpstudenthandler\model\ContentProvider.class
 se\wegelius\olpstudenthandler\model\persistance\CoursePersistance.class

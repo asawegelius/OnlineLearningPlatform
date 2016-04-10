@@ -22,20 +22,10 @@
     List<CourseBranch> branches = new Gson().fromJson(jsonBranches, new TypeToken<List<CourseBranch>>() {
             }.getType());
     CourseClient courseClient = new CourseClient();
-    String plainCourses = courseClient.getPlain();
-    String[] lines = plainCourses.split("\n");
-    ArrayList<Course> courses = new ArrayList<>();
-    for(int i=1; i < lines.length; i++){
-        Course course = new Course();
-        course.setCourseId(new Integer(lines[i].substring(0, lines[i].indexOf(";"))).intValue());
-        String rest =lines[i].substring(lines[i].indexOf(";") + 1, lines[i].length()-1);
-        course.setCourseName(rest.substring(0, rest.indexOf(";")));
-        int branchId = new Integer(lines[i].substring(lines[i].lastIndexOf(";") + 1)).intValue();
-        CourseBranch b = new CourseBranch();
-        b.setCourseBranchId(branchId);
-        course.setCourseBranch(b);
-        courses.add(course);
-    }
+    String jsonCourses = courseClient.getJson().getEntity(String.class);
+    List<Course> courses = new Gson().fromJson(jsonCourses, new TypeToken<List<Course>>() {
+            }.getType());
+
 %>
 <script type="text/javascript">
 <!--
@@ -57,7 +47,7 @@
                             for(Course c: courses){
         System.out.println(c.getCourseName() + " branchId " + c.getCourseBranch().getCourseBranchId() + " branch branchid " + branch.getCourseBranchId());
                                 if(c.getCourseBranch().getCourseBranchId() == branch.getCourseBranchId()){
-                                    out.write("<li><a href='#'>" + c.getCourseName() + "</a></li>");
+                                    out.write("<li><a href='course.jsp'>" + c.getCourseName() + "</a></li>");
                                 }
                             }
                         out.write("</ul>");

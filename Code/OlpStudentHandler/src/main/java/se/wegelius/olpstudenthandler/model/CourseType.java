@@ -19,7 +19,6 @@ public class CourseType  implements java.io.Serializable {
      private int courseTypeId;
      private CourseBranch courseBranch;
      private String courseTypeName;
-     private Set<Course> courses = new HashSet<Course>(0);
 
     public CourseType() {
     }
@@ -29,7 +28,7 @@ public class CourseType  implements java.io.Serializable {
         this.courseTypeId = courseTypeId;
         this.courseTypeName = courseTypeName;
     }
-    public CourseType(int courseTypeId, CourseBranch courseBranch, String courseTypeName, Set<Course> courses) {
+    public CourseType(int courseTypeId, CourseBranch courseBranch, String courseTypeName) {
        this.courseTypeId = courseTypeId;
        this.courseBranch = courseBranch;
        this.courseTypeName = courseTypeName;
@@ -64,17 +63,7 @@ public class CourseType  implements java.io.Serializable {
     public void setCourseTypeName(String courseTypeName) {
         this.courseTypeName = courseTypeName;
     }
-    public Set<Course> getCourses() {
-        return this.courses;
-    }
-    
-    public void setCourses(Set<Course> courses) {
-        this.courses = courses;
-    }
-
-
-
-
+ 
 }
 
 

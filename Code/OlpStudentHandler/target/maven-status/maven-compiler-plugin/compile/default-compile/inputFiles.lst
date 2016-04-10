@@ -1,3 +1,31 @@
+<<<<<<< HEAD
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\dao\CourseDao.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\MultipleChoiceOptions.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\Main.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\dao\CourseTypeDao.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\persistance\LecturePersistance.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\persistance\MultipleChoiceOptionsPersistance.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\Course.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\persistance\ContentProviderPersistance.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\service\CourseService.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\service\CourseBranchService.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\CourseType.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\persistance\MultipleChoiceAnswerPersistance.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\dao\HibernateUtil.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\dao\IOlpDao.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\MultipleChoiceAnswer.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\dao\OlpDao.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\dao\CourseBranchDao.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\persistance\CourseTypePersistance.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\dao\ContentProviderDao.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\ContentProvider.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\persistance\CoursePersistance.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\persistance\MultipleChoiceQuestionPersistance.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\Lecture.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\CourseBranch.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\MultipleChoiceQuestion.java
+C:\Users\asawe\git\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\persistance\CourseBranchPersistance.java
+=======
 C:\Users\Kellog's\Documents\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\CourseType.java
 C:\Users\Kellog's\Documents\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\MultipleChoiceQuestion.java
 C:\Users\Kellog's\Documents\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\persistance\MultipleChoiceQuestionPersistance.java
@@ -24,3 +52,4 @@ C:\Users\Kellog's\Documents\OnlineLearningPlatform\Code\OlpStudentHandler\src\ma
 C:\Users\Kellog's\Documents\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\CourseBranch.java
 C:\Users\Kellog's\Documents\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\model\persistance\CourseTypePersistance.java
 C:\Users\Kellog's\Documents\OnlineLearningPlatform\Code\OlpStudentHandler\src\main\java\se\wegelius\olpstudenthandler\service\CourseService.java
+>>>>>>> f9fb25b6372af4c75c9cf76acc92d997f13759d4

@@ -62,7 +62,6 @@ public class CourseBranchDaoTest {
         cb.setCourseBranchName("Test Branch");
         dao.saveOrUpdate(cb);
         int newSum = dao.count();
-        System.out.println("newSum = " + newSum + " sum = " + sum);
         assertTrue(sum == (newSum - 1));
     }
 

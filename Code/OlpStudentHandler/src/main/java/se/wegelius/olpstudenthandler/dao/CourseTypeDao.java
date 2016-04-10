@@ -23,7 +23,7 @@ public class CourseTypeDao  extends OlpDao<CourseTypePersistance, Integer> {
      *
      */
     public CourseTypeDao() {
-        super();
+        super(CourseTypePersistance.class);
     }
     
 }

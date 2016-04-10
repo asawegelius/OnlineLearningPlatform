@@ -22,7 +22,7 @@ public class CourseBranchDao extends OlpDao<CourseBranchPersistance, Integer> {
      *
      */
     public CourseBranchDao() {
-        super();
+        super(CourseBranchPersistance.class);
     }
     
 }

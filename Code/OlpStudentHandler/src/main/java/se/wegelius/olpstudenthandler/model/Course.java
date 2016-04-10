@@ -26,8 +26,6 @@ public class Course  implements java.io.Serializable {
      private Date released;
      private String language;
      private String skillLevel;
-     private Set<MultipleChoiceQuestion> multipleChoiceQuestions = new HashSet<MultipleChoiceQuestion>(0);
-     private Set<Lecture> lectures = new HashSet<Lecture>(0);
 
     public Course() {
     }
@@ -38,7 +36,7 @@ public class Course  implements java.io.Serializable {
         this.courseBranch = courseBranch;
         this.courseType = courseType;
     }
-    public Course(ContentProvider contentProvider, CourseBranch courseBranch, CourseType courseType, String courseName, String courseDescription, Date released, String language, String skillLevel, Set<MultipleChoiceQuestion> multipleChoiceQuestions, Set<Lecture> lectures) {
+    public Course(ContentProvider contentProvider, CourseBranch courseBranch, CourseType courseType, String courseName, String courseDescription, Date released, String language, String skillLevel) {
        this.contentProvider = contentProvider;
        this.courseBranch = courseBranch;
        this.courseType = courseType;
@@ -63,7 +61,7 @@ public class Course  implements java.io.Serializable {
         //if (p.getMultipleChoiceQuestions()!= null) this.multipleChoiceQuestions = p.getMultipleChoiceQuestions();
         this.released = p.getReleased();
         this.skillLevel = p.getSkillLevel();
-        
+
     }
    
     public Integer getCourseId() {
@@ -129,22 +127,6 @@ public class Course  implements java.io.Serializable {
     public void setSkillLevel(String skillLevel) {
         this.skillLevel = skillLevel;
     }
-    public Set<MultipleChoiceQuestion> getMultipleChoiceQuestions() {
-        return this.multipleChoiceQuestions;
-    }
-    
-    public void setMultipleChoiceQuestions(Set<MultipleChoiceQuestion> multipleChoiceQuestions) {
-        this.multipleChoiceQuestions = multipleChoiceQuestions;
-    }
-    public Set<Lecture> getLectures() {
-        return this.lectures;
-    }
-    
-    public void setLectures(Set<Lecture> lectures) {
-        this.lectures = lectures;
-    }
-
-
 
 
 }
