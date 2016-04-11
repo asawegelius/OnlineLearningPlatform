@@ -3640,26 +3640,26 @@ tbody.collapse.in {
     margin-top: 2px;
     margin-left: 0; }
 
-.nav-justified, .nav-tabs.nav-justified {
+.nav-justified, .nav-tabs.nav-justified, .course-tabs .nav-tabs.nav-justified {
   width: 100%; }
-  .nav-justified > li, .nav-tabs.nav-justified > li {
+  .nav-justified > li, .nav-tabs.nav-justified > li, .course-tabs .nav-tabs.nav-justified > li {
     float: none; }
-    .nav-justified > li > a, .nav-tabs.nav-justified > li > a {
+    .nav-justified > li > a, .nav-tabs.nav-justified > li > a, .course-tabs .nav-tabs.nav-justified > li > a {
       text-align: center;
       margin-bottom: 5px; }
   .nav-justified > .dropdown .dropdown-menu {
     top: auto;
     left: auto; }
   @media (min-width: 768px) {
-    .nav-justified > li, .nav-tabs.nav-justified > li {
+    .nav-justified > li, .nav-tabs.nav-justified > li, .course-tabs .nav-tabs.nav-justified > li {
       display: table-cell;
       width: 1%; }
-      .nav-justified > li > a, .nav-tabs.nav-justified > li > a {
+      .nav-justified > li > a, .nav-tabs.nav-justified > li > a, .course-tabs .nav-tabs.nav-justified > li > a {
         margin-bottom: 0; } }
 
-.nav-tabs-justified, .nav-tabs.nav-justified {
+.nav-tabs-justified, .nav-tabs.nav-justified, .course-tabs .nav-tabs.nav-justified {
   border-bottom: 0; }
-  .nav-tabs-justified > li > a, .nav-tabs.nav-justified > li > a {
+  .nav-tabs-justified > li > a, .nav-tabs.nav-justified > li > a, .course-tabs .nav-tabs.nav-justified > li > a {
     margin-right: 0;
     border-radius: 4px; }
   .nav-tabs-justified > .active > a, .nav-tabs.nav-justified > .active > a,
@@ -3669,7 +3669,7 @@ tbody.collapse.in {
   .nav-tabs.nav-justified > .active > a:focus {
     border: 1px solid #ddd; }
   @media (min-width: 768px) {
-    .nav-tabs-justified > li > a, .nav-tabs.nav-justified > li > a {
+    .nav-tabs-justified > li > a, .nav-tabs.nav-justified > li > a, .course-tabs .nav-tabs.nav-justified > li > a {
       border-bottom: 1px solid #ddd;
       border-radius: 4px 4px 0 0; }
     .nav-tabs-justified > .active > a, .nav-tabs.nav-justified > .active > a,
@@ -5956,6 +5956,161 @@ $side-nav-divider-color: scale-color(#fff, $lightness: 10%);
     color: #edefe2; }
   .navbar-fixed-left .navbar-nav + .container {
     padding-left: 160px; }
+
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 11, 2016, 7:40:50 PM
+    Author     : asawe
+*/
+.course-tabs {
+  padding-top: 70px;
+  height: 100%;
+  /*
+      // Pills
+      // -------------------------
+      .nav-pills {
+          > li {
+              float: left;
+  
+              // Links rendered as pills
+              > a {
+                  border-radius: $nav-pills-border-radius;
+              }
+              + li {
+                  margin-left: 2px;
+              }
+  
+              // Active state
+              &.active > a {
+                  &,
+                  &:hover,
+                      &:focus {
+                      color: $nav-pills-active-link-hover-color;
+                      background-color: $nav-pills-active-link-hover-bg;
+                  }
+              }
+          }
+      }
+  
+  
+      // Stacked pills
+      .nav-stacked {
+          > li {
+              float: none;
+              + li {
+                  margin-top: 2px;
+                  margin-left: 0; // no need for this gap between nav items
+              }
+          }
+      }
+  
+  
+      // Nav variations
+      // --------------------------------------------------
+  
+      // Justified nav links
+      // -------------------------
+  
+      .nav-justified {
+          width: 100%;
+  
+          > li {
+              float: none;
+              > a {
+                  text-align: center;
+                  margin-bottom: 5px;
+              }
+          }
+  
+          > .dropdown .dropdown-menu {
+              top: auto;
+              left: auto;
+          }
+  
+          @media (min-width: $screen-sm-min) {
+              > li {
+                  display: table-cell;
+                  width: 1%;
+                  > a {
+                      margin-bottom: 0;
+                  }
+              }
+          }
+      }
+  
+      // Move borders to anchors instead of bottom of list
+      //
+      // Mixin for adding on top the shared `.nav-justified` styles for our tabs
+      .nav-tabs-justified {
+          border-bottom: 0;
+  
+          > li > a {
+              // Override margin from .nav-tabs
+              margin-right: 0;
+              border-radius: $border-radius-base;
+          }
+  
+          > .active > a,
+          > .active > a:hover,
+              > .active > a:focus {
+              border: 1px solid $nav-tabs-justified-link-border-color;
+          }
+  
+          @media (min-width: $screen-sm-min) {
+              > li > a {
+                  border-bottom: 1px solid $nav-tabs-justified-link-border-color;
+                  border-radius: $border-radius-base $border-radius-base 0 0;
+              }
+              > .active > a,
+              > .active > a:hover,
+                  > .active > a:focus {
+                  border-bottom-color: $nav-tabs-justified-active-link-border-color;
+              }
+          }
+      }
+  
+  */ }
+  .course-tabs .nav-tabs {
+    padding-top: 70px;
+    border-bottom: 1px solid #ddd; }
+    .course-tabs .nav-tabs > li {
+      float: left;
+      margin-bottom: -1px; }
+      .course-tabs .nav-tabs > li > a {
+        margin-right: 2px;
+        line-height: 1.42857;
+        border: 1px solid transparent;
+        border-radius: 4px 4px 0 0; }
+        .course-tabs .nav-tabs > li > a:hover {
+          border-color: #eeeeee #eeeeee #ddd; }
+      .course-tabs .nav-tabs > li.active > a, .course-tabs .nav-tabs > li.active > a:hover, .course-tabs .nav-tabs > li.active > a:focus {
+        color: #FA6900;
+        background-color: #E0E4CC;
+        border: 1px solid #ddd;
+        border-bottom-color: transparent;
+        cursor: default; }
+  .course-tabs .tab-content {
+    background-color: #E0E4CC; }
+    .course-tabs .tab-content > .tab-pane {
+      display: none; }
+    .course-tabs .tab-content > .active {
+      display: block; }
+
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 11, 2016, 7:51:12 PM
+    Author     : asawe
+*/
+.course-content {
+  padding-top: 50px; }
 
 /*
     Document   : colors.scss
