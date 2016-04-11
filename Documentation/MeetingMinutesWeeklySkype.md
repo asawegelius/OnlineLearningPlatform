@@ -169,7 +169,7 @@ We demonstrated the Client Interface and the user story was implemented in a sat
 No one had any complains so far
 
 ####Sprint Planning:
-Next user story was _As a Student I want to be able to choose a course so I can take it_. We discussed it and to be able to implement it we need to implement a user account and login functions. So we decided the story would involve enough steps to keep us busy for a sprint.
+Next two user stories was _As a Student I want to be able to choose a course so I can take it_ and _As a Student I want to be able to browse my choosen courses so I can select one to continue with_. We discussed it and to be able to implement it we need to implement a user account and login functions. So we decided those stories would involve enough steps to keep us busy for a sprint.
 
 ####Hadoop presentation:
 We also discussed the presentation on monday and agreed that all involved should aim for 5 minutes presentation each with the exception of the first person that shall present the group. We shall have a skype meeting on Thursday or Friday to go through the presentation.
