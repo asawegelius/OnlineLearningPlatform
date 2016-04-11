@@ -32,7 +32,6 @@ public class CourseType  implements java.io.Serializable {
        this.courseTypeId = courseTypeId;
        this.courseBranch = courseBranch;
        this.courseTypeName = courseTypeName;
-       this.courses = courses;
     }
 
     public CourseType(CourseTypePersistance p) {

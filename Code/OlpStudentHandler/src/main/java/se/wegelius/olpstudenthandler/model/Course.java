@@ -45,8 +45,6 @@ public class Course  implements java.io.Serializable {
        this.released = released;
        this.language = language;
        this.skillLevel = skillLevel;
-       this.multipleChoiceQuestions = multipleChoiceQuestions;
-       this.lectures = lectures;
     }
 
     public Course(CoursePersistance p) {

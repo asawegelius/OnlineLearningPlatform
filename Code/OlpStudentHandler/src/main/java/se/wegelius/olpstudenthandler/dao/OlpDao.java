@@ -183,7 +183,6 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
         return null;
     }
 
-<<<<<<< HEAD
     /**
      * Find entities based on a query
      *
