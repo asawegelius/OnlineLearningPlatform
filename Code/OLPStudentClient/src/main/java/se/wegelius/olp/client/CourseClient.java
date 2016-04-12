@@ -22,7 +22,8 @@ public class CourseClient {
 
     private final WebResource webResource;
     private final Client client;
-    private static final String BASE_URI = "http://localhost:8080/OlpStudentHandler/rest/course";
+    private static final String BASE_URI = "http://localhost:8080/OlpStudentHandler/rest/course/";
+    //private static final String BASE_URI = "http://188.181.85.75/OlpStudentHandler/rest/course/";
 
     public CourseClient() {
         com.sun.jersey.api.client.config.ClientConfig config = new com.sun.jersey.api.client.config.DefaultClientConfig();

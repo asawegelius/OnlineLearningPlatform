@@ -3,8 +3,6 @@ package se.wegelius.olpstudenthandler.model;
 
 
 
-import java.util.HashSet;
-import java.util.Set;
 import javax.xml.bind.annotation.XmlRootElement;
 import se.wegelius.olpstudenthandler.model.persistance.CourseBranchPersistance;
 
