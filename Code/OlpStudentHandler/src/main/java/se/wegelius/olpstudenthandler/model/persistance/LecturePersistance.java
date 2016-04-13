@@ -1,5 +1,5 @@
 package se.wegelius.olpstudenthandler.model.persistance;
-// Generated Apr 7, 2016 10:41:12 PM by Hibernate Tools 4.3.1
+// Generated Apr 13, 2016 3:49:05 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -17,7 +17,7 @@ public class LecturePersistance  implements java.io.Serializable {
      private String lectureName;
      private String video;
      private Date duration;
-     private Set<MultipleChoiceQuestionPersistance> multipleChoiceQuestions = new HashSet<>(0);
+     private Set<MultipleChoiceQuestionPersistance> multipleChoiceQuestions = new HashSet<MultipleChoiceQuestionPersistance>(0);
 
     public LecturePersistance() {
     }

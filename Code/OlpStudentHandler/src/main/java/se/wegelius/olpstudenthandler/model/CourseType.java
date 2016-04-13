@@ -17,7 +17,7 @@ public class CourseType  implements java.io.Serializable {
 
 
      private int courseTypeId;
-     private CourseBranch courseBranch;
+     private int courseBranchId;
      private String courseTypeName;
 
     public CourseType() {
@@ -28,17 +28,16 @@ public class CourseType  implements java.io.Serializable {
         this.courseTypeId = courseTypeId;
         this.courseTypeName = courseTypeName;
     }
-    public CourseType(int courseTypeId, CourseBranch courseBranch, String courseTypeName) {
+    public CourseType(int courseTypeId, int courseBranchId, String courseTypeName) {
        this.courseTypeId = courseTypeId;
-       this.courseBranch = courseBranch;
+       this.courseBranchId = courseBranchId;
        this.courseTypeName = courseTypeName;
     }
 
     public CourseType(CourseTypePersistance p) {
-        //this.courseBranch = p.getCtCourseBranchFk();
+        this.courseBranchId = p.getCtCourseBranchFk();
         this.courseTypeId = p.getCourseTypeId();
         this.courseTypeName = p.getCourseTypeName();
-        //this.courses = new Course (p.getNonPersistantCourses());
     }
    
     public int getCourseTypeId() {
@@ -48,13 +47,15 @@ public class CourseType  implements java.io.Serializable {
     public void setCourseTypeId(int courseTypeId) {
         this.courseTypeId = courseTypeId;
     }
-    public CourseBranch getCourseBranch() {
-        return this.courseBranch;
+
+    public void setCourseBranchId(int courseBranchId){
+        this.courseBranchId = courseBranchId;
     }
     
-    public void setCourseBranch(CourseBranch courseBranch) {
-        this.courseBranch = courseBranch;
+    public int getCourseBranchId(){
+        return this.courseBranchId;
     }
+    
     public String getCourseTypeName() {
         return this.courseTypeName;
     }

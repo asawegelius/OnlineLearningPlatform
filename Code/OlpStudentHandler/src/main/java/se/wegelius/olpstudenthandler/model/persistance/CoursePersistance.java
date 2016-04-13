@@ -1,5 +1,5 @@
 package se.wegelius.olpstudenthandler.model.persistance;
-// Generated Apr 7, 2016 10:41:12 PM by Hibernate Tools 4.3.1
+// Generated Apr 13, 2016 3:49:05 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -21,19 +21,19 @@ public class CoursePersistance  implements java.io.Serializable {
      private Date released;
      private String language;
      private String skillLevel;
-     private Set<MultipleChoiceQuestionPersistance> multipleChoiceQuestions = new HashSet<>(0);
-     private Set<LecturePersistance> lectures = new HashSet<>(0);
+     private Set<MultipleChoiceQuestionPersistance> multipleChoiceQuestions = new HashSet<MultipleChoiceQuestionPersistance>(0);
+     private Set<LecturePersistance> lectures = new HashSet<LecturePersistance>(0);
 
     public CoursePersistance() {
     }
 
 	
-    public CoursePersistance(ContentProviderPersistance contentProvider,CourseBranchPersistance courseBranch, CourseTypePersistance courseType) {
+    public CoursePersistance(ContentProviderPersistance contentProvider, CourseBranchPersistance courseBranch, CourseTypePersistance courseType) {
         this.contentProvider = contentProvider;
         this.courseBranch = courseBranch;
         this.courseType = courseType;
     }
-    public CoursePersistance(ContentProviderPersistance contentProvider,CourseBranchPersistance courseBranch, CourseTypePersistance courseType, String courseName, String courseDescription, Date released, String language, String skillLevel, Set<MultipleChoiceQuestionPersistance> multipleChoiceQuestions, Set<LecturePersistance> lectures) {
+    public CoursePersistance(ContentProviderPersistance contentProvider, CourseBranchPersistance courseBranch, CourseTypePersistance courseType, String courseName, String courseDescription, Date released, String language, String skillLevel, Set<MultipleChoiceQuestionPersistance> multipleChoiceQuestions, Set<LecturePersistance> lectures) {
        this.contentProvider = contentProvider;
        this.courseBranch = courseBranch;
        this.courseType = courseType;

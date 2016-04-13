@@ -1,5 +1,5 @@
 package se.wegelius.olpstudenthandler.model.persistance;
-// Generated Apr 7, 2016 10:41:12 PM by Hibernate Tools 4.3.1
+// Generated Apr 13, 2016 3:49:05 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -15,7 +15,7 @@ public class MultipleChoiceOptionsPersistance  implements java.io.Serializable {
      private MultipleChoiceQuestionPersistance multipleChoiceQuestion;
      private String mcoSequence;
      private String mcoTheOption;
-     private Set<MultipleChoiceAnswerPersistance> multipleChoiceAnswers = new HashSet<>(0);
+     private Set<MultipleChoiceAnswerPersistance> multipleChoiceAnswers = new HashSet<MultipleChoiceAnswerPersistance>(0);
 
     public MultipleChoiceOptionsPersistance() {
     }

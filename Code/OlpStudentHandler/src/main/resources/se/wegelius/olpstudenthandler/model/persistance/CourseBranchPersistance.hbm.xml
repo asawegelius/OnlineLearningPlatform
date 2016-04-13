@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 13, 2016 3:49:06 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="se.wegelius.olpstudenthandler.model.persistance.CourseBranchPersistance" table="course_branch" catalog="onlinelearningplatform">
+        <id name="courseBranchId" type="java.lang.Integer">
+            <column name="course_branch_id" />
+            <generator class="identity"></generator>
+        </id>
+        <property name="courseBranchName" type="string">
+            <column name="course_branch_name" length="45" not-null="true" unique="true" />
+        </property>
+        <set name="courses" table="course" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="c_course_branch_fk" not-null="true" />
+            </key>
+            <one-to-many class="se.wegelius.olpstudenthandler.model.persistance.CoursePersistance" />
+        </set>
+    </class>
+</hibernate-mapping>

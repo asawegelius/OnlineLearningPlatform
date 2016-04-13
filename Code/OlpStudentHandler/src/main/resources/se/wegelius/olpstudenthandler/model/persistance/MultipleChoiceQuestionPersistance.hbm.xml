@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Apr 13, 2016 3:49:06 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="se.wegelius.olpstudenthandler.model.persistance.MultipleChoiceQuestionPersistance" table="multiple_choice_question" catalog="onlinelearningplatform">
+        <id name="multipleChoiceQuestionId" type="java.lang.Integer">
+            <column name="multiple_choice_question_id" />
+            <generator class="identity"></generator>
+        </id>
+        <many-to-one name="course" class="se.wegelius.olpstudenthandler.model.persistance.CoursePersistance" fetch="select">
+            <column name="mcq_course_fk" not-null="true" />
+        </many-to-one>
+        <many-to-one name="lecture" class="se.wegelius.olpstudenthandler.model.persistance.LecturePersistance" fetch="select">
+            <column name="mcq_lecture_fk" not-null="true" />
+        </many-to-one>
+        <property name="mcqName" type="string">
+            <column name="mcq_name" length="45" />
+        </property>
+        <property name="mcqQuestion" type="string">
+            <column name="mcq_question" length="45" />
+        </property>
+        <set name="multipleChoiceAnswers" table="multiple_choice_answer" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="mca_question_fk" not-null="true" />
+            </key>
+            <one-to-many class="se.wegelius.olpstudenthandler.model.persistance.MultipleChoiceAnswerPersistance" />
+        </set>
+        <set name="multipleChoiceOptionses" table="multiple_choice_options" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="mco_question_fk" />
+            </key>
+            <one-to-many class="se.wegelius.olpstudenthandler.model.persistance.MultipleChoiceOptionsPersistance" />
+        </set>
+    </class>
+</hibernate-mapping>

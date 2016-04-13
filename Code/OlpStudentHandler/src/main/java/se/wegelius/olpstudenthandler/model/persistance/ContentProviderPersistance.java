@@ -1,5 +1,5 @@
 package se.wegelius.olpstudenthandler.model.persistance;
-// Generated Apr 7, 2016 10:41:12 PM by Hibernate Tools 4.3.1
+// Generated Apr 13, 2016 3:49:05 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -15,19 +15,16 @@ public class ContentProviderPersistance  implements java.io.Serializable {
      private String contentProviderName;
      private String contentProviderDescription;
      private String contentProviderEmail;
-     private Set<CoursePersistance> courses;
+     private Set<CoursePersistance> courses = new HashSet<CoursePersistance>(0);
 
     public ContentProviderPersistance() {
-        this.courses = new HashSet<>(0);
     }
 
 	
     public ContentProviderPersistance(String contentProviderName) {
-        this.courses = new HashSet<>(0);
         this.contentProviderName = contentProviderName;
     }
     public ContentProviderPersistance(String contentProviderName, String contentProviderDescription, String contentProviderEmail, Set<CoursePersistance> courses) {
-        this.courses = new HashSet<>(0);
        this.contentProviderName = contentProviderName;
        this.contentProviderDescription = contentProviderDescription;
        this.contentProviderEmail = contentProviderEmail;

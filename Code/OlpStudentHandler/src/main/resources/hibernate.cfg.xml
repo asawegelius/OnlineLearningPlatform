@@ -6,14 +6,15 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/onlinelearningplatform</property>
     <property name="hibernate.connection.username">olp</property>
     <property name="hibernate.connection.password">olppassword1</property>
-    <property name="hibernate.current_session_context_class">org.hibernate.context.ThreadLocalSessionContext</property> 
-    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/MultipleChoiceOptions.hbm.xml"/>
-    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/ContentProvider.hbm.xml"/>
-    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/MultipleChoiceAnswer.hbm.xml"/>
-    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/MultipleChoiceQuestion.hbm.xml"/>
-    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/CourseBranch.hbm.xml"/>
-    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/Lecture.hbm.xml"/>
-    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/CourseType.hbm.xml"/>
-    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/Course.hbm.xml"/>
+    <property name="hibernate.current_session_context_class">org.hibernate.context.ThreadLocalSessionContext</property>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/CoursePersistance.hbm.xml"/>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/ContentProviderPersistance.hbm.xml"/>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/User.hbm.xml"/>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/MultipleChoiceOptionsPersistance.hbm.xml"/>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/MultipleChoiceQuestionPersistance.hbm.xml"/>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/CourseTypePersistance.hbm.xml"/>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/MultipleChoiceAnswerPersistance.hbm.xml"/>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/LecturePersistance.hbm.xml"/>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/CourseBranchPersistance.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

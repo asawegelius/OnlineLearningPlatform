@@ -6,6 +6,9 @@ import org.hibernate.Session;
 import se.wegelius.olpstudenthandler.model.persistance.CourseBranchPersistance;
 import se.wegelius.olpstudenthandler.dao.CourseBranchDao;
 import se.wegelius.olpstudenthandler.dao.HibernateUtil;
+import se.wegelius.olpstudenthandler.dao.UserDao;
+import se.wegelius.olpstudenthandler.model.PasswordEncryptionService;
+import se.wegelius.olpstudenthandler.model.persistance.UserPersistance;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -27,7 +30,7 @@ public class Main {
      BasicConfigurator.configure();
 
      logger.info("Entering application.");
- 
+
      logger.info("Exiting application.");
    }
 }

@@ -5,6 +5,7 @@
  */
 package se.wegelius.olpstudenthandler.dao;
 
+import java.util.Set;
 import se.wegelius.olpstudenthandler.model.persistance.CourseTypePersistance;
 
 /**
@@ -25,5 +26,6 @@ public class CourseTypeDao  extends OlpDao<CourseTypePersistance, Integer> {
     public CourseTypeDao() {
         super(CourseTypePersistance.class);
     }
+
     
 }
