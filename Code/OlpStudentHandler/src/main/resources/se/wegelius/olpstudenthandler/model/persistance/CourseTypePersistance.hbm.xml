@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Apr 13, 2016 3:49:06 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 17-Apr-2016 20:57:24 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="se.wegelius.olpstudenthandler.model.persistance.CourseTypePersistance" table="course_type" catalog="onlinelearningplatform">
         <id name="courseTypeId" type="java.lang.Integer">
@@ -14,7 +14,7 @@
         <property name="ctCourseBranchFk" type="java.lang.Integer">
             <column name="ct_course_branch_fk" />
         </property>
-        <set name="courses" table="course" inverse="true" lazy="false" fetch="select">
+        <set name="courses" table="course" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="c_course_type_fk" not-null="true" />
             </key>

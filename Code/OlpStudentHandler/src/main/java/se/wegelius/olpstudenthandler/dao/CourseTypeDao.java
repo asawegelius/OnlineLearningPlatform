@@ -13,8 +13,7 @@ import se.wegelius.olpstudenthandler.model.persistance.CourseTypePersistance;
  * @author asawe
  */
 public class CourseTypeDao  extends OlpDao<CourseTypePersistance, Integer> {
-    
-    CourseBranchDao CBD = new CourseBranchDao();
+
     
     public CourseTypeDao( Class<CourseTypePersistance> type) {
         super(type);

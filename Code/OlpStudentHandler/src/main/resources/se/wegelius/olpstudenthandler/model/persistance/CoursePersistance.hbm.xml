@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Apr 13, 2016 3:49:06 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 17-Apr-2016 20:57:24 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="se.wegelius.olpstudenthandler.model.persistance.CoursePersistance" table="course" catalog="onlinelearningplatform">
         <id name="courseId" type="java.lang.Integer">
@@ -32,13 +32,13 @@
         <property name="skillLevel" type="string">
             <column name="skill_level" length="45" />
         </property>
-        <set name="multipleChoiceQuestions" table="multiple_choice_question" inverse="true" lazy="false" fetch="select">
+        <set name="multipleChoiceQuestions" table="multiple_choice_question" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="mcq_course_fk" not-null="true" />
             </key>
             <one-to-many class="se.wegelius.olpstudenthandler.model.persistance.MultipleChoiceQuestionPersistance" />
         </set>
-        <set name="lectures" table="lecture" inverse="true" lazy="false" fetch="select">
+        <set name="lectures" table="lecture" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="l_course_fk" not-null="true" />
             </key>

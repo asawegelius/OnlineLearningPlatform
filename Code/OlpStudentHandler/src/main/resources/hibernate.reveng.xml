@@ -2,12 +2,12 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="onlinelearningplatform"/>
-  <table-filter match-name="course"/>
-  <table-filter match-name="lecture"/>
-  <table-filter match-name="multiple_choice_question"/>
-  <table-filter match-name="multiple_choice_answer"/>
-  <table-filter match-name="content_provider"/>
-  <table-filter match-name="course_type"/>
-  <table-filter match-name="course_branch"/>
   <table-filter match-name="multiple_choice_options"/>
+  <table-filter match-name="multiple_choice_answer"/>
+  <table-filter match-name="course_branch"/>
+  <table-filter match-name="course"/>
+  <table-filter match-name="multiple_choice_question"/>
+  <table-filter match-name="lecture"/>
+  <table-filter match-name="course_type"/>
+  <table-filter match-name="content_provider"/>
 </hibernate-reverse-engineering>

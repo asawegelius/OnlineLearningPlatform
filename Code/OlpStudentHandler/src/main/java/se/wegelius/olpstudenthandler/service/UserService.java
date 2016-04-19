@@ -133,7 +133,7 @@ public class UserService {
         }
     }
 
-    
+  /*  
     @POST
     @Produces({MediaType.TEXT_PLAIN})
     @Path("/plain/create")
@@ -158,7 +158,7 @@ public class UserService {
         return Response.ok(msg, "text/plain").build();
         }
     }
-
+*/
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Path("json/update/{id: \\d+}")

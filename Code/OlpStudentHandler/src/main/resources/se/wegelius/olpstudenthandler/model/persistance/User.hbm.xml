@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Apr 13, 2016 3:49:06 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated 17-Apr-2016 20:57:24 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
   <class catalog="onlinelearningplatform" name="se.wegelius.olpstudenthandler.model.persistance.UserPersistance" optimistic-lock="version" table="user">
     <id name="userId" type="java.lang.Integer">
