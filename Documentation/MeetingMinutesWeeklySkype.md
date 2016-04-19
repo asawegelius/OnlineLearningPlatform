@@ -145,7 +145,7 @@ We have a sprint review and retrospective on Friday. We decided that Åsa can de
 ______________________________________________________________________________________________________________________________________
 
 ### Meeting Attended by: 
-Adrian Holm, Åsa Wegelius,, Tudor Stoica, Ionut Vieru, Clovis Lebret
+Adrian Holm, Åsa Wegelius, Tudor Stoica, Ionut Vieru, Clovis Lebret
 
 ### Absent from meeting:
 
@@ -176,16 +176,26 @@ We also discussed the presentation on monday and agreed that all involved should
 
 ______________________________________________________________________________________________________________________________________
 ### Meeting Attended by: 
+Adrian Holm, Åsa Wegelius,  Ionut Vieru
 
 ### Absent from meeting:
+Tudor Stoica, Clovis Lebret
 
 ### Date:
+18-04-16
 
 ### Time:
+21:00-21:25
 
 ### Faciliator:
+Åsa Wegelius
 
 ### Notes:
+We looked at the change added in the change log about a mobile application prototype and agreed on recomending a HTML5 application if our CIO wants to add Mobile Applications to the project after have seen the prototype. 
+
+We agreed on moving forward with the two-steps authenticator and password encryption we started work on last week. It will provide sufficent security for the kind of application we are working on.
+
+We agreed on deploying the application on Åsa Wegelius private server and have a backup on her web hotel. 
 
 ______________________________________________________________________________________________________________________________________
 ### Meeting Attended by: 
