@@ -95,8 +95,8 @@ CREATE TABLE `multiple_choice_answer` (
 
 CREATE TABLE `user` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(45) DEFAULT NULL,
-  `password` varchar(100) DEFAULT NULL,
+  `user_name` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
+  `password` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

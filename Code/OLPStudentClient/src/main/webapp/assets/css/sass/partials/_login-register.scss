@@ -1,0 +1,75 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 20, 2016, 1:52:45 PM
+    Author     : asawe
+*/
+
+//colors
+$white: #ffffff;
+
+//@extend-elements
+//original selectors
+//.bt-login, .bt-login:hover, .bt-login:active, .bt-login:focus
+%extend_1 {
+    background-color: $jaffa;
+    color: $white;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+    transition: background-color 300ms linear 0s;
+}
+a.navlink:hover, a.navlink:visited, a.navlink:link, a.navlink:active
+{   
+    outline: none;
+}
+
+
+.bt-login {
+    @extend %extend_1;
+    &:hover {
+        @extend %extend_1;
+    }
+    &:active {
+        @extend %extend_1;
+    }
+    &:focus {
+        @extend %extend_1;
+    }
+}
+.login-tab {
+    margin: 0 auto;
+    max-width: 380px;
+}
+.login-modal-header {
+    background: $aqua_icland;
+    color: $white;
+    .modal-title {
+        color: $white;
+    }
+    .close {
+        color: $white;
+    }
+}
+.login-modal {
+    background:lighten($kidnapper, 6.5%);
+    i {
+        color: $turquoise_blue;
+    }
+    form {
+        background:lighten($kidnapper, 6.5%);
+        max-width: 340px;
+    }
+}
+.login-modal-footer {
+    background:lighten($kidnapper, 6.5%);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.tab-pane form {
+    background:lighten($kidnapper, 6.5%);
+    margin: 0 auto;
+}

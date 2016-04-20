@@ -106,11 +106,11 @@ public class UserService {
     @Path("/json/create")
     @Consumes("application/octet-stream")
     public Response createJson(@QueryParam("user_name") String user_name,
-            @QueryParam("password") String pw) {
+            @QueryParam("password") String password) {
         checkContext();
         String msg = null;
         // Require both properties to create.
-        if (user_name == null || pw == null) {
+        if (user_name == null || password == null) {
             msg = "Property 'user_name' or property password is missing.\n";
             return Response.status(Response.Status.BAD_REQUEST).
                     entity(msg).
@@ -121,8 +121,6 @@ public class UserService {
             // Otherwise, create the UserPersistance and add it to the database.
             UserPersistance user = new UserPersistance();
             user.setUserName(user_name);
-
-            byte[] password = pw.getBytes();
             user.setPassword(password);
             dao.save(user);
             return Response.ok(toJson(new User(user)), MediaType.APPLICATION_JSON).build();
@@ -133,12 +131,12 @@ public class UserService {
         }
     }
 
-  /*  
+  
     @POST
     @Produces({MediaType.TEXT_PLAIN})
     @Path("/plain/create")
     public Response createPlain(@QueryParam("user_name") String user_name,
-            @QueryParam("password") byte[] password) {
+            @QueryParam("password") String password) {
         checkContext();
         // Require both properties to create.
         if (user_name == null || password == null) {
@@ -158,7 +156,7 @@ public class UserService {
         return Response.ok(msg, "text/plain").build();
         }
     }
-*/
+
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Path("json/update/{id: \\d+}")
@@ -211,7 +209,7 @@ public class UserService {
             msg = "There is no user with id " + id + "\n";
         } else {
             user.setUserName(user_name);
-            user.setPassword(pw.getBytes());
+            user.setPassword(pw);
         }
         if (msg != null) {
             return Response.status(Response.Status.BAD_REQUEST).

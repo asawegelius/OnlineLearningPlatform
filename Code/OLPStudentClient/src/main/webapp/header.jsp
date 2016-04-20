@@ -12,8 +12,8 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 <meta name="description" content="">
 <meta name="author" content="">
-<link rel="icon" href="assets/img/favicon.ico">
-
+<link rel="icon" href="assets/img/icons/favicon.ico">
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <title>OLP Online Learning Platform</title>
 
 
@@ -50,9 +50,16 @@
                     <li id="browse_courses"><a href="browseCourses.jsp">Browse Courses</a></li>
                     <li id="about"><a href="about.jsp">About</a></li>
                     <li id="contact"><a href="contact.jsp">Contact</a></li>
-
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="navlink" href="javascript:;" data-toggle="modal" data-target="#loginModal">Login/Sign Up</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
     </nav>
 
+    <div id="openLogin" class="modalDialog">
+        <div>	<a href="#close" title="Close" class="close">X</a>
+            <%@ include file="content/loginRegisterContent.jsp" %>
+        </div>
+    </div>

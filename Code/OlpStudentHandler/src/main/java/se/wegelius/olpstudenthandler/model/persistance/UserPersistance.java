@@ -11,12 +11,12 @@ public class UserPersistance  implements java.io.Serializable {
 
      private Integer userId;
      private String userName;
-     private byte[] password;
+     private String password;
 
     public UserPersistance() {
     }
 
-    public UserPersistance(String userName, byte[] password) {
+    public UserPersistance(String userName, String password) {
        this.userName = userName;
        this.password = password;
     }
@@ -35,11 +35,11 @@ public class UserPersistance  implements java.io.Serializable {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    public byte[] getPassword() {
+    public String getPassword() {
         return this.password;
     }
     
-    public void setPassword(byte[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 

@@ -6113,6 +6113,54 @@ and open the template in the editor.
   padding-top: 50px; }
 
 /*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 20, 2016, 1:52:45 PM
+    Author     : asawe
+*/
+.bt-login, .bt-login:hover, .bt-login:active, .bt-login:focus {
+  background-color: #F38630;
+  color: #ffffff;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  transition: background-color 300ms linear 0s; }
+
+a.navlink:hover, a.navlink:visited, a.navlink:link, a.navlink:active {
+  outline: none; }
+
+.login-tab {
+  margin: 0 auto;
+  max-width: 380px; }
+
+.login-modal-header {
+  background: #A7DBD8;
+  color: #ffffff; }
+  .login-modal-header .modal-title {
+    color: #ffffff; }
+  .login-modal-header .close {
+    color: #ffffff; }
+
+.login-modal {
+  background: #edefe2; }
+  .login-modal i {
+    color: #69E2E7; }
+  .login-modal form {
+    background: #edefe2;
+    max-width: 340px; }
+
+.login-modal-footer {
+  background: #edefe2;
+  margin-top: 15px;
+  margin-bottom: 15px; }
+
+.tab-pane form {
+  background: #edefe2;
+  margin: 0 auto; }
+
+/*
     Document   : colors.scss
     Created on : Apr 6, 2016, 2:26:05 PM
     Author     : asawe
