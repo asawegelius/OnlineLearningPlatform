@@ -1,14 +1,6 @@
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import se.wegelius.olpstudenthandler.model.persistance.CourseBranchPersistance;
-import se.wegelius.olpstudenthandler.dao.CourseBranchDao;
-import se.wegelius.olpstudenthandler.dao.HibernateUtil;
-import se.wegelius.olpstudenthandler.dao.UserDao;
-import se.wegelius.olpstudenthandler.model.PasswordEncryptionService;
-import se.wegelius.olpstudenthandler.model.persistance.UserPersistance;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

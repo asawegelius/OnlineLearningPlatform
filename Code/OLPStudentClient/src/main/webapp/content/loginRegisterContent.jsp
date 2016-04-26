@@ -33,8 +33,8 @@
                                 <form>
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                            <input type="text" class="form-control" id="login_username" placeholder="Username">
+                                            <div class="input-group-addon"><i class="fa fa-at"></i></div>
+                                            <input type="text" class="form-control" id="login_email"  pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" placeholder="Email">
                                         </div>
                                         <span class="help-block has-error" id="email-error"></span>
                                     </div>
@@ -54,22 +54,29 @@
                                 &nbsp;&nbsp;
                                 <span id="registration_fail" class="response_error" style="display: none;">Registration failed, please try again.</span>
                                 <div class="clearfix"></div>
-                                <form>
+                                <form action="register" action="post">
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                            <input type="text" class="form-control" id="username" placeholder="Username">
+                                            <div class="input-group-addon"><i class="fa fa-at"></i></div>
+                                            <input type="text" class="form-control" id="remail" name="remail"  pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" placeholder="Emailxx">
                                         </div>
                                         <span class="help-block has-error" data-error='0' id="username-error"></span>
                                     </div>
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <div class="input-group-addon"><i class="fa fa-at"></i></div>
-                                            <input type="text" class="form-control" id="remail" placeholder="Email">
+                                            <div class="input-group-addon"><i class="fa fa-lock"></i></div>
+                                            <input type="text" class="form-control" id="password" name="password"  placeholder="Password">
                                         </div>
                                         <span class="help-block has-error" data-error='0' id="remail-error"></span>
                                     </div>
-                                    <button type="button" id="register_btn" class="btn btn-block bt-login" data-loading-text="Registering....">Register</button>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-addon"><i class="fa fa-lock"></i></div>
+                                            <input type="text" class="form-control" id="repeat" placeholder="Password">
+                                        </div>
+                                        <span class="help-block has-error" data-error='0' id="remail-error"></span>
+                                    </div>
+                                    <button type="submit" id="register_btn" class="btn btn-block bt-login" data-loading-text="Registering....">Register</button>
                                     <div class="clearfix"></div>
 
                                 </form>
@@ -81,8 +88,8 @@
                                 <form>
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <div class="input-group-addon"><i class="fa fa-user"></i></div>
-                                            <input type="text" class="form-control" id="femail" placeholder="Email">
+                                            <div class="input-group-addon"><i class="fa fa-at"></i></div>
+                                            <input type="text" class="form-control" id="femail"  pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$" placeholder="Email">
                                         </div>
                                         <span class="help-block has-error" data-error='0' id="femail-error"></span>
                                     </div>

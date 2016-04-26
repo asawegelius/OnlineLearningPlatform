@@ -6,13 +6,11 @@
 package se.wegelius.olpstudenthandler.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.net.HttpURLConnection;
 import java.util.HashSet;
 import java.util.Set;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -85,8 +83,8 @@ public class UserService {
         checkContext();
         Set<UserPersistance> users = dao.getAll();
         String msg = dao.count() + "\n";
-        for (UserPersistance b : users) {
-            msg = msg + b.getUserId() + ";" + b.getUserName() + ";" + b.getPassword() + "\n";
+        for (UserPersistance user : users) {
+            msg = msg + user.getUserId() + ";" + user.getUserName() + ";" + user.getPassword() + ";" + user.isEnabled() + "\n";
         }
         return msg;
     }
@@ -97,7 +95,7 @@ public class UserService {
     public String getPlain(@PathParam("id") int id) {
         checkContext();
         UserPersistance user = dao.findByID(id);
-        String msg = user.getUserId() + ";" + user.getUserName() + ";" + user.getPassword();
+        String msg = user.getUserId() + ";" + user.getUserName() + ";" + user.getPassword() + ";" + user.isEnabled();
         return msg;
     }
 
@@ -106,72 +104,122 @@ public class UserService {
     @Path("/json/create")
     @Consumes("application/octet-stream")
     public Response createJson(@QueryParam("user_name") String user_name,
-            @QueryParam("password") String password) {
+            @QueryParam("password") String password, @QueryParam("enabled") int enabled) {
         checkContext();
-        String msg = null;
-        // Require both properties to create.
-        if (user_name == null || password == null) {
-            msg = "Property 'user_name' or property password is missing.\n";
+        // Require all properties to create.
+        if (user_name == null || password == null || enabled < 0) {
+            String msg = "Property 'user_name', property 'password' or property 'enabled' is missing.\n";
             return Response.status(Response.Status.BAD_REQUEST).
                     entity(msg).
                     type(MediaType.APPLICATION_JSON).
                     build();
         }
-        if (msg != null) {
-            // Otherwise, create the UserPersistance and add it to the database.
-            UserPersistance user = new UserPersistance();
-            user.setUserName(user_name);
-            user.setPassword(password);
-            dao.save(user);
-            return Response.ok(toJson(new User(user)), MediaType.APPLICATION_JSON).build();
-        } else {
-            return Response.status(HttpURLConnection.HTTP_BAD_REQUEST)
-                    .entity(msg)
-                    .build();
+
+        // check the user_name is unique
+        Set<UserPersistance> users = dao.getAll(" WHERE `user`.`user_name` = " + user_name);
+        if (users != null) {
+            // the user is activated 
+            if (users.iterator().next().isEnabled()) {
+                String msg = "Property 'user_name' is not unique.\n";
+                return Response.status(Response.Status.BAD_REQUEST).
+                        entity(msg).
+                        type(MediaType.APPLICATION_JSON).
+                        build();
+            } // the user is not activated
+            else {
+                String msg = "Property 'user_name' is not activated.\n";
+                return Response.status(Response.Status.BAD_REQUEST).
+                        entity(msg).
+                        type(MediaType.APPLICATION_JSON).
+                        build();
+            }
         }
+        // Otherwise, create the UserPersistance and add it to the database.
+        UserPersistance user = new UserPersistance();
+        user.setUserName(user_name);
+        user.setPassword(password);
+        if (enabled == 0) {
+            user.setEnabled(false);
+        } else {
+            user.setEnabled(true);
+        }
+        dao.save(user);
+        return Response.ok(toJson(new User(user)), MediaType.APPLICATION_JSON).build();
+
     }
 
-  
     @POST
     @Produces({MediaType.TEXT_PLAIN})
     @Path("/plain/create")
     public Response createPlain(@QueryParam("user_name") String user_name,
-            @QueryParam("password") String password) {
+            @QueryParam("password") String password, @QueryParam("enabled") int enabled) {
         checkContext();
-        // Require both properties to create.
-        if (user_name == null || password == null) {
-            String msg = "Property 'user_name' or property password is missing.\n";
+        // Require all properties to create.
+        if (user_name == null || password == null || enabled < 0) {
+            String msg = "Property 'user_name', property 'password' or property 'enabled' is missing.\n";
             return Response.status(Response.Status.BAD_REQUEST).
                     entity(msg).
                     type(MediaType.TEXT_PLAIN).
                     build();
         } else {
-        // Otherwise, create the Mail and add it to the database.
-        UserPersistance user = new UserPersistance();
-        user.setUserName(user_name);
-        user.setPassword(password);
-        dao.save(user);
-        int id = user.getUserId();
-        String msg = id + ";" + user_name + "\n";
-        return Response.ok(msg, "text/plain").build();
+            // check the user_name is unique
+            Set<UserPersistance> users = dao.getAll(" WHERE `user`.`user_name` = " + user_name);
+            if (users != null) {
+                String msg = "Property 'user_name' is not unique.\n";
+                return Response.status(Response.Status.BAD_REQUEST).
+                        entity(msg).
+                        type(MediaType.TEXT_PLAIN).
+                        build();
+            }
+            // Otherwise, create the Mail and add it to the database.
+            UserPersistance user = new UserPersistance();
+            user.setUserName(user_name);
+            user.setPassword(password);
+            if (enabled == 0) {
+                user.setEnabled(false);
+            } else {
+                user.setEnabled(true);
+            }
+            dao.save(user);
+            int id = user.getUserId();
+            String msg = id + ";" + user_name + "\n";
+            return Response.ok(msg, "text/plain").build();
         }
     }
 
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Path("json/update/{id: \\d+}")
-    public Response updateJson(@PathParam("id") int id,
-            @QueryParam("branch_name") String branch_name) {
+    public Response updateJson(@QueryParam("id") int id, @QueryParam("user_name") String user_name,
+            @QueryParam("password") String password, @QueryParam("enabled") int enabled) {
         checkContext();
 
         System.out.println("in put json got request for id " + id);
         UserPersistance user = dao.findByID(id);
         // Check that sufficient data are present to do an edit.
         String msg = null;
-        if (branch_name == null) {
-            msg = "branch_name is not given: nothing to edit\n";
-        } else if (user == null) {
-            msg = "There is no branch with id " + id + "\n";
+        if (user_name == null) {
+            msg = "Property user_name is not given.\n";
+        }
+        if (password == null) {
+            msg = msg + "Property password is not given.\n";
+        }
+        if (enabled < 0) {
+            msg = msg + "Property 'enabled' is corrupted.\n";
+        }
+        if (msg != null) {
+            msg = msg + "Nothing to edit.\n";
+        }
+        if (user == null) {
+            msg = msg + "There is no user with id " + id + "\n";
+        } else {
+            user.setUserName(user_name);
+            user.setPassword(password);
+            if (enabled == 0) {
+                user.setEnabled(false);
+            } else {
+                user.setEnabled(true);
+            }
         }
 
         if (msg != null) {
@@ -179,9 +227,6 @@ public class UserService {
                     entity(msg).
                     type(MediaType.APPLICATION_JSON).
                     build();
-        } else {
-            // Update.
-            user.setUserName(branch_name);
         }
         dao.update(user);
 
@@ -191,25 +236,34 @@ public class UserService {
     @PUT
     @Produces({MediaType.TEXT_PLAIN})
     @Path("plain/update/{id: \\d+}")
-    public Response update(@FormParam("id") int id,
-            @QueryParam("user_name") String user_name,
-            @QueryParam("password") String pw) {
+    public Response update(@QueryParam("id") int id, @QueryParam("user_name") String user_name,
+            @QueryParam("password") String password, @QueryParam("enabled") int enabled) {
         checkContext();
-
         // Check that sufficient data are present to do an edit.
         String msg = null;
-        if (user_name == null) {
-            msg = "user_name is not given: nothing to edit\n";
-        }
-        if (pw == null) {
-            msg = msg + "password is not given: nothing to edit\n";
-        }
         UserPersistance user = dao.findByID(id);
+        if (user_name == null) {
+            msg = "Property user_name is not given.\n";
+        }
+        if (password == null) {
+            msg = msg + "Property password is not given.\n";
+        }
+        if (enabled < 0) {
+            msg = msg + "Property 'enabled' is corrupted.\n";
+        }
+        if (msg != null) {
+            msg = msg + "Nothing to edit.\n";
+        }
         if (user == null) {
-            msg = "There is no user with id " + id + "\n";
+            msg = msg + "There is no user with id " + id + "\n";
         } else {
             user.setUserName(user_name);
-            user.setPassword(pw);
+            user.setPassword(password);
+            if (enabled == 0) {
+                user.setEnabled(false);
+            } else {
+                user.setEnabled(true);
+            }
         }
         if (msg != null) {
             return Response.status(Response.Status.BAD_REQUEST).
@@ -240,7 +294,7 @@ public class UserService {
             return Response.ok(msg, "text/plain").build();
         }
     }
-     
+
     //** utilities
     private void checkContext() {
         if (dao == null) {

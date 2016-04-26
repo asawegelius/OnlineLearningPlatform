@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package se.wegelius.olpstudenthandler.model;
+package se.wegelius.olp.model;
 
-import se.wegelius.olpstudenthandler.model.persistance.UserPersistance;
+
 
 /**
  *
@@ -28,11 +28,6 @@ public class User {
         this.enabled = enabled;
     }
 
-    public User(UserPersistance p) {
-        this.userName = p.getUserName();
-        this.userId = p.getUserId();
-        this.password = p.getPassword();
-    }
    
     public Integer getUserId() {
         return this.userId;

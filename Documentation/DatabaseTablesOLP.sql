@@ -97,6 +97,8 @@ CREATE TABLE `user` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_name` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
   `password` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `enabled` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 
