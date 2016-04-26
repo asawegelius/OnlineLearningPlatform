@@ -199,16 +199,29 @@ We agreed on deploying the application on Åsa Wegelius private server and have 
 
 ______________________________________________________________________________________________________________________________________
 ### Meeting Attended by: 
+Adrian Holm, Åsa Wegelius,  Ionut Vieru, Tudor Stoica, Clovis Lebret
 
 ### Absent from meeting:
 
 ### Date:
+25-04-2016
 
 ### Time:
+21:00-21:30
 
 ### Faciliator:
+Åsa Wegelius
 
 ### Notes:
+We discussed with the Product Owner what could be put back to the backlog due to time issues and agreed on that the user account management page could be implemented later.
+
+Next week plans:
+
+- Adrian Holm will update the scrum board and burndown chart at KEA and finish the Business Case document
+- Ionut Vieru will update the documents according to the comments we got about them
+- Tudor Stoica will add Test Cases
+- Clovis Lebret will take care of what we talked about some time ago
+- Åsa Wegelius will continue on the tasks in the sprint backlog
 
 ______________________________________________________________________________________________________________________________________
 ### Meeting Attended by: 
