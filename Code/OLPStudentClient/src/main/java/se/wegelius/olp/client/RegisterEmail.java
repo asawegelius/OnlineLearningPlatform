@@ -5,18 +5,17 @@
  */
 package se.wegelius.olp.client;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.sun.jersey.api.client.ClientResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,7 +54,7 @@ public class RegisterEmail extends HttpServlet {
         // collect all input values
         String email = request.getParameter("remail");
         logger.info(email);
-        String password = request.getParameter("password");
+        String password = request.getParameter("rpassword");
         logger.info(password);
         User user = new User();
         user.setUserName(email);
@@ -70,7 +69,6 @@ public class RegisterEmail extends HttpServlet {
         }
         String encryptedToString = new String(encryptedPassword, "ISO-8859-1");
         user.setPassword(encryptedToString);
-
         // generate unique code for email verification
         UUID uniqueid = UUID.randomUUID();
         String stringToken = uniqueid.toString();
@@ -80,13 +78,16 @@ public class RegisterEmail extends HttpServlet {
         token.setToken(stringToken);
         token.setUser(user);
 
-        // check whether email exists or not
+ 
+        // save the user as a not enabled user
         UserClient userClient = new UserClient();
-        MultivaluedMap parameters = userClient.getParameters(email, password, 0);
+        MultivaluedMap parameters = userClient.getParameters(user.getUserName(), user.getPassword(), 0);
         ClientResponse clientResponse = userClient.createJson(parameters);
         String msg = null;
-        if(clientResponse.getStatusInfo() == ClientResponse.Status.BAD_REQUEST){
+        logger.info(clientResponse.getStatusInfo().getReasonPhrase());
+        if(clientResponse.getStatusInfo().getReasonPhrase().equals("Bad Request")){
             msg = clientResponse.getEntity(String.class);
+            logger.info("error message after trying to create user: " + msg);
         }
         if (msg == null) {
             // create account and verificationtoken if email not exists
@@ -101,6 +102,13 @@ public class RegisterEmail extends HttpServlet {
             }
             msg = "Registation Link Was Sent To Your Mail Successfully. Please Verify Your Email";
         } 
+        else {
+            
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+            PrintWriter out= response.getWriter();
+            out.println("<font color=red> " + msg +"</font>");
+            rd.include(request, response);
+        }
 
     }
 

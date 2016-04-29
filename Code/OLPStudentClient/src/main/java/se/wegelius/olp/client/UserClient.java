@@ -5,10 +5,6 @@
  */
 package se.wegelius.olp.client;
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.UniformInterfaceException;
-import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javax.ws.rs.core.MultivaluedMap;
 
@@ -27,16 +23,18 @@ public class UserClient extends GenericClient {
 
     public MultivaluedMap getParameters(int id, String userName, String password, int enabled) {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
-        queryParams.add("id", id);
+        queryParams.add("id", Integer.toString(id));
         queryParams.add("user_name", userName);
-        queryParams.add("enabled", enabled);
+        queryParams.add("password", password);
+        queryParams.add("enabled", Integer.toString(enabled));
         return queryParams;
     }
 
     public MultivaluedMap getParameters(String userName, String password, int enabled) {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
         queryParams.add("user_name", userName);
-        queryParams.add("enabled", enabled);
+        queryParams.add("password", password);
+        queryParams.add("enabled", Integer.toString(enabled));
         return queryParams;
     }
 

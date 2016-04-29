@@ -1,5 +1,5 @@
 package se.wegelius.olpstudenthandler.model.persistance;
-// Generated 17-Apr-2016 20:57:20 by Hibernate Tools 4.3.1
+// Generated Apr 27, 2016 1:23:38 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;

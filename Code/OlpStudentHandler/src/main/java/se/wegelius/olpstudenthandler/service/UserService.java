@@ -21,6 +21,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.slf4j.LoggerFactory;
 import se.wegelius.olpstudenthandler.dao.UserDao;
 import se.wegelius.olpstudenthandler.model.User;
 import se.wegelius.olpstudenthandler.model.persistance.UserPersistance;
@@ -31,12 +32,13 @@ import se.wegelius.olpstudenthandler.model.persistance.UserPersistance;
  */
 @Path("/user")
 public class UserService {
-
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserService.class);
     @Context
     private ServletContext sctx;          // dependency injection
     private static UserDao dao;
 
     public UserService() {
+        logger.info("starting UserService");
     }
 
     @GET
@@ -106,6 +108,7 @@ public class UserService {
     public Response createJson(@QueryParam("user_name") String user_name,
             @QueryParam("password") String password, @QueryParam("enabled") int enabled) {
         checkContext();
+        logger.info("UserService got user_name: " + user_name + " password: " + password + " enable " + enabled);
         // Require all properties to create.
         if (user_name == null || password == null || enabled < 0) {
             String msg = "Property 'user_name', property 'password' or property 'enabled' is missing.\n";
@@ -152,10 +155,10 @@ public class UserService {
     @Produces({MediaType.TEXT_PLAIN})
     @Path("/plain/create")
     public Response createPlain(@QueryParam("user_name") String user_name,
-            @QueryParam("password") String password, @QueryParam("enabled") int enabled) {
+            @QueryParam("password") String password, @QueryParam("enabled") String enabled) {
         checkContext();
         // Require all properties to create.
-        if (user_name == null || password == null || enabled < 0) {
+        if (user_name == null || password == null || enabled == null) {
             String msg = "Property 'user_name', property 'password' or property 'enabled' is missing.\n";
             return Response.status(Response.Status.BAD_REQUEST).
                     entity(msg).
@@ -165,17 +168,27 @@ public class UserService {
             // check the user_name is unique
             Set<UserPersistance> users = dao.getAll(" WHERE `user`.`user_name` = " + user_name);
             if (users != null) {
+             // the user is activated 
+            if (users.iterator().next().isEnabled()) {
                 String msg = "Property 'user_name' is not unique.\n";
                 return Response.status(Response.Status.BAD_REQUEST).
                         entity(msg).
-                        type(MediaType.TEXT_PLAIN).
+                        type(MediaType.APPLICATION_JSON).
                         build();
+            } // the user is not activated
+            else {
+                String msg = "Property 'user_name' is not activated.\n";
+                return Response.status(Response.Status.BAD_REQUEST).
+                        entity(msg).
+                        type(MediaType.APPLICATION_JSON).
+                        build();
+            }
             }
             // Otherwise, create the Mail and add it to the database.
             UserPersistance user = new UserPersistance();
             user.setUserName(user_name);
             user.setPassword(password);
-            if (enabled == 0) {
+            if (Integer.parseInt(enabled) == 0) {
                 user.setEnabled(false);
             } else {
                 user.setEnabled(true);
@@ -194,7 +207,6 @@ public class UserService {
             @QueryParam("password") String password, @QueryParam("enabled") int enabled) {
         checkContext();
 
-        System.out.println("in put json got request for id " + id);
         UserPersistance user = dao.findByID(id);
         // Check that sufficient data are present to do an edit.
         String msg = null;

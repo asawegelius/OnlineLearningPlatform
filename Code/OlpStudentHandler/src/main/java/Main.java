@@ -1,6 +1,8 @@
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,12 +16,11 @@ import org.apache.log4j.Logger;
 public class Main {
    // Define a static logger variable so that it references the
    // Logger instance named "MyApp".
-   static Logger logger = Logger.getLogger(Main.class);
+   private static final org.slf4j.Logger logger = LoggerFactory.getLogger(Main.class);
 
    public static void main(String[] args) {
 
-     // Set up a simple configuration that logs on the console.
-     BasicConfigurator.configure();
+
 
      logger.info("Entering application.");
 

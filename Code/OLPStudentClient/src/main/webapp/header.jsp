@@ -16,7 +16,12 @@
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 <title>OLP Online Learning Platform</title>
 
+<script>
+    $('#loginModal').on('hidden.bs.modal', function () {
+        $('.modal-body').find('lable,input,textarea').val('');
 
+    });
+</script>
 
 <link href="assets/css/main.css" rel="stylesheet">
 
@@ -52,14 +57,11 @@
                     <li id="contact"><a href="contact.jsp">Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="navlink" href="javascript:;" data-toggle="modal" data-target="#loginModal">Login/Sign Up</a></li>
+                    <li><a class="navlink" href="#" data-toggle="modal" data-target="#loginModal">Login/Sign Up</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
     </nav>
 
-    <div id="openLogin" class="modalDialog">
-        <div>	<a href="#close" title="Close" class="close">X</a>
-            <%@ include file="content/loginRegisterContent.jsp" %>
-        </div>
-    </div>
+
+    <%@ include file="content/loginRegisterContent.jsp" %>

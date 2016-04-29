@@ -8,6 +8,7 @@ package se.wegelius.olpstudenthandler.model;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
+import se.wegelius.olpstudenthandler.model.persistance.VerificationtokenPersistance;
 
 /**
  *
@@ -22,6 +23,12 @@ public class VerificationToken {
  
     public VerificationToken() {
         super();
+    }
+    
+    public VerificationToken(VerificationtokenPersistance p){
+        this.token = p.getToken();
+        this.user = new User(p.getUser());
+        this.expiryDate = p.getExpiryDate();
     }
     public VerificationToken(String token, User user) {
         super();
