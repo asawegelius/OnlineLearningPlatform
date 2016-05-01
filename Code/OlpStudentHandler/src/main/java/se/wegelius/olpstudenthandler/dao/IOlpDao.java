@@ -7,6 +7,7 @@ package se.wegelius.olpstudenthandler.dao;
 
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -48,13 +49,13 @@ public interface IOlpDao<T, ID extends Serializable> {
 	/**
 	 * Find entities based on a query
 	 * 
-	 * @param query
-	 *            the name of the query
+	 * @param hsql
+	 *            the query
 	 * @param params
 	 *            the query parameters
 	 * @return a Set of the entities
 	 */
-	Set<T> getAll(String query, Object... params);
+	Set<T> query(String hsql, Map<String, Object> params);
 
 	/**
 	 * Count all entities

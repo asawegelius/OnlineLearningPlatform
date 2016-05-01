@@ -6,11 +6,13 @@
 package se.wegelius.olp.client;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.MultivaluedMap;
+import se.wegelius.olp.model.VerificationToken;
 
 /**
  *
@@ -29,19 +31,17 @@ public class OLPRegister extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet OLPRegister</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet OLPRegister at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        String t = request.getParameter("go");
+        // get the token
+        VerificationTokenClient tokenClient = new VerificationTokenClient();
+        VerificationToken token = tokenClient.getJsonToken(VerificationToken.class, t);
+        // update the user to enabled = true;
+        UserClient userClient = new UserClient();
+        MultivaluedMap queryParam = userClient.getParameters(token.getUser().getUserId(), token.getUser().getUserName(), token.getUser().getPassword(), 1);
+        userClient.updateJson(queryParam, token.getUser().getUserId());
+        // redirect to index with user logged in
+        HttpSession session = request.getSession();
+        session.setAttribute("user", token.getUser().getUserName());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

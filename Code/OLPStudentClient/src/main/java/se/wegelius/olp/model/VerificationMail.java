@@ -42,7 +42,8 @@ public class VerificationMail {
             }
         });
 
-        String link = "http://188.181.85.75/OLPRegister?go=" + code;
+        //String link = "http://188.181.85.75/OLP/verify?go=" + code;
+        String link = "http://localhost:8080/OLP/verify?go=" + code;
 
         StringBuilder bodyText = new StringBuilder();
         bodyText.append("<div>")

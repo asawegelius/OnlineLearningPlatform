@@ -57,7 +57,18 @@
                     <li id="contact"><a href="contact.jsp">Contact</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a class="navlink" href="#" data-toggle="modal" data-target="#loginModal">Login/Sign Up</a></li>
+                    <%
+                        String user = null;
+                        //check if no on has logged in:
+                        if(session.getAttribute("user") == null){
+                            // check if there is a message to display
+                            if(session.getAttribute("msg")!= null){
+                                 out.write("<li><p class=\"navbar-text\"> " + (String) session.getAttribute("msg")+ "</p></li>");
+                            }
+                            out.write("<li><a class=\"navlink\" href=\"#\" data-toggle=\"modal\" data-target=\"#loginModal\">Login/Sign Up</a></li>");
+                        }
+                    %>
+                    
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

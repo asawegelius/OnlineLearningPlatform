@@ -22,7 +22,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>OLPRegister</servlet-name>
-        <url-pattern>/OLPRegister</url-pattern>
+        <url-pattern>/verify</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

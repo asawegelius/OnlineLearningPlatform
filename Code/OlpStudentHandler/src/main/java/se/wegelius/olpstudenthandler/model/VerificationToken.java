@@ -23,12 +23,13 @@ public class VerificationToken {
  
     public VerificationToken() {
         super();
+        this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
     
     public VerificationToken(VerificationtokenPersistance p){
         this.token = p.getToken();
         this.user = new User(p.getUser());
-        this.expiryDate = p.getExpiryDate();
+        this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
     public VerificationToken(String token, User user) {
         super();

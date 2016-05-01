@@ -62,7 +62,7 @@ function myFunction() {
                                 &nbsp;&nbsp;
                                 <span id="registration_fail" class="response_error" style="display: none;">Registration failed, please try again.</span>
                                 <div class="clearfix"></div>
-                                <form action="" method="post" id="registerForm">
+                                <form action="register" method="post" id="registerForm">
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="input-group-addon"><i class="fa fa-at"></i></div>

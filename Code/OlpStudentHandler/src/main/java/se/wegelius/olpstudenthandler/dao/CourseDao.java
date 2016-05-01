@@ -12,6 +12,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.slf4j.LoggerFactory;
 import se.wegelius.olpstudenthandler.model.persistance.CoursePersistance;
 
 /**
@@ -19,6 +20,8 @@ import se.wegelius.olpstudenthandler.model.persistance.CoursePersistance;
  * @author asawe
  */
 public class CourseDao extends OlpDao<CoursePersistance, Integer> {
+
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(CourseDao.class);
 
     public CourseDao(Class<CoursePersistance> type) {
         super(type);
@@ -44,18 +47,17 @@ public class CourseDao extends OlpDao<CoursePersistance, Integer> {
         try {
             session.beginTransaction();
             course = (CoursePersistance) session.get(CoursePersistance.class, id);
-            System.out.println("will try to initialize course branches in course");
             Hibernate.initialize(course.getCourseBranch());
             Hibernate.initialize(course.getContentProvider());
             Hibernate.initialize(course.getCourseType());
             session.getTransaction().commit();
         } catch (HibernateException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } finally {
             try {
                 session.close();
             } catch (HibernateException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
         return course;
@@ -82,12 +84,12 @@ public class CourseDao extends OlpDao<CoursePersistance, Integer> {
             }
             session.getTransaction().commit();
         } catch (HibernateException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } finally {
             try {
                 session.close();
             } catch (HibernateException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
         if (objects != null) {
@@ -95,8 +97,8 @@ public class CourseDao extends OlpDao<CoursePersistance, Integer> {
         }
         return null;
     }
-    
-        /**
+
+    /**
      * Find entities based on a query
      *
      * @param query the name of the query
@@ -116,12 +118,12 @@ public class CourseDao extends OlpDao<CoursePersistance, Integer> {
             }
             session.getTransaction().commit();
         } catch (HibernateException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } finally {
             try {
                 session.close();
             } catch (HibernateException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
         if (objects != null) {

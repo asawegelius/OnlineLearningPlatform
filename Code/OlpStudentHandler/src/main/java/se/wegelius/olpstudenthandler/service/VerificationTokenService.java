@@ -7,7 +7,9 @@ package se.wegelius.olpstudenthandler.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
@@ -22,9 +24,9 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.slf4j.LoggerFactory;
 import se.wegelius.olpstudenthandler.dao.UserDao;
 import se.wegelius.olpstudenthandler.dao.VerificationTokenDao;
-import se.wegelius.olpstudenthandler.model.User;
 import se.wegelius.olpstudenthandler.model.VerificationToken;
 import se.wegelius.olpstudenthandler.model.persistance.UserPersistance;
 import se.wegelius.olpstudenthandler.model.persistance.VerificationtokenPersistance;
@@ -35,7 +37,7 @@ import se.wegelius.olpstudenthandler.model.persistance.VerificationtokenPersista
  */
 @Path("/token")
 public class VerificationTokenService {
-
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(VerificationTokenService.class);
     @Context
     private ServletContext sctx;          // dependency injection
     private static VerificationTokenDao dao;
@@ -65,11 +67,11 @@ public class VerificationTokenService {
     public Response getJson() {
         checkContext();
         Set<VerificationtokenPersistance> set = dao.getAll();
-        Set<VerificationToken> users = new HashSet<>();
+        Set<VerificationToken> tokens = new HashSet<>();
         for (VerificationtokenPersistance p : set) {
-            users.add(new VerificationToken(p));
+            tokens.add(new VerificationToken(p));
         }
-        return Response.ok(toJson(users), "application/json").build();
+        return Response.ok(toJson(tokens), "application/json").build();
     }
 
     @GET
@@ -78,6 +80,22 @@ public class VerificationTokenService {
     public Response getJson(@PathParam("id") int id) {
         checkContext();
         return toRequestedType(id, "application/json");
+    }
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("/json/token/{token: \\d+}")
+    public Response getJsonToken(@PathParam("token") String token) {
+        checkContext();
+        int id = -1;
+        Map params = new HashMap();
+        params.put("token", token);
+        Set<VerificationtokenPersistance> tokens = dao.query("SELECT t FROM VerificationtokenPersistance AS t WHERE t.token = :token", params);        
+        if (tokens.iterator().hasNext()) {
+            VerificationtokenPersistance t = tokens.iterator().next();
+            id = t.getVerificationtokenId();
+        }
+        return toRequestedType( id, "application/json");
     }
 
     @GET
@@ -111,32 +129,48 @@ public class VerificationTokenService {
             @QueryParam("token") String token) {
         checkContext();
         // Require all properties to create.
-        if (user_id < 1 || token == null) {
-            String msg = "Property 'user_id' or property 'token' is missing.\n";
+        String msg = "";
+        if (user_id < 1) {
+            msg = "user_id corrupted";
+        }
+        if (token == null) {
+            msg = msg + ";token missing";
+        }
+        if (!msg.equals("")) {
             return Response.status(Response.Status.BAD_REQUEST).
                     entity(msg).
                     type(MediaType.APPLICATION_JSON).
                     build();
         }
-
-        // get the vtoken
+        // get the vtokens user
         UserPersistance user = new UserDao().findByID(user_id);
         if (user == null) {
-            String msg = "Property 'user_id' have no matching user. \n";
+            msg = msg + "user missing";
             return Response.status(Response.Status.BAD_REQUEST).
                     entity(msg).
                     type(MediaType.APPLICATION_JSON).
                     build();
         }
-
-        // Otherwise, create the VerificationTokenPersistance and add it to the database.
-        VerificationToken getDate = new VerificationToken(token, new User(user));
-        VerificationtokenPersistance vtoken = new VerificationtokenPersistance();
-        vtoken.setUser(user);
-        vtoken.setToken(token);
-        vtoken.setExpiryDate(getDate.getExpiryDate());
-        dao.save(vtoken);
-        return Response.ok(toJson(new VerificationToken(vtoken)), MediaType.APPLICATION_JSON).build();
+        // check if the user already have a token and set a new date if it exists since a user can have at the most one token
+        Map params = new HashMap();
+        params.put("user", user);
+        VerificationtokenPersistance t;
+        Set<VerificationtokenPersistance> tokens = dao.query("SELECT t FROM VerificationtokenPersistance AS t WHERE t.user = :user", params);
+        if (tokens.iterator().hasNext()) {
+            t = tokens.iterator().next();
+            t.setUser(user);
+            t.setExpiryDate(new VerificationToken(t).getExpiryDate());
+            dao.update(t);
+        } // Otherwise, create the VerificationTokenPersistance and add it to the database.
+        else {
+            t = new VerificationtokenPersistance();
+            t.setUser(user);
+            t.setToken(token);
+            t.setExpiryDate(new VerificationToken(t).getExpiryDate());
+            
+            dao.save(t);
+        }
+        return Response.ok(toJson(new VerificationToken(t)), MediaType.APPLICATION_JSON).build();
 
     }
 
@@ -147,33 +181,48 @@ public class VerificationTokenService {
             @QueryParam("token") String token) {
         checkContext();
         // Require all properties to create.
-        if (user_id < 1 || token == null) {
-            String msg = "Property 'user_id' or property 'token' is missing.\n";
+        String msg = "";
+        if (user_id < 1) {
+            msg = "user_id corrupted";
+        }
+        if (token == null) {
+            msg = msg + ";token missing";
+        }
+        if (!msg.equals("")) {
             return Response.status(Response.Status.BAD_REQUEST).
                     entity(msg).
                     type(MediaType.TEXT_PLAIN).
                     build();
-        } else {
-            // get the vtoken
-            UserPersistance user = new UserDao().findByID(user_id);
-            if (user == null) {
-                String msg = "Property 'user_id' have no matching user. \n";
-                return Response.status(Response.Status.BAD_REQUEST).
-                        entity(msg).
-                        type(MediaType.TEXT_PLAIN).
-                        build();
-            }
-            // Otherwise, create the VerificationTokenPersistance and add it to the database.
-            VerificationToken getDate = new VerificationToken(token, new User(user));
-            VerificationtokenPersistance vtoken = new VerificationtokenPersistance();
-            vtoken.setUser(user);
-            vtoken.setToken(token);
-            vtoken.setExpiryDate(getDate.getExpiryDate());
-            dao.save(vtoken);
-            int id = vtoken.getVerificationtokenId();
-            String msg = id + ";" + token + "\n";
-            return Response.ok(msg, "text/plain").build();
         }
+        // get the vtokens user
+        UserPersistance user = new UserDao().findByID(user_id);
+        if (user == null) {
+            msg = msg + "user missing";
+            return Response.status(Response.Status.BAD_REQUEST).
+                    entity(msg).
+                    type(MediaType.TEXT_PLAIN).
+                    build();
+        }
+        // check if the user already have a token and set a new date if it exists since a user can have at the most one token
+        Map params = new HashMap();
+        params.put("user_id", user.getUserId());
+        VerificationtokenPersistance t;
+        Set<VerificationtokenPersistance> tokens = dao.query("SELECT t FROM VerificationtokenPersistance AS t WHERE t.user.userId = :user_id", params);
+        if (tokens.iterator().hasNext()) {
+            t = tokens.iterator().next();
+            t.setExpiryDate(new VerificationToken(t).getExpiryDate());
+            dao.update(t);
+        } // Otherwise, create the VerificationTokenPersistance and add it to the database.
+        else {
+            t = new VerificationtokenPersistance();
+            t.setUser(user);
+            t.setToken(token);
+            t.setExpiryDate(new VerificationToken(t).getExpiryDate());
+            dao.save(t);
+        }
+        msg = t.getVerificationtokenId() + ";" + token;
+        return Response.ok(msg, "text/plain").build();
+
     }
 
     @PUT

@@ -5,9 +5,10 @@
  */
 package se.wegelius.olp.client;
 
+import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
-import java.util.Date;
 import javax.ws.rs.core.MultivaluedMap;
+import se.wegelius.olp.model.VerificationToken;
 
 /**
  *
@@ -22,20 +23,25 @@ public class VerificationTokenClient extends GenericClient {
         super(BASE_URI);
     }
 
-    public MultivaluedMap getParameters(int id, int user_id, String token, Date expiry_day) {
+    public VerificationToken getJsonToken(Class<VerificationToken> responseType, String token) {
+        WebResource resource = super.getWebResource();
+        resource = resource.path(java.text.MessageFormat.format("json/token/{0}", new Object[]{token}));
+        return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+
+    }
+
+    public MultivaluedMap getParameters(String id, String user_id, String token) {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
         queryParams.add("id", id);
         queryParams.add("user_id", user_id);
         queryParams.add("token", token);
-        queryParams.add("expiry_day", expiry_day);
         return queryParams;
     }
 
-    public MultivaluedMap getParameters(int user_id, String token, Date expiry_day) {
+    public MultivaluedMap getParameters(String user_id, String token) {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
         queryParams.add("user_id", user_id);
         queryParams.add("token", token);
-        queryParams.add("expiry_day", expiry_day);
         return queryParams;
     }
 

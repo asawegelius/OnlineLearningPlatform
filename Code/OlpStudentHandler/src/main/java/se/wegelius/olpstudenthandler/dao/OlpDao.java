@@ -8,12 +8,12 @@ package se.wegelius.olpstudenthandler.dao;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Query;
+import org.slf4j.LoggerFactory;
 
 /**
  * Generic repository providing basic CRUD operations
@@ -25,6 +25,7 @@ import org.hibernate.Query;
  */
 public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
 
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(OlpDao.class);
     private final Class<T> type;
 
     public OlpDao(Class<T> type) {
@@ -45,12 +46,12 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
             session.save(entity);
             session.getTransaction().commit();
         } catch (HibernateException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } finally {
             try {
                 session.close();
             } catch (HibernateException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
     }
@@ -68,12 +69,12 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
             session.update(entity);
             session.getTransaction().commit();
         } catch (HibernateException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } finally {
             try {
                 session.close();
             } catch (HibernateException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
     }
@@ -91,12 +92,12 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
             session.saveOrUpdate(entity);
             session.getTransaction().commit();
         } catch (HibernateException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } finally {
             try {
                 session.close();
             } catch (HibernateException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
     }
@@ -114,12 +115,12 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
             session.merge(entity);
             session.getTransaction().commit();
         } catch (HibernateException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } finally {
             try {
                 session.close();
             } catch (HibernateException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
     }
@@ -140,12 +141,12 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
             obj = (T) session.get(type, id);
             session.getTransaction().commit();
         } catch (HibernateException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } finally {
             try {
                 session.close();
             } catch (HibernateException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
         return obj;
@@ -167,12 +168,12 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
             objects = query.list();
             session.getTransaction().commit();
         } catch (HibernateException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } finally {
             try {
                 session.close();
             } catch (HibernateException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
         if (objects != null) {
@@ -184,58 +185,39 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
     /**
      * Find entities based on a query
      *
-     * @param query the name of the query
-     * @return a Set of the entities
-     */
-    @SuppressWarnings("unchecked")
-    @Produces(MediaType.APPLICATION_XML)
-    public Set<T> getAll(String query) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        List<T> objects = null;
-        try {
-            session.beginTransaction();
-            objects = session.createQuery(query).list();
-            session.getTransaction().commit();
-        } catch (HibernateException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                session.close();
-            } catch (HibernateException e) {
-                e.printStackTrace();
-            }
-        }
-        if (objects != null) {
-            return new HashSet<>(objects);
-        }
-        return null;
-    }
-
-    /**
-     * Find entities based on a query
-     *
-     * @param queryString
+     * @param hsql the query
      * @param params the query parameters
      * @return a Set of the entities
      */
     @SuppressWarnings("unchecked")
     @Override
-    public Set<T> getAll(String queryString, Object... params) {
+    public Set<T> query(String hsql, Map<String, Object> params) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Query query = session.createQuery(queryString);
         List<T> objects = null;
-        for (int i = 0; i < params.length; i++) {
-            query.setParameter(i + 1, params[i]);
-        }
         try {
-            objects = query.list();
+            session.beginTransaction();
+            Query query = session.createQuery(hsql);
+            if (params != null) {
+                for (String i : params.keySet()) {
+                    query.setParameter(i, params.get(i));
+                }
+            }
+            if ((hsql.toUpperCase().indexOf("DELETE") == -1)
+                    && (hsql.toUpperCase().indexOf("UPDATE") == -1)
+                    && (hsql.toUpperCase().indexOf("INSERT") == -1)) {
+                objects = query.list();
+                logger.info("FINISHED - query. Result size=" + objects.size());
+            } else {
+                logger.info("FINISHED - query. ");
+            }
+            session.getTransaction().commit();
         } catch (HibernateException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } finally {
             try {
                 session.close();
             } catch (HibernateException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
         if (objects != null) {
@@ -257,12 +239,12 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
             session.delete(entity);
             session.getTransaction().commit();
         } catch (HibernateException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         } finally {
             try {
                 session.close();
             } catch (HibernateException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
     }
