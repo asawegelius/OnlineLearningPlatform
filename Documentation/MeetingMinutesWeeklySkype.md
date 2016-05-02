@@ -244,7 +244,7 @@ Adrian Holm, Ionut Vieru
 - Clovis Lebret will update the documents
 - Åsa Wegelius will continue on verification/authentication in the project
 - All will look into scaling and integration of the system
-- We will have a Skype-meeting tomorrow
+- We will have a Skype-meeting tomorrow 21:00 when all have looked up on the exam requirements
 
 ______________________________________________________________________________________________________________________________________
 ### Meeting Attended by: 
