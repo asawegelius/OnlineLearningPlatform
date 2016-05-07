@@ -54,7 +54,7 @@ public class UserService {
 
     @GET
     @Path("/xml/{id: \\d+}")
-    @Produces({MediaType.APPLICATION_XML}) // could use "application/xml" instead
+    @Produces({MediaType.APPLICATION_XML})
     public Response getXml(@PathParam("id") int id) {
         checkContext();
         return toRequestedType(id, "application/xml");
@@ -78,6 +78,7 @@ public class UserService {
     @Path("/json/{id: \\d+}")
     public Response getJson(@PathParam("id") int id) {
         checkContext();
+        logger.info("id: " + id);
         return toRequestedType(id, "application/json");
     }
 
@@ -111,7 +112,7 @@ public class UserService {
     public Response createJson(@QueryParam("user_name") String user_name,
             @QueryParam("password") String password, @QueryParam("enabled") String enabled) {
         checkContext();
-        logger.info("UserService got user_name: " + user_name + " password: " + password + " enable " + enabled); 
+        logger.info("UserService got user_name: " + user_name + " password: " + password + " enable " + enabled);
         // Require all properties to create.
         String msg = "";
         if (user_name == null) {
@@ -133,8 +134,8 @@ public class UserService {
         // check the user_name is unique
         Map params = new HashMap();
         params.put("user_name", user_name);
-        Set<UserPersistance> users = dao.query("SELECT u FROM UserPersistance AS u WHERE u.userName = :user_name", params);
-        if (users != null) {
+        Set<UserPersistance> users = dao.query("FROM UserPersistance u WHERE u.userName = :user_name", params);
+        if (!users.isEmpty()) {
             // the user is activated 
             // the user is activated
             UserPersistance u = users.iterator().next();
@@ -172,6 +173,7 @@ public class UserService {
             user.setEnabled(true);
         }
         dao.save(user);
+        logger.info("the new user: " + user.getPassword() + ", " + user.getUserName() + ", " + user.getUserId());
         return Response.ok(toJson(new User(user)), MediaType.APPLICATION_JSON).build();
 
     }
@@ -208,7 +210,7 @@ public class UserService {
             // the user is activated
             UserPersistance u = users.iterator().next();
             if (u.isEnabled()) {
-                msg = "user_name active;" + u.getUserId(); 
+                msg = "user_name active;" + u.getUserId();
                 return Response.status(Response.Status.BAD_REQUEST).
                         entity(msg).
                         type(MediaType.TEXT_PLAIN).
@@ -349,6 +351,7 @@ public class UserService {
                     build();
         }
         user.setUserName(user_name);
+
         user.setPassword(password);
         if (Integer.parseInt(enabled) == 0) {
             user.setEnabled(false);

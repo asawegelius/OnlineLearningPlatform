@@ -41,7 +41,8 @@ public class CourseDao extends OlpDao<CoursePersistance, Integer> {
      * @return the entity
      */
     @SuppressWarnings("unchecked")
-    public CoursePersistance findByID(int id) {
+    @Override
+    public CoursePersistance findByID(Integer id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         CoursePersistance course = null;
         try {

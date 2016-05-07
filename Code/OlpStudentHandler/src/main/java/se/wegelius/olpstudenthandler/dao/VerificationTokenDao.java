@@ -27,7 +27,9 @@ public class VerificationTokenDao extends OlpDao<VerificationtokenPersistance, I
         super(VerificationtokenPersistance.class);
     }
 
-    public VerificationtokenPersistance findByID(int id) {
+    @Override
+    public VerificationtokenPersistance findByID(Integer id) {
+        logger.info("trying to find by id");
         Session session = HibernateUtil.getSessionFactory().openSession();
         VerificationtokenPersistance token = null;
         try {

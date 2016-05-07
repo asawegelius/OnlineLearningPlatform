@@ -27,6 +27,7 @@ public class VerificationToken {
     }
     
     public VerificationToken(VerificationtokenPersistance p){
+        this.id = p.getVerificationtokenId();
         this.token = p.getToken();
         this.user = new User(p.getUser());
         this.expiryDate = calculateExpiryDate(EXPIRATION);

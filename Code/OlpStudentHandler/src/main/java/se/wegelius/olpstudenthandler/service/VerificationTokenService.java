@@ -37,6 +37,7 @@ import se.wegelius.olpstudenthandler.model.persistance.VerificationtokenPersista
  */
 @Path("/token")
 public class VerificationTokenService {
+
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(VerificationTokenService.class);
     @Context
     private ServletContext sctx;          // dependency injection
@@ -69,7 +70,8 @@ public class VerificationTokenService {
         Set<VerificationtokenPersistance> set = dao.getAll();
         Set<VerificationToken> tokens = new HashSet<>();
         for (VerificationtokenPersistance p : set) {
-            tokens.add(new VerificationToken(p));
+            VerificationtokenPersistance t = dao.findByID(p.getVerificationtokenId());
+            tokens.add(new VerificationToken(t));
         }
         return Response.ok(toJson(tokens), "application/json").build();
     }
@@ -79,23 +81,27 @@ public class VerificationTokenService {
     @Path("/json/{id: \\d+}")
     public Response getJson(@PathParam("id") int id) {
         checkContext();
+        logger.info(Integer.toString(id));
         return toRequestedType(id, "application/json");
     }
 
+
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("/json/token/{token: \\d+}")
+    @Path("/jsontoken/{token}")
     public Response getJsonToken(@PathParam("token") String token) {
         checkContext();
         int id = -1;
+        logger.info(token);
         Map params = new HashMap();
         params.put("token", token);
-        Set<VerificationtokenPersistance> tokens = dao.query("SELECT t FROM VerificationtokenPersistance AS t WHERE t.token = :token", params);        
+        Set<VerificationtokenPersistance> tokens = dao.query("SELECT t FROM VerificationtokenPersistance AS t WHERE t.token = :token", params);
         if (tokens.iterator().hasNext()) {
             VerificationtokenPersistance t = tokens.iterator().next();
+            dao.findByID(t.getVerificationtokenId());
             id = t.getVerificationtokenId();
         }
-        return toRequestedType( id, "application/json");
+        return toRequestedType(id, "application/json");
     }
 
     @GET
@@ -161,13 +167,14 @@ public class VerificationTokenService {
             t.setUser(user);
             t.setExpiryDate(new VerificationToken(t).getExpiryDate());
             dao.update(t);
+            logger.info("token to create already exists. Token id: " + t.getVerificationtokenId());
+
         } // Otherwise, create the VerificationTokenPersistance and add it to the database.
         else {
             t = new VerificationtokenPersistance();
             t.setUser(user);
             t.setToken(token);
-            t.setExpiryDate(new VerificationToken(t).getExpiryDate());
-            
+            t.setExpiryDate(new VerificationToken().getExpiryDate());
             dao.save(t);
         }
         return Response.ok(toJson(new VerificationToken(t)), MediaType.APPLICATION_JSON).build();
@@ -347,6 +354,7 @@ public class VerificationTokenService {
         String json = "If you see this, there's a problem.";
         try {
             json = new ObjectMapper().writeValueAsString(userSet);
+            logger.info(json);
         } catch (Exception e) {
         }
         return json;

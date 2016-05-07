@@ -5,13 +5,22 @@
  */
 package se.wegelius.olp.client;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.sun.jersey.api.client.ClientResponse;
 import java.io.IOException;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MultivaluedMap;
+import org.slf4j.LoggerFactory;
 import se.wegelius.olp.model.VerificationToken;
 
 /**
@@ -19,6 +28,8 @@ import se.wegelius.olp.model.VerificationToken;
  * @author asawe
  */
 public class OLPRegister extends HttpServlet {
+
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(OLPRegister.class);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,16 +43,33 @@ public class OLPRegister extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String t = request.getParameter("go");
+        logger.info("the token: " + t);
         // get the token
         VerificationTokenClient tokenClient = new VerificationTokenClient();
-        VerificationToken token = tokenClient.getJsonToken(VerificationToken.class, t);
-        // update the user to enabled = true;
+        ClientResponse tokenResponse = tokenClient.getJsonToken(t);
+        String jsonToken = tokenResponse.getEntity(String.class);
+        GsonBuilder builder = new GsonBuilder();
+
+        // Register an adapter to manage the date types as long values 
+        builder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
+            @Override
+            public Date deserialize(JsonElement je, java.lang.reflect.Type type, JsonDeserializationContext jdc) throws JsonParseException {
+                return new Date(je.getAsJsonPrimitive().getAsLong());
+            }
+        });
+
+        Gson gson = builder.create();
+        VerificationToken token = gson.fromJson(jsonToken, VerificationToken.class);
+        logger.info(jsonToken);
+        //update the user to enabled = true;
         UserClient userClient = new UserClient();
         MultivaluedMap queryParam = userClient.getParameters(token.getUser().getUserId(), token.getUser().getUserName(), token.getUser().getPassword(), 1);
         userClient.updateJson(queryParam, token.getUser().getUserId());
-        // redirect to index with user logged in
+        //redirect to index with user logged in
         HttpSession session = request.getSession();
         session.setAttribute("user", token.getUser().getUserName());
+        String encodedURL = response.encodeRedirectURL("index.jsp");
+        response.sendRedirect(encodedURL);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

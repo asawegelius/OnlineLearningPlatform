@@ -71,12 +71,12 @@ public class GenericClient {
     
 
     public ClientResponse getJson(int id) {
-        GenericType<Course> gType = new GenericType<Course>() {
-        };
-        return getJson(ClientResponse.class, Integer.toString(1));
+        /*GenericType<Course> gType = new GenericType<Course>() {
+        };*/
+        return getJson(ClientResponse.class, id);
     }
 
-    public <T> T getJson(Class<T> responseType, String id) throws UniformInterfaceException {
+    public <T> T getJson(Class<T> responseType, int id) throws UniformInterfaceException {
         WebResource resource = webResource;
         resource = resource.path(java.text.MessageFormat.format("json/{0}", new Object[]{id}));
         return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);

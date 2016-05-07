@@ -58,14 +58,17 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <%
-                        String user = null;
+                        String user = (String)session.getAttribute("user");
                         //check if no on has logged in:
-                        if(session.getAttribute("user") == null){
+                        if( user == null){
                             // check if there is a message to display
                             if(session.getAttribute("msg")!= null){
                                  out.write("<li><p class=\"navbar-text\"> " + (String) session.getAttribute("msg")+ "</p></li>");
                             }
                             out.write("<li><a class=\"navlink\" href=\"#\" data-toggle=\"modal\" data-target=\"#loginModal\">Login/Sign Up</a></li>");
+                        } else {
+                            out.write("<li><p class=\"navbar-text\"> " + user + "</p></li>");
+                            out.write("<li><a class=\"navlink\" href=\"#\" data-toggle=\"modal\" data-target=\"#logoutModal\">Logout</a></li>");
                         }
                     %>
                     

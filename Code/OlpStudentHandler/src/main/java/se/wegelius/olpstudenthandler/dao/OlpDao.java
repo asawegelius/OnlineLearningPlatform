@@ -6,6 +6,7 @@
 package se.wegelius.olpstudenthandler.dao;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -46,7 +47,8 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
             session.save(entity);
             session.getTransaction().commit();
         } catch (HibernateException e) {
-            logger.error(e.getMessage());
+            logger.error("tried to save " + e.getMessage());
+            e.printStackTrace();
         } finally {
             try {
                 session.close();
@@ -134,6 +136,7 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
     @SuppressWarnings("unchecked")
     @Override
     public T findByID(ID id) {
+        logger.info("trying to find by id " + id);
         Session session = HibernateUtil.getSessionFactory().openSession();
         T obj = null;
         try {
@@ -194,6 +197,7 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
     public Set<T> query(String hsql, Map<String, Object> params) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<T> objects = null;
+        logger.info("hsql: " + hsql + " params size: " + params.size());
         try {
             session.beginTransaction();
             Query query = session.createQuery(hsql);
@@ -202,9 +206,10 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
                     query.setParameter(i, params.get(i));
                 }
             }
-            if ((hsql.toUpperCase().indexOf("DELETE") == -1)
-                    && (hsql.toUpperCase().indexOf("UPDATE") == -1)
-                    && (hsql.toUpperCase().indexOf("INSERT") == -1)) {
+            logger.info("query parameters: " + Arrays.toString(query.getNamedParameters()));
+            if ((!hsql.toUpperCase().contains("DELETE"))
+                    && (!hsql.toUpperCase().contains("UPDATE"))
+                    && (!hsql.toUpperCase().contains("INSERT"))) {
                 objects = query.list();
                 logger.info("FINISHED - query. Result size=" + objects.size());
             } else {
@@ -213,6 +218,8 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
             session.getTransaction().commit();
         } catch (HibernateException e) {
             logger.error(e.getMessage());
+            
+            e.printStackTrace();
         } finally {
             try {
                 session.close();
@@ -221,6 +228,7 @@ public class OlpDao<T, ID extends Serializable> implements IOlpDao<T, ID> {
             }
         }
         if (objects != null) {
+            logger.info("no of objects: " + objects.size());
             return new HashSet<>(objects);
         }
         return null;

@@ -5,6 +5,7 @@
  */
 package se.wegelius.olp.client;
 
+import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javax.ws.rs.core.MultivaluedMap;
@@ -23,10 +24,18 @@ public class VerificationTokenClient extends GenericClient {
         super(BASE_URI);
     }
 
-    public VerificationToken getJsonToken(Class<VerificationToken> responseType, String token) {
+   
+    public ClientResponse getJsonToken(String token) {
+
+        return getJsonToken(ClientResponse.class, token);
+    }
+    
+   
+    
+    public ClientResponse getJsonToken(Class<ClientResponse> responseType, String token) {
         WebResource resource = super.getWebResource();
-        resource = resource.path(java.text.MessageFormat.format("json/token/{0}", new Object[]{token}));
-        return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(responseType);
+        resource = resource.path(java.text.MessageFormat.format("jsontoken/{0}", new Object[]{token}));
+        return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
 
     }
 
