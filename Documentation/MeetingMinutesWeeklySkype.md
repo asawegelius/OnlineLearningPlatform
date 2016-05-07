@@ -225,6 +225,55 @@ Next week plans:
 
 ______________________________________________________________________________________________________________________________________
 ### Meeting Attended by: 
+Åsa Wegelius, Tudor Stoica, Clovis Lebret
+
+### Absent from meeting:
+Adrian Holm, Ionut Vieru
+
+### Date:
+02-05-16
+
+### Time:
+21:00 - 22:00
+
+### Faciliator:
+Åsa Wegelius,
+
+### Notes:
+- Tudor Stoica will work on the test cases and other tests needed 
+- Clovis Lebret will update the documents
+- Åsa Wegelius will continue on verification/authentication in the project
+- All will look into scaling and integration of the system
+- We will have a Skype-meeting tomorrow 21:00 when all have looked up on the exam requirements
+
+______________________________________________________________________________________________________________________________________
+### Meeting Attended by: 
+
+### Absent from meeting:
+
+### Date:
+
+### Time:
+
+### Faciliator:
+
+### Notes:
+
+______________________________________________________________________________________________________________________________________
+### Meeting Attended by: 
+
+### Absent from meeting:
+
+### Date:
+
+### Time:
+
+### Faciliator:
+
+### Notes:
+
+______________________________________________________________________________________________________________________________________
+### Meeting Attended by: 
 
 ### Absent from meeting:
 
