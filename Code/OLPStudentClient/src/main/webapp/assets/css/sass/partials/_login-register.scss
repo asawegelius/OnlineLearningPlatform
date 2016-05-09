@@ -73,3 +73,12 @@ a.navlink:hover, a.navlink:visited, a.navlink:link, a.navlink:active
     background:lighten($kidnapper, 6.5%);
     margin: 0 auto;
 }
+
+#button-link {
+    background: none!important;
+    border: none;
+    padding: 0!important;
+    margin-top: 15px;
+    color:$jaffa;
+    cursor: pointer;
+}

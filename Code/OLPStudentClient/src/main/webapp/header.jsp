@@ -58,20 +58,33 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <%
-                        String user = (String)session.getAttribute("user");
                         //check if no on has logged in:
-                        if( user == null){
+                        if (session.getAttribute("user") == null) {
                             // check if there is a message to display
-                            if(session.getAttribute("msg")!= null){
-                                 out.write("<li><p class=\"navbar-text\"> " + (String) session.getAttribute("msg")+ "</p></li>");
+                            if (session.getAttribute("msg") != null) {
+                                out.write("<li><p class=\"navbar-text\"> " + (String) session.getAttribute("msg") + "</p></li>");
                             }
-                            out.write("<li><a class=\"navlink\" href=\"#\" data-toggle=\"modal\" data-target=\"#loginModal\">Login/Sign Up</a></li>");
+                            out.write("<li><a class='navlink' href='#' data-toggle='modal' data-target='#loginModal'>Login/Sign Up</a></li>");
                         } else {
-                            out.write("<li><p class=\"navbar-text\"> " + user + "</p></li>");
-                            out.write("<li><a class=\"navlink\" href=\"#\" data-toggle=\"modal\" data-target=\"#logoutModal\">Logout</a></li>");
+                            String user = (String) session.getAttribute("user");
+                            String userName = null;
+                            String sessionID = null;
+                            Cookie[] cookies = request.getCookies();
+                            if (cookies != null) {
+                                for (Cookie cookie : cookies) {
+                                    if (cookie.getName().equals("user")) {
+                                        userName = cookie.getValue();
+                                    }
+                                    if (cookie.getName().equals("JSESSIONID")) {
+                                        sessionID = cookie.getValue();
+                                    }
+                                }
+                                out.write("<li><p class='navbar-text'> " + user + "</p></li>");
+                                out.write("<li><form action='logout' method='post'><input id='button-link' type='submit' value='Logout' ></form></li>");
+                            }
                         }
                     %>
-                    
+
                 </ul>
             </div><!--/.nav-collapse -->
         </div>

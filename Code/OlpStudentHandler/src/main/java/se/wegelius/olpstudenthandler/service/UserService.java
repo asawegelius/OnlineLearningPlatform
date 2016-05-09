@@ -27,6 +27,7 @@ import org.slf4j.LoggerFactory;
 import se.wegelius.olpstudenthandler.dao.UserDao;
 import se.wegelius.olpstudenthandler.model.User;
 import se.wegelius.olpstudenthandler.model.persistance.UserPersistance;
+import se.wegelius.olpstudenthandler.model.persistance.VerificationtokenPersistance;
 
 /**
  *
@@ -79,6 +80,24 @@ public class UserService {
     public Response getJson(@PathParam("id") int id) {
         checkContext();
         logger.info("id: " + id);
+        return toRequestedType(id, "application/json");
+    }
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("/jsonuser/{user}")
+    public Response getJsonUser(@PathParam("user") String user) {
+        checkContext();
+        int id = -1;
+        logger.info(user);
+        Map params = new HashMap();
+        params.put("user", user);
+        Set<UserPersistance> users = dao.query("SELECT u FROM UserPersistance AS u WHERE u.userName = :user", params);
+        if (users.iterator().hasNext()) {
+            UserPersistance u = users.iterator().next();
+            dao.findByID(u.getUserId());
+            id = u.getUserId();
+        }
         return toRequestedType(id, "application/json");
     }
 
@@ -414,7 +433,7 @@ public class UserService {
     private Response toRequestedType(int id, String type) {
         UserPersistance user = dao.findByID(id);
         if (user == null) {
-            String msg = id + " is a bad ID.\n";
+            String msg = id + " corrupted.\n";
             return Response.status(Response.Status.BAD_REQUEST).
                     entity(msg).
                     type(MediaType.APPLICATION_JSON).

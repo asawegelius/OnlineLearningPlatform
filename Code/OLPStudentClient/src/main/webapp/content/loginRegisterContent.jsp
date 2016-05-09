@@ -38,18 +38,18 @@ function myFunction() {
                                 &nbsp;&nbsp;
                                 <span id="login_fail" class="response_error" style="display: none;">Loggin failed, please try again.</span>
                                 <div class="clearfix"></div>
-                                <form action="" method="post" id="loginForm">
+                                <form action="login" method="post" id="loginForm">
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="input-group-addon"><i class="fa fa-at"></i></div>
-                                            <input type="email" class="form-control" id="login_email" placeholder="Email" required>
+                                            <input type="email" class="form-control" id="login_email" name="email" placeholder="Email" required>
                                         </div>
                                         <span class="help-block has-error" id="email-error"></span>
                                     </div>
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="input-group-addon"><i class="fa fa-lock"></i></div>
-                                            <input type="password" class="form-control" id="login_password" placeholder="Password" required>
+                                            <input type="password" class="form-control" id="login_password" name="password" placeholder="Password" required>
                                         </div>
                                         <span class="help-block has-error" id="password-error"></span>
                                     </div>

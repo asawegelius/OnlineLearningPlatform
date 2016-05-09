@@ -5,6 +5,8 @@
  */
 package se.wegelius.olp.client;
 
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -25,15 +27,22 @@ public class UserClient extends GenericClient {
         super(BASE_URI);
     }
 
+    public ClientResponse getJsonUser(String user) {
+
+        return getJsonUser(ClientResponse.class, user);
+    }
+
+    public ClientResponse getJsonUser(Class<ClientResponse> responseType, String user) {
+        WebResource resource = super.getWebResource();
+        resource = resource.path(java.text.MessageFormat.format("jsonuser/{0}", new Object[]{user}));
+        return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
+
+    }
+
     public MultivaluedMap getParameters(int id, String userName, String password, int enabled) {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
         queryParams.add("id", Integer.toString(id));
         queryParams.add("user_name", userName);
-        /*try {
-            password = URLEncoder.encode(password, "ISO-8859-1");
-        } catch (UnsupportedEncodingException e) {
-            logger.error(e.getMessage());
-        }*/
         queryParams.add("password", password);
         queryParams.add("enabled", Integer.toString(enabled));
         return queryParams;
@@ -42,11 +51,6 @@ public class UserClient extends GenericClient {
     public MultivaluedMap getParameters(String userName, String password, int enabled) {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
         queryParams.add("user_name", userName);
-        /*try {
-            password = URLEncoder.encode(password, "ISO-8859-1");
-        } catch (UnsupportedEncodingException e) {
-            logger.error(e.getMessage());
-        }*/
         queryParams.add("password", password);
         queryParams.add("enabled", Integer.toString(enabled));
         return queryParams;

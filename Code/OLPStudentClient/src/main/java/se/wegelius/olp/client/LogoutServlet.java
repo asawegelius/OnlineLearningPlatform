@@ -5,32 +5,23 @@
  */
 package se.wegelius.olp.client;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParseException;
-import com.sun.jersey.api.client.ClientResponse;
 import java.io.IOException;
-import java.util.Date;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.ws.rs.core.MultivaluedMap;
 import org.slf4j.LoggerFactory;
-import se.wegelius.olp.model.VerificationToken;
 
 /**
  *
  * @author asawe
  */
-public class OLPRegister extends HttpServlet {
+public class LogoutServlet extends HttpServlet {
 
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(OLPRegister.class);
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(LogoutServlet.class);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -43,37 +34,29 @@ public class OLPRegister extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String t = request.getParameter("go");
-        logger.info("the token: " + t);
-        // get the token
-        VerificationTokenClient tokenClient = new VerificationTokenClient();
-        ClientResponse tokenResponse = tokenClient.getJsonToken(t);
-        String jsonToken = tokenResponse.getEntity(String.class);
-        GsonBuilder builder = new GsonBuilder();
-
-        // Register an adapter to manage the date types as long values 
-        builder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
-            @Override
-            public Date deserialize(JsonElement je, java.lang.reflect.Type type, JsonDeserializationContext jdc) throws JsonParseException {
-                return new Date(je.getAsJsonPrimitive().getAsLong());
+        logger.info("logout servlet");
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("JSESSIONID")) {
+                    logger.info("JSESSIONID = " + cookie.getValue());
+                }
+                cookie.setMaxAge(0);
+                response.addCookie(cookie);
             }
-        });
-
-        Gson gson = builder.create();
-        VerificationToken token = gson.fromJson(jsonToken, VerificationToken.class);
-        logger.info(jsonToken);
-        //update the user to enabled = true;
-        UserClient userClient = new UserClient();
-        MultivaluedMap queryParam = userClient.getParameters(token.getUser().getUserId(), token.getUser().getUserName(), token.getUser().getPassword(), 1);
-        userClient.updateJson(queryParam, token.getUser().getUserId());
-        //redirect to index with user logged in
-        HttpSession session = request.getSession();
-        session.setAttribute("user", token.getUser().getUserName());
-        session.setMaxInactiveInterval(30 * 60);
-        Cookie userName = new Cookie("user", token.getUser().getUserName());
-        userName.setMaxAge(30 * 60);
-        response.addCookie(userName);
-        String encodedURL = response.encodeRedirectURL("index.jsp");
+        }
+        //invalidate the session if exists
+        HttpSession session = request.getSession(false);
+        logger.info("User = " + session.getAttribute("user"));
+        if (session != null) {
+            session.invalidate();
+        }
+        String referer = request.getHeader("Referer");
+        logger.info("Referer = " + referer);
+        if (referer == null) {
+            referer = "index.jsp";
+        }
+        String encodedURL = response.encodeRedirectURL(referer);
         response.sendRedirect(encodedURL);
     }
 
