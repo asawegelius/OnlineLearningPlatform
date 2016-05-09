@@ -237,7 +237,7 @@ Adrian Holm, Ionut Vieru
 21:00 - 22:00
 
 ### Faciliator:
-Åsa Wegelius,
+Åsa Wegelius
 
 ### Notes:
 - Tudor Stoica will work on the test cases and other tests needed 
@@ -248,16 +248,29 @@ Adrian Holm, Ionut Vieru
 
 ______________________________________________________________________________________________________________________________________
 ### Meeting Attended by: 
+Åsa Wegelius, Tudor Stoica, Clovis Lebret
 
 ### Absent from meeting:
+Adrian Holm, Ionut Vieru
 
 ### Date:
+09-05-16
 
 ### Time:
+21:00 - 22:00
 
 ### Faciliator:
+Åsa Wegelius
 
 ### Notes:
+- Tudor Stoica have been working on the test cases and will upload them later this week when he has finish them.
+- Clovis Lebret have updated the Solution Document according to the comments we got last time we handed them in.
+- Åsa Wegelius have implemented login/register/verify email/logout. 
+
+- Tudor Stoica will continue to work on test cases and JMeter
+- Clovis Lebret will take tasks from Scrummy to implement
+- Åsa Wegelius will take tasks from Scrummy to implement
+- Åsa Wegelius will install Teamviewer on the server so those not in Denmark can participate when we deploy the application next week
 
 ______________________________________________________________________________________________________________________________________
 ### Meeting Attended by: 
