@@ -1,4 +1,4 @@
-##1.	Solution Document History
+﻿##1.	Solution Document History
 
 ###1.2	Revision History
 
@@ -226,7 +226,7 @@ The system shall support English, Danish, Swedish and Arabic
 * [JavaScript Style Guide and Coding Conventions](http://www.w3schools.com/js/js_conventions.asp)
 * [CSS and LESS Coding Standards](http://www.runopencode.com/index.php/how-we-code/css-and-less-coding-standards)
 
-#### Design Constraints
+#### Implementation Constraints
 #####	Frontend
 The web-based interface shall run on Explorer, Chrome, Safari.
 
@@ -255,6 +255,10 @@ __SpeedVoter__ are installed on the same hardware server but runs in a different
 The setup to handle failovers is use of a synchronized backup server. We will use a service called [DNS Made Easy](http://www.dnsmadeeasy.com/) to monitor the server. It will check a script we setup and redirect to the secondary server if it fails. 
 
 ![Failover setup](http://wegelius.se/bilder/FailoverSetup.png "Failover setup")
+
+As soon as any of one of the server fail to respond from at least two different geographic monitoring locations or experience a load balancing issue, the traffic will automatically be moved to a different system. This minimizes the amount of downtime that would result from an outage.
+
+This makes scaling more easier and since the administrators will be aware if there is any overload over the time they will then be able to either add capacity or switch of server for a better perennity.
 
 ##8	Technical implementation plan
 
@@ -308,10 +312,12 @@ The setup to handle failovers is use of a synchronized backup server. We will us
 
 |Item#	    |Area       	      |Description	       |Rank (RF=i*p)|Mitigation		|Solution 		|
 |-----------|-------------------|--------------------|-------------------|----------------------|----------------------:|	
-| 1.        | Performance       |Lack of sufficient hardware to assure performance in real time | 9=3*3       |Evaluate the possibility to acquire preformat and scalable infrastructure |Migrate the application in a Cloud Infrastructure |	
-| 2.        | Security          |Bad intended users can break the application with penetration tools.| 6=3*2       | Implement a security audit mechanism |Develop and implement security solution|	
-| 3.        | Development       |Lack of time to develop the application | 3=3*1       | Evaluate the developing time allocated to each team member | Outsource the development process |	
-| 4.        | Software          |Users might not agree with the graphical user interface| 3=3*1       |  Prepare a UI survey |Ask an Web Design Specialist|
+| 1.        | Performance       |Lack of sufficient hardware to assure performance in real time | 9=3*3       |Evaluate the possibility to acquire preformat and scalable infrastructure |Migrate the application in a Cloud Infrastructure |
+| 2.        | Performance       |Failures in distribution | 9=3*3       |Implement a safe distribution platform for the system |Use an automatic Failover and System monitoring tool|
+| 3.        | Security          |Bad intended users can break the application with penetration tools.| 6=3*2       | Implement a security audit mechanism |Develop and implement security solution|	
+| 4.        | Development       |Lack of time to develop the application | 3=3*1       | Evaluate the developing time allocated to each team member | Outsource the development process |	
+| 5.        | Software          |Users might not agree with the graphical user interface| 3=3*1       |  Prepare a UI survey |Ask an Web Design Specialist|
+| 6.        | Reputation        |Damage to market reputation.| 3=3*1      | Provide quality content | Check courses before they are available|
 
 __Impact__ scale is from 1 to 3: the lowest impact of the risk is 1 and the highest impact is 3
 
