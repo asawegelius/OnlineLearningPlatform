@@ -263,10 +263,12 @@ Adrian Holm, Ionut Vieru
 Åsa Wegelius
 
 ### Notes:
+#### What we have done:
 - Tudor Stoica have been working on the test cases and will upload them later this week when he has finish them.
 - Clovis Lebret have updated the Solution Document according to the comments we got last time we handed them in.
 - Åsa Wegelius have implemented login/register/verify email/logout. 
 
+#### What we will do:
 - Tudor Stoica will continue to work on test cases and JMeter
 - Clovis Lebret will take tasks from Scrummy to implement
 - Åsa Wegelius will take tasks from Scrummy to implement
