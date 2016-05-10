@@ -8,15 +8,16 @@ CREATE TABLE `course_branch` (
   `course_branch_name` varchar(45) NOT NULL,
   PRIMARY KEY (`course_branch_id`),
   UNIQUE KEY `course_branch_name_UNIQUE` (`course_branch_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `course_type` (
   `course_type_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `course_type_name` varchar(45) NOT NULL,
+  `course_type_name` varchar(45) DEFAULT NULL,
   `ct_course_branch_fk` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`course_type_id`),
+  UNIQUE KEY `course_type_name_UNIQUE` (`course_type_name`),
   KEY `ct_course_branch_fk_idx` (`ct_course_branch_fk`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `content_provider` (
   `content_provider_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -25,7 +26,7 @@ CREATE TABLE `content_provider` (
   `content_provider_email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`content_provider_id`),
   UNIQUE KEY `content_provider_name_UNIQUE` (`content_provider_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `course` (
   `course_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -44,7 +45,7 @@ CREATE TABLE `course` (
   CONSTRAINT `c_content_provider_fk` FOREIGN KEY (`c_content_provider_fk`) REFERENCES `content_provider` (`content_provider_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `c_course_branch_fk` FOREIGN KEY (`c_course_branch_fk`) REFERENCES `course_branch` (`course_branch_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `c_course_type_fk` FOREIGN KEY (`c_course_type_fk`) REFERENCES `course_type` (`course_type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `lecture` (
   `lecture_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -96,9 +97,30 @@ CREATE TABLE `multiple_choice_answer` (
 CREATE TABLE `user` (
   `user_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_name` varchar(45) CHARACTER SET utf8 DEFAULT NULL,
-  `password` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
+  `password` varchar(256) CHARACTER SET utf8 DEFAULT NULL,
   `enabled` tinyint(1) NOT NULL DEFAULT '0',
+  `email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
+CREATE TABLE `verificationtoken` (
+  `verificationtoken_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `token` varchar(45) DEFAULT NULL,
+  `expiry_date` date DEFAULT NULL,
+  `vt_user_fk` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`verificationtoken_id`),
+  KEY `vt_user_fk_idx` (`vt_user_fk`),
+  CONSTRAINT `vt_user_fk` FOREIGN KEY (`vt_user_fk`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `playlist` (
+  `playlist_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `pl_user_id` int(10) unsigned DEFAULT NULL,
+  `pl_course_id` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`playlist_id`),
+  KEY `pl_user_id_idx` (`pl_user_id`),
+  KEY `pl_course_id_idx` (`pl_course_id`),
+  CONSTRAINT `pl_course_id` FOREIGN KEY (`pl_course_id`) REFERENCES `course` (`course_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `pl_user_id` FOREIGN KEY (`pl_user_id`) REFERENCES `user` (`user_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
