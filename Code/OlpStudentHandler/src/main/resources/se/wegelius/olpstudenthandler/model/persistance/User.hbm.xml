@@ -10,8 +10,11 @@
     <property name="userName" type="string">
       <column length="45" name="user_name"/>
     </property>
+    <property name="email" type="string">
+      <column length="45" name="email"/>
+    </property>
     <property name="password" type="string">
-      <column length="100" name="password"/>
+      <column length="256" name="password"/>
     </property>
     <property name="enabled" type="boolean">
       <column name="enabled" not-null="true"/>

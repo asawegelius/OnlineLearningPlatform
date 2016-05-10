@@ -32,25 +32,27 @@ public class UserClient extends GenericClient {
         return getJsonUser(ClientResponse.class, user);
     }
 
-    public ClientResponse getJsonUser(Class<ClientResponse> responseType, String user) {
+    public ClientResponse getJsonUser(Class<ClientResponse> responseType, String email) {
         WebResource resource = super.getWebResource();
-        resource = resource.path(java.text.MessageFormat.format("jsonuser/{0}", new Object[]{user}));
+        resource = resource.path(java.text.MessageFormat.format("jsonuser/{0}", new Object[]{email}));
         return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
 
     }
 
-    public MultivaluedMap getParameters(int id, String userName, String password, int enabled) {
+    public MultivaluedMap getParameters(int id, String userName, String email, String password, int enabled) {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
         queryParams.add("id", Integer.toString(id));
         queryParams.add("user_name", userName);
+        queryParams.add("email", email);
         queryParams.add("password", password);
         queryParams.add("enabled", Integer.toString(enabled));
         return queryParams;
     }
 
-    public MultivaluedMap getParameters(String userName, String password, int enabled) {
+    public MultivaluedMap getParameters(String userName, String email, String password, int enabled) {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
         queryParams.add("user_name", userName);
+        queryParams.add("email", email);
         queryParams.add("password", password);
         queryParams.add("enabled", Integer.toString(enabled));
         return queryParams;

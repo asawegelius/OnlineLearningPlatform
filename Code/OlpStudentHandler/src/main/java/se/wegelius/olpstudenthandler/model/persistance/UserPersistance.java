@@ -13,6 +13,7 @@ public class UserPersistance  implements java.io.Serializable {
 
      private Integer userId;
      private String userName;
+     private String email;
      private String password;
      private boolean enabled;
      private Set<VerificationtokenPersistance> verificationtokens = new HashSet<VerificationtokenPersistance>(0);
@@ -24,7 +25,7 @@ public class UserPersistance  implements java.io.Serializable {
     public UserPersistance(boolean enabled) {
         this.enabled = enabled;
     }
-    public UserPersistance(String userName, String password, boolean enabled, Set<VerificationtokenPersistance> verificationtokens) {
+    public UserPersistance(String userName, String email, String password, boolean enabled, Set<VerificationtokenPersistance> verificationtokens) {
        this.userName = userName;
        this.password = password;
        this.enabled = enabled;
@@ -44,7 +45,16 @@ public class UserPersistance  implements java.io.Serializable {
     
     public void setUserName(String userName) {
         this.userName = userName;
+    }   
+    
+    public String getEmail() {
+        return email;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
     public String getPassword() {
         return this.password;
     }
@@ -66,10 +76,6 @@ public class UserPersistance  implements java.io.Serializable {
     public void setVerificationtokens(Set<VerificationtokenPersistance> verificationtokens) {
         this.verificationtokens = verificationtokens;
     }
-
-
-
-
 }
 
 

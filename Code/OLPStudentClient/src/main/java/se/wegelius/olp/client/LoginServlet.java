@@ -8,7 +8,6 @@ package se.wegelius.olp.client;
 import com.google.gson.Gson;
 import com.sun.jersey.api.client.ClientResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;

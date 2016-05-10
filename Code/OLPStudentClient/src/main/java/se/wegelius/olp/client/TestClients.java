@@ -30,7 +30,7 @@ public class TestClients {
         String email = "asa@wegelius.se";
         String pw = "qwert";
         String encryptedPw = encryptor.get_SHA_512_SecurePassword(pw);
-        MultivaluedMap map = userClient.getParameters(email, encryptedPw, 0);
+        MultivaluedMap map = userClient.getParameters(null, email, encryptedPw, 0);
         ClientResponse response = userClient.createJson(map);
         String userJson = response.getEntity(String.class);
         User user = new Gson().fromJson(userJson, User.class);

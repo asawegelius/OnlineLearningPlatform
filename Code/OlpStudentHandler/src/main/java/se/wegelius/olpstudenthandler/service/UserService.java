@@ -27,7 +27,6 @@ import org.slf4j.LoggerFactory;
 import se.wegelius.olpstudenthandler.dao.UserDao;
 import se.wegelius.olpstudenthandler.model.User;
 import se.wegelius.olpstudenthandler.model.persistance.UserPersistance;
-import se.wegelius.olpstudenthandler.model.persistance.VerificationtokenPersistance;
 
 /**
  *
@@ -85,14 +84,14 @@ public class UserService {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("/jsonuser/{user}")
-    public Response getJsonUser(@PathParam("user") String user) {
+    @Path("/jsonuser/{email}")
+    public Response getJsonUser(@PathParam("email") String email) {
         checkContext();
         int id = -1;
-        logger.info(user);
+        logger.info(email);
         Map params = new HashMap();
-        params.put("user", user);
-        Set<UserPersistance> users = dao.query("SELECT u FROM UserPersistance AS u WHERE u.userName = :user", params);
+        params.put("email", email);
+        Set<UserPersistance> users = dao.query("SELECT u FROM UserPersistance AS u WHERE u.email = :email", params);
         if (users.iterator().hasNext()) {
             UserPersistance u = users.iterator().next();
             dao.findByID(u.getUserId());
@@ -127,15 +126,14 @@ public class UserService {
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/json/create")
-    @Consumes("application/octet-stream")
-    public Response createJson(@QueryParam("user_name") String user_name,
+    public Response createJson(@QueryParam("user_name") String user_name, @QueryParam("email") String email,
             @QueryParam("password") String password, @QueryParam("enabled") String enabled) {
         checkContext();
-        logger.info("UserService got user_name: " + user_name + " password: " + password + " enable " + enabled);
-        // Require all properties to create.
+        logger.info("UserService got user_name: " + user_name + " email " + email + " password: " + password + " enable " + enabled);
+        // Require these properties to create.
         String msg = "";
-        if (user_name == null) {
-            msg = "username missing";
+        if (email == null) {
+            msg = "email missing";
         }
         if (password == null) {
             msg = msg + ";password missing";
@@ -152,21 +150,21 @@ public class UserService {
 
         // check the user_name is unique
         Map params = new HashMap();
-        params.put("user_name", user_name);
-        Set<UserPersistance> users = dao.query("FROM UserPersistance u WHERE u.userName = :user_name", params);
+        params.put("email", email);
+        Set<UserPersistance> users = dao.query("FROM UserPersistance u WHERE u.email = :email", params);
+        // there is a user with that email
         if (!users.isEmpty()) {
-            // the user is activated 
-            // the user is activated
             UserPersistance u = users.iterator().next();
+            // the user is activated
             if (u.isEnabled()) {
-                msg = "user_name active;" + u.getUserId();
+                msg = "user active;" + u.getUserId();
                 return Response.status(Response.Status.BAD_REQUEST).
                         entity(msg).
                         type(MediaType.APPLICATION_JSON).
                         build();
             } // the user is not activated
             else {
-                msg = "user_name inactive;" + u.getUserId();
+                msg = "user inactive;" + u.getUserId();
                 return Response.status(Response.Status.BAD_REQUEST).
                         entity(msg).
                         type(MediaType.APPLICATION_JSON).
@@ -176,7 +174,8 @@ public class UserService {
         try {
             Integer.parseInt(enabled);
         } catch (NumberFormatException e) {
-            msg = "enabled corrupted";
+            logger.error(e.getLocalizedMessage());
+            msg = "enabled corrupted;" + enabled;
             return Response.status(Response.Status.BAD_REQUEST).
                     entity(msg).
                     type(MediaType.APPLICATION_JSON).
@@ -184,15 +183,20 @@ public class UserService {
         }
         // Otherwise, create the UserPersistance and add it to the database.
         UserPersistance user = new UserPersistance();
-        user.setUserName(user_name);
+        if (user_name != null) {
+            user.setUserName(user_name);
+        }
+        user.setEmail(email);
         user.setPassword(password);
         if (Integer.parseInt(enabled) == 0) {
             user.setEnabled(false);
         } else {
             user.setEnabled(true);
         }
+        logger.info("will save user: pw = " + user.getPassword() + ", name = " + user.getUserName() + ", email = " + user.getEmail() + ", id = " + user.getUserId());
+        
         dao.save(user);
-        logger.info("the new user: " + user.getPassword() + ", " + user.getUserName() + ", " + user.getUserId());
+        logger.info("saved user: pw = " + user.getPassword() + ", name = " + user.getUserName() + ", email = " + user.getEmail() + ", id = " + user.getUserId());
         return Response.ok(toJson(new User(user)), MediaType.APPLICATION_JSON).build();
 
     }
@@ -200,13 +204,13 @@ public class UserService {
     @POST
     @Produces({MediaType.TEXT_PLAIN})
     @Path("/plain/create")
-    public Response createPlain(@QueryParam("user_name") String user_name,
+    public Response createPlain(@QueryParam("user_name") String user_name, @QueryParam("email") String email,
             @QueryParam("password") String password, @QueryParam("enabled") String enabled) {
         checkContext();
-        // Require all properties to create.
+        // Require these properties to create.
         String msg = "";
-        if (user_name == null) {
-            msg = "username missing";
+        if (email == null) {
+            msg = "email missing";
         }
         if (password == null) {
             msg = msg + ";password missing";
@@ -223,20 +227,20 @@ public class UserService {
 
         // check the user_name is unique
         Map params = new HashMap();
-        params.put("user_name", user_name);
-        Set<UserPersistance> users = dao.query("SELECT u FROM UserPersistance AS u WHERE u.userName = :user_name", params);
+        params.put("email", email);
+        Set<UserPersistance> users = dao.query("SELECT u FROM UserPersistance AS u WHERE u.email = :email", params);
         if (users != null) {
             // the user is activated
             UserPersistance u = users.iterator().next();
             if (u.isEnabled()) {
-                msg = "user_name active;" + u.getUserId();
+                msg = "user active;" + u.getUserId();
                 return Response.status(Response.Status.BAD_REQUEST).
                         entity(msg).
                         type(MediaType.TEXT_PLAIN).
                         build();
             } // the user is not activated
             else {
-                msg = "user_name inactive;" + u.getUserId();
+                msg = "user inactive;" + u.getUserId();
                 return Response.status(Response.Status.BAD_REQUEST).
                         entity(msg).
                         type(MediaType.TEXT_PLAIN).
@@ -254,7 +258,10 @@ public class UserService {
         }
         // Otherwise, create the User and add it to the database.
         UserPersistance user = new UserPersistance();
-        user.setUserName(user_name);
+        if (user_name != null) {
+            user.setUserName(user_name);
+        }
+        user.setEmail(email);
         user.setPassword(password);
         if (Integer.parseInt(enabled) == 0) {
             user.setEnabled(false);
@@ -271,13 +278,13 @@ public class UserService {
     @PUT
     @Produces({MediaType.APPLICATION_JSON})
     @Path("json/update/{id: \\d+}")
-    public Response updateJson(@QueryParam("id") int id, @QueryParam("user_name") String user_name,
+    public Response updateJson(@QueryParam("id") int id, @QueryParam("user_name") String user_name, @QueryParam("email") String email,
             @QueryParam("password") String password, @QueryParam("enabled") String enabled) {
         checkContext();
-        // Require all properties to create.
+        // Require these properties to create.
         String msg = "";
-        if (user_name == null) {
-            msg = "username missing";
+        if (email == null) {
+            msg = "email missing";
         }
         if (password == null) {
             msg = msg + ";password missing";
@@ -312,7 +319,10 @@ public class UserService {
                     type(MediaType.APPLICATION_JSON).
                     build();
         }
-        user.setUserName(user_name);
+        if (user_name != null) {
+            user.setUserName(user_name);
+        }
+        user.setEmail(email);
         user.setPassword(password);
         if (Integer.parseInt(enabled) == 0) {
             user.setEnabled(false);
@@ -328,13 +338,13 @@ public class UserService {
     @PUT
     @Produces({MediaType.TEXT_PLAIN})
     @Path("plain/update/{id: \\d+}")
-    public Response update(@QueryParam("id") int id, @QueryParam("user_name") String user_name,
+    public Response update(@QueryParam("id") int id, @QueryParam("user_name") String user_name, @QueryParam("email") String email,
             @QueryParam("password") String password, @QueryParam("enabled") String enabled) {
         checkContext();
-        // Require all properties to create.
+        // Require these properties to create.
         String msg = "";
-        if (user_name == null) {
-            msg = "username missing";
+        if (email == null) {
+            msg = "email missing";
         }
         if (password == null) {
             msg = msg + ";password missing";
@@ -369,8 +379,10 @@ public class UserService {
                     type(MediaType.TEXT_PLAIN).
                     build();
         }
-        user.setUserName(user_name);
-
+        if (user_name != null) {
+            user.setUserName(user_name);
+        }
+        user.setEmail(email);
         user.setPassword(password);
         if (Integer.parseInt(enabled) == 0) {
             user.setEnabled(false);

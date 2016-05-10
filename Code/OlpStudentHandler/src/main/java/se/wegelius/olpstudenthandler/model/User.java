@@ -11,28 +11,31 @@ import se.wegelius.olpstudenthandler.model.persistance.UserPersistance;
  *
  * @author asawe
  */
-public class User {
-    
+public class User {     
 
      private Integer userId;
      private String userName;
+     private String email;
      private String password;
     private boolean enabled;
 
     public User() {
     }
 
-    public User(String userName, String password, boolean enabled) {
+    public User(String userName, String email, String password, boolean enabled) {
        this.userName = userName;
+       this.email = email;
        this.password = password;
         this.enabled = enabled;
     }
 
     public User(UserPersistance p) {
-        this.userName = p.getUserName();
-        this.userId = p.getUserId();
-        this.password = p.getPassword();
+       this.userId = p.getUserId();
+       this.email = p.getEmail();
+       this.password = p.getPassword();
+       this.enabled = p.isEnabled();
     }
+
    
     public Integer getUserId() {
         return this.userId;
@@ -48,6 +51,8 @@ public class User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+    
+    
     public String getPassword() {
         return this.password;
     }
@@ -62,5 +67,13 @@ public class User {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

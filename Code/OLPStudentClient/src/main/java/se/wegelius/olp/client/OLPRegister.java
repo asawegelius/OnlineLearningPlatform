@@ -64,13 +64,14 @@ public class OLPRegister extends HttpServlet {
         logger.info(jsonToken);
         //update the user to enabled = true;
         UserClient userClient = new UserClient();
-        MultivaluedMap queryParam = userClient.getParameters(token.getUser().getUserId(), token.getUser().getUserName(), token.getUser().getPassword(), 1);
+        MultivaluedMap queryParam = userClient.getParameters(token.getUser().getUserId(), null,  token.getUser().getEmail(), token.getUser().getPassword(), 1);
         userClient.updateJson(queryParam, token.getUser().getUserId());
         //redirect to index with user logged in
         HttpSession session = request.getSession();
-        session.setAttribute("user", token.getUser().getUserName());
+        session.removeAttribute("msg");
+        session.setAttribute("user", token.getUser().getEmail());
         session.setMaxInactiveInterval(30 * 60);
-        Cookie userName = new Cookie("user", token.getUser().getUserName());
+        Cookie userName = new Cookie("user", token.getUser().getEmail());
         userName.setMaxAge(30 * 60);
         response.addCookie(userName);
         String encodedURL = response.encodeRedirectURL("index.jsp");
