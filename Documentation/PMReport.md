@@ -33,21 +33,20 @@
 
 
 ##2.	Table of Contents
-1. Solution Document History  
-⋅⋅1.2	Revision History  
-⋅⋅1.3	Approvals
-⋅⋅1.4	Distribution 
-⋅⋅1.5 Confidentiality Rating
-⋅⋅1.6 Link to online version
+1.	PMReport Document History  
+  1.2	Revision History  
+  1.3	Approvals  
+  1.4	Distribution 
+  1.5 Confidentiality Rating
 2. Table of Contents  
-3.	Introduction
+3. Introduction
 4.  Background
-5.  Implementation
-⋅⋅5.1 Prince2
-⋅⋅5.2 Scrum
+5.	Implementation  
+  5.2	Prince2  
+  5.3	Scrum 
 6. Conclusion
-7.  Appendices
-⋅⋅7.1 References
+7. Appendices  
+  7.2	References
 
 ###Table of Contents
 
