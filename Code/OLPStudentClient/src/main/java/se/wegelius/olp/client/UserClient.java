@@ -8,8 +8,6 @@ package se.wegelius.olp.client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import javax.ws.rs.core.MultivaluedMap;
 import org.slf4j.LoggerFactory;
 

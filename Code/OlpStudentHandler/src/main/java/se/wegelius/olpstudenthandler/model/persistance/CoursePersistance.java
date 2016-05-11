@@ -1,5 +1,5 @@
 package se.wegelius.olpstudenthandler.model.persistance;
-// Generated Apr 27, 2016 1:23:38 AM by Hibernate Tools 4.3.1
+// Generated May 10, 2016 4:15:18 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -21,8 +21,21 @@ public class CoursePersistance  implements java.io.Serializable {
      private Date released;
      private String language;
      private String skillLevel;
-     private Set<MultipleChoiceQuestionPersistance> multipleChoiceQuestions = new HashSet<MultipleChoiceQuestionPersistance>(0);
-     private Set<LecturePersistance> lectures = new HashSet<LecturePersistance>(0);
+     private Set<MultipleChoiceQuestionPersistance> multipleChoiceQuestions = new HashSet<>(0);
+     private Set<LecturePersistance> lectures = new HashSet<>(0);
+     private Set<PlaylistPersistance> playlists = new HashSet<>(0);
+
+    public CoursePersistance(Integer courseId, ContentProviderPersistance contentProvider, CourseBranchPersistance courseBranch, CourseTypePersistance courseType, String courseName, String courseDescription, Date released, String language, String skillLevel) {
+        this.courseId = courseId;
+        this.contentProvider = contentProvider;
+        this.courseBranch = courseBranch;
+        this.courseType = courseType;
+        this.courseName = courseName;
+        this.courseDescription = courseDescription;
+        this.released = released;
+        this.language = language;
+        this.skillLevel = skillLevel;
+    }
 
     public CoursePersistance() {
     }
@@ -124,8 +137,13 @@ public class CoursePersistance  implements java.io.Serializable {
         this.lectures = lectures;
     }
 
+    public Set<PlaylistPersistance> getPlaylists() {
+        return playlists;
+    }
 
-
+    public void setPlaylists(Set<PlaylistPersistance> playlists) {
+        this.playlists = playlists;
+    }
 
 }
 

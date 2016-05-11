@@ -2,10 +2,6 @@ package se.wegelius.olpstudenthandler.model;
 // Generated Mar 20, 2016 4:31:10 PM by Hibernate Tools 4.3.1
 
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import se.wegelius.olpstudenthandler.model.persistance.CourseTypePersistance;
 

@@ -7,11 +7,9 @@ package se.wegelius.olp.client;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
-import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import javax.ws.rs.core.MultivaluedMap;
-import se.wegelius.olp.model.Course;
 
 /**
  *

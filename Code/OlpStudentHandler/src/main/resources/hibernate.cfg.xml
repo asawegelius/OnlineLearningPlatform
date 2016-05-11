@@ -15,7 +15,8 @@
     <mapping resource="se/wegelius/olpstudenthandler/model/persistance/MultipleChoiceAnswerPersistance.hbm.xml"/>
     <mapping resource="se/wegelius/olpstudenthandler/model/persistance/MultipleChoiceOptionsPersistance.hbm.xml"/>
     <mapping resource="se/wegelius/olpstudenthandler/model/persistance/MultipleChoiceQuestionPersistance.hbm.xml"/>
-    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/Verificationtoken.hbm.xml"/>
-    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/User.hbm.xml"/>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/VerificationtokenPersistance.hbm.xml"/>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/UserPersistance.hbm.xml"/>
+    <mapping resource="se/wegelius/olpstudenthandler/model/persistance/PlaylistPersistance.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

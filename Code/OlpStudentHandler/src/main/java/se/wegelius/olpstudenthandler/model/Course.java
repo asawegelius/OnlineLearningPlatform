@@ -3,10 +3,6 @@ package se.wegelius.olpstudenthandler.model;
 
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import se.wegelius.olpstudenthandler.model.persistance.CoursePersistance;
 

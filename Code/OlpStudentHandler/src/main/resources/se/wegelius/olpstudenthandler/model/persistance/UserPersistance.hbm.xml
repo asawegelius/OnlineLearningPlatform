@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated May 10, 2016 4:15:18 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="se.wegelius.olpstudenthandler.model.persistance.UserPersistance" table="user" catalog="onlinelearningplatform">
+        <id name="userId" type="java.lang.Integer">
+            <column name="user_id" />
+            <generator class="identity"></generator>
+        </id>
+        <property name="userName" type="string">
+            <column name="user_name" length="45" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="45" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="256" />
+        </property>
+        <property name="enabled" type="boolean">
+            <column name="enabled" not-null="true" />
+        </property>
+        <set name="verificationtokens" table="verificationtoken" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="vt_user_fk" />
+            </key>
+            <one-to-many class="se.wegelius.olpstudenthandler.model.persistance.VerificationtokenPersistance" />
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="playlists" table="playlist">
+            <key>
+                <column name="pl_user_id"/>
+            </key>
+            <one-to-many class="se.wegelius.olpstudenthandler.model.persistance.PlaylistPersistance"/>
+        </set>
+    </class>
+</hibernate-mapping>

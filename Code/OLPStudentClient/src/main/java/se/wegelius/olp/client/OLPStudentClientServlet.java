@@ -23,6 +23,7 @@ public class OLPStudentClientServlet extends HttpServlet {
     private String jsonCourses;
     private CourseBranchClient branchClient;
     
+    @Override
     public void init(ServletConfig config)
     {
         branchClient = new CourseBranchClient();
