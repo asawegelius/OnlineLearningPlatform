@@ -90,7 +90,7 @@ public class CourseClient {
     public ClientResponse getJson(int id) {
         GenericType<Course> gType = new GenericType<Course>() {
         };
-        return getJson(ClientResponse.class, Integer.toString(1));
+        return getJson(ClientResponse.class, Integer.toString(id));
     }
 
     public <T> T getJson(Class<T> responseType, String id) throws UniformInterfaceException {
