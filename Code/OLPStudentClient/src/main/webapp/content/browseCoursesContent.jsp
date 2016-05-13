@@ -40,7 +40,6 @@
         for(Playlist p: playlists){
                 if (p.getUserId() == (int) userId) {
                     String jsonPlaylistCourse = courseClient.getJson(p.getCourseId()).getEntity(String.class);
-                    out.write(jsonPlaylistCourse);
                     Course playlistCourse = new Gson().fromJson(jsonPlaylistCourse, new TypeToken<Course>() {
                     }.getType());
                     playlistCourses.add(playlistCourse);
