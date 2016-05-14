@@ -4,7 +4,7 @@
 
 | version   | Revision               | date    |	Implemented by| 
 | --------- |------------------------| ------- |--------------| 
-|           |                        |         |               |
+| 1.0       |  Added Junit tests     |14-05-16 |Åsa Wegelius   |
 |           |                        |         |               |
 |           |                        |         |               |
 
