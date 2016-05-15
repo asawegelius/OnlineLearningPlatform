@@ -95,6 +95,7 @@ public interface IOlpDao<T, ID extends Serializable> {
 	 *            the entity to merge
 	 */
 	void merge(T entity);
+        
 
 	/**
 	 * Deletes an entity

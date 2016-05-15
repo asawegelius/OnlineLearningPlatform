@@ -185,29 +185,7 @@ public class CourseDaoTest {
         assertEquals(instance.count(), result.size());
     }
 
-    /**
-     * Test of getAll method, of class OlpDao.
-     *
-     * @Test public void testGetAll_String() { System.out.println("getAll");
-     * String query = "WHERE ct_course_branch_fk < 25"; CourseTypeDao typeDao =
-     * new CourseTypeDao(); Set all = typeDao.getAll(query); for
-     * (CourseTypePersistance type : typeDao.getAll(query)) { assertTrue(
-     * type.getCtCourseBranchFk()< 25); } }
-     */
-    /**
-     * Test of getAll method, of class OlpDao.
-     *
-     * @Test public void testGetAll_String_ObjectArr() {
-     * System.out.println("getAll"); String queryString = ""; Object[] params =
-     * null; CourseTypeDao instance = new CourseTypeDao(); Set expResult = null;
-     * Set result = instance.getAll(queryString, params);
-     * assertEquals(expResult, result); // TODO review the generated test code
-     * and remove the default call to fail. fail("The test case is a
-     * prototype."); }
-     */
-    /**
-     * Test of delete method, of class OlpDao.
-     */
+
     @Test
     public void testDelete() {
         System.out.println("delete");

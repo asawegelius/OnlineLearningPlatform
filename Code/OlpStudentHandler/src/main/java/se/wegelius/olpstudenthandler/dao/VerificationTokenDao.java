@@ -5,6 +5,7 @@
  */
 package se.wegelius.olpstudenthandler.dao;
 
+import se.wegelius.olpstudenthandler.model.HibernateUtil;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -35,7 +36,9 @@ public class VerificationTokenDao extends OlpDao<VerificationtokenPersistance, I
         try {
             session.beginTransaction();
             token = (VerificationtokenPersistance) session.get(VerificationtokenPersistance.class, id);
-            Hibernate.initialize(token.getUser());
+            if (token != null) {
+                Hibernate.initialize(token.getUser());
+            }
             session.getTransaction().commit();
         } catch (HibernateException e) {
             logger.error(e.getMessage());

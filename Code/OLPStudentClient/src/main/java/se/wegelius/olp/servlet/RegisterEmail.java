@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package se.wegelius.olp.client;
+package se.wegelius.olp.servlet;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -25,6 +25,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MultivaluedMap;
 import org.slf4j.LoggerFactory;
+import se.wegelius.olp.client.UserClient;
+import se.wegelius.olp.client.VerificationTokenClient;
 import se.wegelius.olp.model.Encryptor;
 import se.wegelius.olp.model.User;
 import se.wegelius.olp.model.VerificationMail;

@@ -53,10 +53,6 @@ public class CourseTypePersistance  implements java.io.Serializable {
     public void setCourses(Set<CoursePersistance> courses) {
         this.courses = courses;
     }
-
-
-
-
 }
 
 

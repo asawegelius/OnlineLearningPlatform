@@ -4,6 +4,7 @@
     Author     : asawe
 --%>
 
+
 <%@page import="org.slf4j.Logger"%>
 <%@page import="se.wegelius.olp.model.Playlist"%>
 <%@page import="se.wegelius.olp.client.PlaylistClient"%>
@@ -24,10 +25,12 @@
 <%
     CourseBranchClient branchClient = new CourseBranchClient();
     String jsonBranches = branchClient.getJson().getEntity(String.class);
+    System.out.println(jsonBranches);
     List<CourseBranch> branches = new Gson().fromJson(jsonBranches, new TypeToken<List<CourseBranch>>() {
             }.getType());
     CourseClient courseClient = new CourseClient();
     String jsonCourses = courseClient.getJson().getEntity(String.class);
+    System.out.println(jsonCourses);
     List<Course> courses = new Gson().fromJson(jsonCourses, new TypeToken<List<Course>>() {
             }.getType());
     
