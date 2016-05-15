@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.MultivaluedMap;
 import org.slf4j.LoggerFactory;
 import se.wegelius.olp.model.Playlist;
 
@@ -41,11 +42,12 @@ public class PlaylistServlet extends HttpServlet {
         logger.info("userid : " + userid + " courseid : " + courseid);
         
         PlaylistClient playlist = new PlaylistClient();
-        ClientResponse userResponse = playlist.getJsonByUser(Integer.parseInt(userid));
-        logger.info(userResponse.toString());
-        String jsonPlaylists = userResponse.getEntity(String.class);
-        List<Playlist> playlists = new Gson().fromJson(jsonPlaylists, List.class);
-        logger.info(playlists.toString());
+        ClientResponse playlistResponse = playlist.createJson(Integer.parseInt(userid), Integer.parseInt(courseid));
+        logger.info("playlistResponse = " + playlistResponse);
+        String jsonPlaylist = playlistResponse.getEntity(String.class);
+        logger.info("jsonPlaylist = " + jsonPlaylist);
+        Playlist p = new Gson().fromJson(jsonPlaylist, Playlist.class);
+        logger.info("the new playlist: " + p.getPlaylistId()+ ", " + p.getCourseId()+ ", " + p.getUserId());
         response.sendRedirect("/OLP/course.jsp");
     }
 

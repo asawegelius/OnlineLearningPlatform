@@ -50,7 +50,7 @@ Object userId= session.getAttribute("userId");
                          out.write("<form action='playlist' method='post' id='followForm'>");
                             out.write("<input type='hidden' name='userid' value='"+userId.toString()+"' />");
                             // Replace course id by the real one when actual courses will be displayed
-                            out.write("<input type='hidden' name='courseid' value='1' />");
+                            out.write("<input type='hidden' name='courseid' value='2' />");
                             out.write("<button type='submit' id='follow_btn' class='btn btn-block bt-login' data-loading-text='Following...'>Follow</button>");
                         out.write("</form>");
                     }

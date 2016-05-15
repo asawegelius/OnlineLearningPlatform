@@ -18,7 +18,7 @@ import se.wegelius.olp.model.CourseBranch;
  *
  * @author clovis.lebret
  */
-public class PlaylistClient {
+public class PlaylistClient  {
     
     private final WebResource webResource;
     private final Client client;
@@ -37,37 +37,37 @@ public class PlaylistClient {
         return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 
-    public ClientResponse createJson(String email, String message) throws UniformInterfaceException {
+    public ClientResponse createJson(int userid, int courseid) throws UniformInterfaceException {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
-        queryParams.add("email", email);
-        queryParams.add("message", message);
+        queryParams.add("user_id", Integer.toString(userid));
+        queryParams.add("course_id", Integer.toString(courseid));
         System.out.println(queryParams.toString());
         ClientResponse response = webResource.queryParams(queryParams).path("json/create").post(ClientResponse.class);
         return response;
     }
 
-    public ClientResponse create(String email, String message) throws UniformInterfaceException {
+    public ClientResponse create(int userid, int courseid) throws UniformInterfaceException {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
-        queryParams.add("email", email);
-        queryParams.add("message", message);
+        queryParams.add("user_id", Integer.toString(userid));
+        queryParams.add("course_id", Integer.toString(courseid));
         ClientResponse response = webResource.queryParams(queryParams).path("plain/create").post(ClientResponse.class);
         return response;
     }
     
-    public ClientResponse updateJson(int id, String email, String message) throws UniformInterfaceException {
+    public ClientResponse updateJson(int id, int userid, int courseid) throws UniformInterfaceException {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
         queryParams.add("id", Integer.toString(id));
-        queryParams.add("email", email);
-        queryParams.add("message", message);
+        queryParams.add("user_id", Integer.toString(userid));
+        queryParams.add("course_id", Integer.toString(courseid));
         System.out.println(queryParams.toString());
         return webResource.queryParams(queryParams).path(java.text.MessageFormat.format("json/update/{0}", new Object[]{id})).put(ClientResponse.class);
     }
 
-    public ClientResponse updatePlain(int id, String email, String message) throws UniformInterfaceException {
+    public ClientResponse updatePlain(int id, int userid, int courseid) throws UniformInterfaceException {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
         queryParams.add("id", Integer.toString(id));
-        queryParams.add("email", email);
-        queryParams.add("message", message);
+        queryParams.add("user_id", Integer.toString(userid));
+        queryParams.add("course_id", Integer.toString(courseid));
         return webResource.queryParams(queryParams).path(java.text.MessageFormat.format("plain/update/{0}", new Object[]{id})).put(ClientResponse.class);
     }
 

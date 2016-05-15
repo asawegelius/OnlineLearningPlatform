@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -96,9 +97,12 @@ public class PlaylistService {
         Set<Playlist> playlists = new HashSet<>();
         params.put("id", id);
         logger.info(id+"");
-        Set<PlaylistPersistance> set = dao.query("SELECT p FROM PlaylistPersistance AS p WHERE p.user.userId = :id", params);
-        if (set.iterator().hasNext()) {
-            PlaylistPersistance p = set.iterator().next();
+        Set<PlaylistPersistance> set = dao.query("FROM PlaylistPersistance AS p WHERE p.user.userId = :id", params);
+        
+        Iterator<PlaylistPersistance> itr = set.iterator(); 
+        while (itr.hasNext()) {
+            PlaylistPersistance p = itr.next();
+            logger.info(Integer.toString(p.getPlaylistId()));
             playlists.add(new Playlist(dao.findByID(p.getPlaylistId())));
         }
         return Response.ok(toJson(playlists), "application/json").build();
