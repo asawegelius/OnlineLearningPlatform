@@ -41,7 +41,7 @@ public class PlaylistClient extends GenericClient {
         queryParams.add("course_id", Integer.toString(courseId));
         queryParams.add("user_id", Integer.toString(userId));
         return queryParams;
-    }    
+    }
     public ClientResponse getJsonByUser(int id) {
         WebResource resource = super.getWebResource();
         resource = resource.path("json/user/"+id);
