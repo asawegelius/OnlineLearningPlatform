@@ -37,37 +37,37 @@ public class PlaylistClient  {
         return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 
-    public ClientResponse createJson(int userid, int courseid) throws UniformInterfaceException {
+    public ClientResponse createJson(String userid, String courseid) throws UniformInterfaceException {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
-        queryParams.add("user_id", Integer.toString(userid));
-        queryParams.add("course_id", Integer.toString(courseid));
+        queryParams.add("user_id", userid);
+        queryParams.add("course_id", courseid);
         System.out.println(queryParams.toString());
         ClientResponse response = webResource.queryParams(queryParams).path("json/create").post(ClientResponse.class);
         return response;
     }
 
-    public ClientResponse create(int userid, int courseid) throws UniformInterfaceException {
+    public ClientResponse create(String userid, String courseid) throws UniformInterfaceException {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
-        queryParams.add("user_id", Integer.toString(userid));
-        queryParams.add("course_id", Integer.toString(courseid));
+        queryParams.add("user_id", userid);
+        queryParams.add("course_id", courseid);
         ClientResponse response = webResource.queryParams(queryParams).path("plain/create").post(ClientResponse.class);
         return response;
     }
     
-    public ClientResponse updateJson(int id, int userid, int courseid) throws UniformInterfaceException {
+    public ClientResponse updateJson(int id, String userid, String courseid) throws UniformInterfaceException {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
         queryParams.add("id", Integer.toString(id));
-        queryParams.add("user_id", Integer.toString(userid));
-        queryParams.add("course_id", Integer.toString(courseid));
+        queryParams.add("user_id", userid);
+        queryParams.add("course_id", courseid);
         System.out.println(queryParams.toString());
         return webResource.queryParams(queryParams).path(java.text.MessageFormat.format("json/update/{0}", new Object[]{id})).put(ClientResponse.class);
     }
 
-    public ClientResponse updatePlain(int id, int userid, int courseid) throws UniformInterfaceException {
+    public ClientResponse updatePlain(int id, String userid, String courseid) throws UniformInterfaceException {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
         queryParams.add("id", Integer.toString(id));
-        queryParams.add("user_id", Integer.toString(userid));
-        queryParams.add("course_id", Integer.toString(courseid));
+        queryParams.add("user_id", userid);
+        queryParams.add("course_id", courseid);
         return webResource.queryParams(queryParams).path(java.text.MessageFormat.format("plain/update/{0}", new Object[]{id})).put(ClientResponse.class);
     }
 
