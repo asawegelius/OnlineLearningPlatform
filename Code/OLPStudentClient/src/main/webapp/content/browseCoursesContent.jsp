@@ -4,6 +4,7 @@
     Author     : asawe
 --%>
 
+<%@page import="org.slf4j.Logger"%>
 <%@page import="se.wegelius.olp.model.Playlist"%>
 <%@page import="se.wegelius.olp.client.PlaylistClient"%>
 <%@page import="se.wegelius.olp.client.UserClient"%>
@@ -29,21 +30,21 @@
     String jsonCourses = courseClient.getJson().getEntity(String.class);
     List<Course> courses = new Gson().fromJson(jsonCourses, new TypeToken<List<Course>>() {
             }.getType());
-    PlaylistClient pClient = new PlaylistClient();
-    String jsonPlaylist = pClient.getJson().getEntity(String.class);
-    List<Playlist> playlists = new Gson().fromJson(jsonPlaylist, new TypeToken<List<Playlist>>() {
-            }.getType());
     
-    List<Course> playlistCourses = new ArrayList<>();
     Object userId= session.getAttribute("userId");
+    List<Course> playlistCourses= new ArrayList<>();
+    
     if (userId != null){
+        PlaylistClient pClient = new PlaylistClient();
+        String jsonPlaylist = pClient.getJsonByUser((int)userId).getEntity(String.class);
+        List<Playlist> playlists = new Gson().fromJson(jsonPlaylist, new TypeToken<List<Playlist>>() {
+                }.getType());
+        
         for(Playlist p: playlists){
-                if (p.getUserId() == (int) userId) {
-                    String jsonPlaylistCourse = courseClient.getJson(p.getCourseId()).getEntity(String.class);
-                    Course playlistCourse = new Gson().fromJson(jsonPlaylistCourse, new TypeToken<Course>() {
-                    }.getType());
-                    playlistCourses.add(playlistCourse);
-                }
+            String jsonPlaylistCourse = courseClient.getJson(p.getCourseId()).getEntity(String.class);
+            Course playlistCourse = new Gson().fromJson(jsonPlaylistCourse, new TypeToken<Course>() {
+            }.getType());
+            playlistCourses.add(playlistCourse);
         }
     }
 %>
@@ -60,7 +61,7 @@
             <!--Sidebar content-->
             <div class="navbar navbar-fixed-left">
                 <%
-                    if (session.getAttribute("user") != null) {
+                    if (userId != null) {
                         out.write("<li  class='dropdown' style='list-style:none'><a  class='navbar-brand dropdown-toggle' data-toggle='dropdown'>Playslist<span class='caret'></span></a>");
                             out.write("<ul class='dropdown-menu' role='menu'>");
                             for(Course c: playlistCourses){

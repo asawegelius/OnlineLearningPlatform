@@ -88,9 +88,13 @@ public class PlaylistClient {
     }
 
     public ClientResponse getJson(int id) {
-        GenericType<CourseBranch> gType = new GenericType<CourseBranch>() {
-        };
-        return getJson(ClientResponse.class, Integer.toString(1));
+        return getJson(ClientResponse.class, Integer.toString(id));
+    }
+    
+    public ClientResponse getJsonByUser(int id) {
+        WebResource resource = webResource;
+        resource = resource.path("json/user/"+id);
+        return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
     }
 
     public <T> T getJson(Class<T> responseType, String id) throws UniformInterfaceException {

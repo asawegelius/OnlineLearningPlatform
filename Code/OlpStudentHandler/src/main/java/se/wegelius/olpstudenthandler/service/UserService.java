@@ -99,7 +99,7 @@ public class UserService {
         }
         return toRequestedType(id, "application/json");
     }
-
+    
     @GET
     @Path("/plain")
     @Produces({MediaType.TEXT_PLAIN})

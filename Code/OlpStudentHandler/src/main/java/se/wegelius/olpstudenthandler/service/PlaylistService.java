@@ -6,7 +6,11 @@
 package se.wegelius.olpstudenthandler.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javax.servlet.ServletContext;
 import javax.ws.rs.DELETE;
@@ -20,11 +24,14 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.slf4j.LoggerFactory;
 import se.wegelius.olpstudenthandler.dao.CourseDao;
+import se.wegelius.olpstudenthandler.dao.PlaylistDao;
 import se.wegelius.olpstudenthandler.dao.PlaylistDao;
 import se.wegelius.olpstudenthandler.dao.UserDao;
 import se.wegelius.olpstudenthandler.model.Playlist;
 import se.wegelius.olpstudenthandler.model.persistance.CoursePersistance;
+import se.wegelius.olpstudenthandler.model.persistance.PlaylistPersistance;
 import se.wegelius.olpstudenthandler.model.persistance.PlaylistPersistance;
 import se.wegelius.olpstudenthandler.model.persistance.UserPersistance;
 
@@ -35,6 +42,7 @@ import se.wegelius.olpstudenthandler.model.persistance.UserPersistance;
 @Path("/playlist")
 public class PlaylistService {
 
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserService.class);
     @Context
     private ServletContext sctx;          // dependency injection
     private static PlaylistDao dao;
@@ -77,6 +85,23 @@ public class PlaylistService {
     public Response getJson(@PathParam("id") int id) {
         checkContext();
         return toRequestedType(id, "application/json");
+    }
+    
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("/json/user/{id: \\d+}")
+    public Response getJsonByPlaylist(@PathParam("id") int id) {
+        checkContext();
+        Map params = new HashMap();
+        Set<Playlist> playlists = new HashSet<>();
+        params.put("id", id);
+        logger.info(id+"");
+        Set<PlaylistPersistance> set = dao.query("SELECT p FROM PlaylistPersistance AS p WHERE p.user.userId = :id", params);
+        if (set.iterator().hasNext()) {
+            PlaylistPersistance p = set.iterator().next();
+            playlists.add(new Playlist(dao.findByID(p.getPlaylistId())));
+        }
+        return Response.ok(toJson(playlists), "application/json").build();
     }
 
     @GET
@@ -199,7 +224,7 @@ public class PlaylistService {
                 playlist.setCourse(course);
                 playlist.setUser(user);
                 dao.save(playlist);
-                msg = playlist.getPlaylistId() + ";" + playlist.getCourse().getCourseId() + ";" + playlist.getUser().getUserId();
+                msg = playlist.getPlaylistId()+ ";" + playlist.getCourse().getCourseId() + ";" + playlist.getUser().getUserId();
                 return Response.ok(msg, "text/plain").build();
             }
         }
@@ -250,7 +275,7 @@ public class PlaylistService {
                 // Update.
                 PlaylistPersistance playlist = dao.findByID(id);
                 if (playlist == null) {
-                    msg = "playlist missing";
+                    msg = "user missing";
                     return Response.status(Response.Status.BAD_REQUEST).
                             entity(msg).
                             type(MediaType.APPLICATION_JSON).
@@ -310,7 +335,7 @@ public class PlaylistService {
                 // Update.
                 PlaylistPersistance playlist = dao.findByID(id);
                 if (playlist == null) {
-                    msg = "playlist missing";
+                    msg = "user missing";
                     return Response.status(Response.Status.BAD_REQUEST).
                             entity(msg).
                             type(MediaType.APPLICATION_JSON).
@@ -319,7 +344,7 @@ public class PlaylistService {
                     playlist.setCourse(course);
                     playlist.setUser(user);
                     dao.update(playlist);
-                    msg = playlist.getPlaylistId() + ";" + playlist.getCourse().getCourseId() + ";" + playlist.getUser().getUserId();
+                    msg = playlist.getPlaylistId()+ ";" + playlist.getCourse().getCourseId() + ";" + playlist.getUser().getUserId();
                     return Response.ok(msg, "text/plain").build();
                 }
             }
@@ -337,7 +362,7 @@ public class PlaylistService {
         String msg = null;
         PlaylistPersistance playlist = dao.findByID(id);
         if (playlist == null) {
-            msg = "Playlist missing.\n";
+            msg = "user missing.\n";
             return Response.status(Response.Status.BAD_REQUEST).
                     entity(msg).
                     type(MediaType.TEXT_PLAIN).
