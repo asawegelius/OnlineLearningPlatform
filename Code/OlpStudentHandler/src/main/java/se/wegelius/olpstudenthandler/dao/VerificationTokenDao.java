@@ -36,7 +36,9 @@ public class VerificationTokenDao extends OlpDao<VerificationtokenPersistance, I
         try {
             session.beginTransaction();
             token = (VerificationtokenPersistance) session.get(VerificationtokenPersistance.class, id);
-            Hibernate.initialize(token.getUser());
+            if (token != null) {
+                Hibernate.initialize(token.getUser());
+            }
             session.getTransaction().commit();
         } catch (HibernateException e) {
             logger.error(e.getMessage());

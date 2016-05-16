@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.htm</welcome-file>
         <welcome-file>index.jsp</welcome-file>
-    </welcome-file-list>   
+    </welcome-file-list>
     <servlet>
         <servlet-name>OLPStudentClientServlet</servlet-name>
-        <servlet-class>se.wegelius.olp.client.OLPStudentClientServlet</servlet-class>
+        <servlet-class>se.wegelius.olp.servlet.OLPStudentClientServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RegisterEmail</servlet-name>
-        <servlet-class>se.wegelius.olp.client.RegisterEmail</servlet-class>
+        <servlet-class>se.wegelius.olp.servlet.RegisterEmail</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>OLPRegister</servlet-name>
-        <servlet-class>se.wegelius.olp.client.OLPRegister</servlet-class>
+        <servlet-class>se.wegelius.olp.servlet.OLPRegister</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LogoutServlet</servlet-name>
-        <servlet-class>se.wegelius.olp.client.LogoutServlet</servlet-class>
+        <servlet-class>se.wegelius.olp.servlet.LogoutServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>se.wegelius.olp.client.LoginServlet</servlet-class>
+        <servlet-class>se.wegelius.olp.servlet.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PlaylistServlet</servlet-name>
-        <servlet-class>se.wegelius.olp.client.PlaylistServlet</servlet-class>
+        <servlet-class>se.wegelius.olp.servlet.PlaylistServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>OLPStudentClientServlet</servlet-name>

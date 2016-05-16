@@ -6,11 +6,9 @@
 package se.wegelius.olpstudenthandler.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import javax.servlet.ServletContext;
@@ -28,11 +26,9 @@ import javax.ws.rs.core.Response;
 import org.slf4j.LoggerFactory;
 import se.wegelius.olpstudenthandler.dao.CourseDao;
 import se.wegelius.olpstudenthandler.dao.PlaylistDao;
-import se.wegelius.olpstudenthandler.dao.PlaylistDao;
 import se.wegelius.olpstudenthandler.dao.UserDao;
 import se.wegelius.olpstudenthandler.model.Playlist;
 import se.wegelius.olpstudenthandler.model.persistance.CoursePersistance;
-import se.wegelius.olpstudenthandler.model.persistance.PlaylistPersistance;
 import se.wegelius.olpstudenthandler.model.persistance.PlaylistPersistance;
 import se.wegelius.olpstudenthandler.model.persistance.UserPersistance;
 
@@ -147,6 +143,15 @@ public class PlaylistService {
             } else {
                 msg = msg + ";user_id corrupted.\n";
             }
+        }      
+        Map params = new HashMap();
+        Set<PlaylistPersistance> playlists = new HashSet<>();
+        params.put("user_id", user_id);
+        params.put("course_id", course_id);
+        playlists = dao.query("FROM PlaylistPersistance AS p WHERE p.user.userId = :user_id and p.course.courseId = :course_id", params);
+        logger.info("no of same course in playlist = " + playlists.size());
+        if(playlists.size() > 0){
+                return Response.ok(toJson(new Playlist(playlists.iterator().next())), MediaType.APPLICATION_JSON).build();
         }
         if (msg != null) {
             return Response.status(Response.Status.BAD_REQUEST).
@@ -410,7 +415,7 @@ public class PlaylistService {
     private Response toRequestedType(int id, String type) {
         PlaylistPersistance playlist = dao.findByID(id);
         if (playlist == null) {
-            String msg = id + " is a bad ID.\n";
+            String msg = "no playlist;" + id;
             return Response.status(Response.Status.BAD_REQUEST).
                     entity(msg).
                     type(MediaType.APPLICATION_JSON).
