@@ -5,6 +5,7 @@
  */
 package se.wegelius.olpstudenthandler.dao;
 
+import se.wegelius.olpstudenthandler.model.HibernateUtil;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;

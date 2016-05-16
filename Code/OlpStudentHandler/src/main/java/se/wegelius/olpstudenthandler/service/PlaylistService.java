@@ -334,7 +334,7 @@ public class PlaylistService {
     public Response delete(@QueryParam("id") int id
     ) {
         checkContext();
-        String msg = null;
+        String msg;
         PlaylistPersistance playlist = dao.findByID(id);
         if (playlist == null) {
             msg = "Playlist missing.\n";

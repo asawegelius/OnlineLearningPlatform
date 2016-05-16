@@ -46,14 +46,33 @@
         </div>
         <div class="col-md-9 course-content">
             <!--Body content-->
-            <p> <h3>Awesom course!</h3></p>
-            <video width="534" height="300" controls poster="assets/img/MMHO.jpg"  >
+            <ul>
+                <li>                    
+                    <p> <h3>awesome course!</h3></p>
+                </li>
+                <li>    
+                    <!--
+                    <video width="534" height="300" controls poster="assets/img/MMHO.jpg"  >
 
-                <source src="assets/img/videos/testLecture.mp4" type="video/mp4" />
+                        <source src="assets/img/videos/testLecture.mp4" type="video/mp4" />
 
-                <em>Sorry, your browser doesn't support HTML5 video.</em>
+                        <em>Sorry, your browser doesn't support HTML5 video.</em>
 
-            </video>
+                    </video>
+                     -->
+                    <div style="position: relative; width: 640px;">
+                        <video id=0 controls width=640 height=360>
+                            <source src="assets/img/videos/test.ogv" type='video/ogg; codecs="theora, vorbis"'/>
+                            <source src="assets/img/videos/test.webm" type='video/webm' >
+                            <source src="assets/img/videos/test.mp4" type='video/mp4'>
+                            <p>Video is not visible, most likely your browser does not support HTML5 video</p>
+                        </video>
+                    </div>
+                </li>
+                <li>
+                    <a href="/sign_in?action_name=collect&amp;resource_id=490139" data-view="modalAjax" rel="nofollow" title="Add to Collection"><span>Add to Collection</span></a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>    

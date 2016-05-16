@@ -5,6 +5,7 @@
  */
 package se.wegelius.olpstudenthandler.dao;
 
+import se.wegelius.olpstudenthandler.model.HibernateUtil;
 import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
