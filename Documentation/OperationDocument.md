@@ -99,9 +99,9 @@ You might already have data on your master and need to syncronize your slave. Yo
 ```mysql
 shell> mysqldump --all-databases --master-data > dbdump.db
 ```
-7. To import the data, either copy the dump file to the slave, or access the file from the master when connecting remotely to the slave.
+To import the data, either copy the dump file to the slave, or access the file from the master when connecting remotely to the slave.
 
-The slave need connection information to be able to communicate with the master. To set the master configuration on the slave you execute the below statements after you swap the values with the correct values for your system:
+7. The slave need connection information to be able to communicate with the master. To set the master configuration on the slave you execute the below statements after you swap the values with the correct values for your system:
 ```mysql
 mysql> CHANGE MASTER TO
     ->     MASTER_HOST='master_host_name',
@@ -110,9 +110,24 @@ mysql> CHANGE MASTER TO
     ->     MASTER_LOG_FILE='recorded_log_file_name',
     ->     MASTER_LOG_POS=recorded_log_position;b
 ```
-####To set up replication for a fresh installation of a master and slaves(no data involved):
 
-
+8.  If you are setting up a new replica enviroment using data from a different MySQL server, run the dump file from that one on the new master as below. The updates are automatically propagated to the slaves.
+```mysql
+shell> mysql -h master < fulldb.dump
+```
+9.  If you are setting up replication with existing data there are two ways. If you used __mysqldump__ start the slave using the  --skip-slave-start option so that replication does not start. Then you import the dump file as below:
+```mysql
+shell> mysql < fulldb.dump
+```
+If you created a snapshot using the raw data files you extract the data files into your slave data directory. You can do as below:
+```mysql
+shell> tar xvf dbdump.tar
+```
+You may need to set permissions and ownership on the files so that the slave server can access and modify them. Start the slave using the  --skip-slave-start option so that replication does not start. Configure the slave with the replication coordinates from the master. This tells the slave the binary log file and position within the file where replication needs to start. Also, configure the slave with the login credentials and host name of the master. Start the slave threads as below:
+```mysql
+mysql> START SLAVE;
+```
+After you have performed this procedure, the slave connects to the master and replicates any updates that have occurred on the master since the snapshot was taken.
 
 ##9.  Appendices
 ###9.2 References
@@ -127,3 +142,6 @@ MySQL Manual (version 5.6) _17.1.1.4 Obtaining the Replication Master Binary Log
 MySQL Manual (version 5.6) _17.1.1.5 Creating a Data Snapshot Using mysqldump_ Retrieved 05 15, 2016, from https://dev.mysql.com/doc/refman/5.6/en/replication-howto-mysqldump.html
 
 MySQL Manual (version 5.6) _17.1.1.10 Setting the Master Configuration on the Slave_ Retrieved 05 15, 2016, from https://dev.mysql.com/doc/refman/5.6/en/replication-howto-slaveinit.html
+
+MySQL Manual (version 5.6) _18.1.2.5 Setting Up Replication Slaves_ Retrieved 05 16, 2016, from http://dev.mysql.com/doc/refman/5.7/en/replication-setup-slaves.html
+
