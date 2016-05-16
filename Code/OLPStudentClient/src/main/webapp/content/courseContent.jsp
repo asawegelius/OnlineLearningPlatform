@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    Object userId = session.getAttribute("userId");
+%>
 <script type="text/javascript">
 <!--
     var d = document.getElementById("browse_courses");
@@ -16,7 +19,7 @@
     <div class="row-fluid">
         <div class="col-md-3">
             <!--Sidebar content-->
-            <div class="navbar course-tabs">
+            <div class="navbar course-tabs">                          
                 <ul class="nav nav-tabs tabbable">
                     <li class="active"><a href="#one" data-toggle="tab">Lectures</a></li>
                     <li><a href="#two" data-toggle="tab">Exercises</a></li>
@@ -42,8 +45,22 @@
                     </div>
 
                 </div>
+                <%
+                    if (userId != null) {
+                        out.write("<form action='playlist' method='post' id='followForm'>");
+                        out.write("<input type='hidden' name='userid' value='" + userId.toString() + "' />");
+                        // Replace course id by the real one when actual courses will be displayed
+                        out.write("<input type='hidden' name='courseid' value='2' />");
+                        out.write("<button type='submit' id='follow_btn' class='btn btn-block bt-login' data-loading-text='Following...'>Follow</button>");
+                        out.write("</form>");
+                    } else {
+                        out.write("<a href='#' style='text-decoration:none' data-toggle='modal' data-target='#loginModal'><button id='follow_btn' class='btn btn-block bt-login' data-loading-text='Following...'>Follow</button></a>");
+                    }
+                %>
             </div>
+
         </div>
+
         <div class="col-md-9 course-content">
             <!--Body content-->
             <ul>
@@ -51,15 +68,7 @@
                     <p> <h3>awesome course!</h3></p>
                 </li>
                 <li>    
-                    <!--
-                    <video width="534" height="300" controls poster="assets/img/MMHO.jpg"  >
 
-                        <source src="assets/img/videos/testLecture.mp4" type="video/mp4" />
-
-                        <em>Sorry, your browser doesn't support HTML5 video.</em>
-
-                    </video>
-                     -->
                     <div style="position: relative; width: 640px;">
                         <video id=0 controls width=640 height=360>
                             <source src="assets/img/videos/test.ogv" type='video/ogg; codecs="theora, vorbis"'/>
@@ -73,6 +82,7 @@
                     <a href="/sign_in?action_name=collect&amp;resource_id=490139" data-view="modalAjax" rel="nofollow" title="Add to Collection"><span>Add to Collection</span></a>
                 </li>
             </ul>
+
         </div>
     </div>
 </div>    

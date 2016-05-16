@@ -26,6 +26,10 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>se.wegelius.olp.client.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PlaylistServlet</servlet-name>
+        <servlet-class>se.wegelius.olp.client.PlaylistServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>OLPStudentClientServlet</servlet-name>
         <url-pattern>/OLPStudentClientServlet</url-pattern>
@@ -45,6 +49,10 @@
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PlaylistServlet</servlet-name>
+        <url-pattern>/playlist</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

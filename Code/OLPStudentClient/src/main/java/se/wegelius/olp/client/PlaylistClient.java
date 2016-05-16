@@ -12,20 +12,20 @@ import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javax.ws.rs.core.MultivaluedMap;
-import se.wegelius.olp.model.Course;
+import se.wegelius.olp.model.CourseBranch;
 
 /**
  *
- * @author asawe
+ * @author clovis.lebret
  */
-public class CourseClient {
-
+public class PlaylistClient  {
+    
     private final WebResource webResource;
     private final Client client;
-    private static final String BASE_URI = "http://localhost:8080/OlpStudentHandler/rest/course/";
-    //private static final String BASE_URI = "http://188.181.85.75/OlpStudentHandler/rest/course/";
-
-    public CourseClient() {
+    private static final String BASE_URI = "http://localhost:8080/OlpStudentHandler/rest/playlist/";
+    //private static final String BASE_URI = "http://188.181.85.75/OlpStudentHandler/rest/branch/";
+    
+    public PlaylistClient() {
         com.sun.jersey.api.client.config.ClientConfig config = new com.sun.jersey.api.client.config.DefaultClientConfig();
         client = Client.create(config);
         webResource = client.resource(BASE_URI);
@@ -37,37 +37,37 @@ public class CourseClient {
         return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 
-    public ClientResponse createJson(String email, String message) throws UniformInterfaceException {
+    public ClientResponse createJson(int userid, int courseid) throws UniformInterfaceException {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
-        queryParams.add("email", email);
-        queryParams.add("message", message);
+        queryParams.add("user_id", Integer.toString(userid));
+        queryParams.add("course_id", Integer.toString(courseid));
         System.out.println(queryParams.toString());
         ClientResponse response = webResource.queryParams(queryParams).path("json/create").post(ClientResponse.class);
         return response;
     }
 
-    public ClientResponse create(String email, String message) throws UniformInterfaceException {
+    public ClientResponse create(int userid, int courseid) throws UniformInterfaceException {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
-        queryParams.add("email", email);
-        queryParams.add("message", message);
+        queryParams.add("user_id", Integer.toString(userid));
+        queryParams.add("course_id", Integer.toString(courseid));
         ClientResponse response = webResource.queryParams(queryParams).path("plain/create").post(ClientResponse.class);
         return response;
     }
-
-    public ClientResponse updateJson(int id, String email, String message) throws UniformInterfaceException {
+    
+    public ClientResponse updateJson(int id, int userid, int courseid) throws UniformInterfaceException {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
         queryParams.add("id", Integer.toString(id));
-        queryParams.add("email", email);
-        queryParams.add("message", message);
+        queryParams.add("user_id", Integer.toString(userid));
+        queryParams.add("course_id", Integer.toString(courseid));
         System.out.println(queryParams.toString());
         return webResource.queryParams(queryParams).path(java.text.MessageFormat.format("json/update/{0}", new Object[]{id})).put(ClientResponse.class);
     }
 
-    public ClientResponse updatePlain(int id, String email, String message) throws UniformInterfaceException {
+    public ClientResponse updatePlain(int id, int userid, int courseid) throws UniformInterfaceException {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
         queryParams.add("id", Integer.toString(id));
-        queryParams.add("email", email);
-        queryParams.add("message", message);
+        queryParams.add("user_id", Integer.toString(userid));
+        queryParams.add("course_id", Integer.toString(courseid));
         return webResource.queryParams(queryParams).path(java.text.MessageFormat.format("plain/update/{0}", new Object[]{id})).put(ClientResponse.class);
     }
 
@@ -80,17 +80,21 @@ public class CourseClient {
         resource = resource.path("plain");
         return resource.accept(javax.ws.rs.core.MediaType.TEXT_PLAIN).get(String.class);
     }
-
-    public ClientResponse getJson() {
-        WebResource resource = webResource;
+    
+    public ClientResponse getJson(){
+           WebResource resource = webResource;
         resource = resource.path("json");
         return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
     }
 
     public ClientResponse getJson(int id) {
-        GenericType<Course> gType = new GenericType<Course>() {
-        };
         return getJson(ClientResponse.class, Integer.toString(id));
+    }
+    
+    public ClientResponse getJsonByUser(int id) {
+        WebResource resource = webResource;
+        resource = resource.path("json/user/"+id);
+        return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
     }
 
     public <T> T getJson(Class<T> responseType, String id) throws UniformInterfaceException {
@@ -102,5 +106,4 @@ public class CourseClient {
     public void close() {
         client.destroy();
     }
-
 }

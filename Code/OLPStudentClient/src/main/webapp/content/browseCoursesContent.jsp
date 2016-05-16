@@ -4,8 +4,12 @@
     Author     : asawe
 --%>
 
-<%@page import="se.wegelius.olp.client.TestClients"%>
-<%@page import="org.slf4j.LoggerFactory"%>
+
+<%@page import="org.slf4j.Logger"%>
+<%@page import="se.wegelius.olp.model.Playlist"%>
+<%@page import="se.wegelius.olp.client.PlaylistClient"%>
+<%@page import="se.wegelius.olp.client.UserClient"%>
+<%@page import="se.wegelius.olp.model.User"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.io.BufferedInputStream"%>
 <%@page import="java.util.Scanner"%>
@@ -29,7 +33,23 @@
     System.out.println(jsonCourses);
     List<Course> courses = new Gson().fromJson(jsonCourses, new TypeToken<List<Course>>() {
             }.getType());
-
+    
+    Object userId= session.getAttribute("userId");
+    List<Course> playlistCourses= new ArrayList<>();
+    
+    if (userId != null){
+        PlaylistClient pClient = new PlaylistClient();
+        String jsonPlaylist = pClient.getJsonByUser((int)userId).getEntity(String.class);
+        List<Playlist> playlists = new Gson().fromJson(jsonPlaylist, new TypeToken<List<Playlist>>() {
+                }.getType());
+        
+        for(Playlist p: playlists){
+            String jsonPlaylistCourse = courseClient.getJson(p.getCourseId()).getEntity(String.class);
+            Course playlistCourse = new Gson().fromJson(jsonPlaylistCourse, new TypeToken<Course>() {
+            }.getType());
+            playlistCourses.add(playlistCourse);
+        }
+    }
 %>
 <script type="text/javascript">
 <!--
@@ -43,6 +63,18 @@
         <div class="span2 left">
             <!--Sidebar content-->
             <div class="navbar navbar-fixed-left">
+                <%
+                    if (userId != null) {
+                        out.write("<li  class='dropdown' style='list-style:none'><a  class='navbar-brand dropdown-toggle' data-toggle='dropdown'>Playslist<span class='caret'></span></a>");
+                            out.write("<ul class='dropdown-menu' role='menu'>");
+                            for(Course c: playlistCourses){
+                             out.write("<li><a href='course.jsp'>" + c.getCourseName() + "</a></li>");
+                            }
+                            out.write("</ul>");
+                        out.write("</li>");
+                    }
+                    
+                %>
                 <a class="navbar-brand" href="#">Topics</a>
                 <ul class="nav navbar-nav">
                     <% for (CourseBranch branch : branches) {
