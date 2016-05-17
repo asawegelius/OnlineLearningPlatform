@@ -1,28 +1,36 @@
 package se.wegelius.olpstudenthandler.model;
 
-import java.util.Date;
+import java.sql.Time;
+import se.wegelius.olpstudenthandler.model.persistance.LecturePersistance;
 
 public class Lecture  implements java.io.Serializable {
 
 
      private Integer lectureId;
-     private Course course;
+     private int courseID;
      private String lectureName;
      private String video;
-     private Date duration;
+     private Time duration;
+     private String description;
 
     public Lecture() {
     }
 
 	
-    public Lecture(Course course) {
-        this.course = course;
+    public Lecture(LecturePersistance persistance) {
+        this.lectureId = persistance.getLectureId();
+        this.courseID = persistance.getCourse().getCourseId();
+        this.lectureName = persistance.getLectureName();
+        this.video = persistance.getVideo();
+        this.duration = persistance.getDuration();
+        this.description = persistance.getDescription();
     }
-    public Lecture(Course course, String lectureName, String video, Date duration) {
-       this.course = course;
+    public Lecture(int courseId, String lectureName, String video, Time duration, String description) {
+       this.courseID = courseId;
        this.lectureName = lectureName;
        this.video = video;
        this.duration = duration;
+       this.description = description;
     }
    
     public Integer getLectureId() {
@@ -32,12 +40,12 @@ public class Lecture  implements java.io.Serializable {
     public void setLectureId(Integer lectureId) {
         this.lectureId = lectureId;
     }
-    public Course getCourse() {
-        return this.course;
+    public int getCourseId() {
+        return this.courseID;
     }
     
-    public void setCourse(Course course) {
-        this.course = course;
+    public void setCourseId(int course) {
+        this.courseID = course;
     }
     public String getLectureName() {
         return this.lectureName;
@@ -53,12 +61,20 @@ public class Lecture  implements java.io.Serializable {
     public void setVideo(String video) {
         this.video = video;
     }
-    public Date getDuration() {
+    public Time getDuration() {
         return this.duration;
     }
     
-    public void setDuration(Date duration) {
+    public void setDuration(Time duration) {
         this.duration = duration;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 

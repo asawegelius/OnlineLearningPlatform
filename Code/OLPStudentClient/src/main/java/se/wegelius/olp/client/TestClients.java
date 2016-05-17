@@ -66,6 +66,8 @@ public class TestClients {
         logger.info(jsonCourses);
         List<Course> courses = new Gson().fromJson(jsonCourses, new TypeToken<List<Course>>() {
         }.getType());
+        
+
     }
 
 }

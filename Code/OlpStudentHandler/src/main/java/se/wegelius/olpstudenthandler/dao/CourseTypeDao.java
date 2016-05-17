@@ -5,7 +5,6 @@
  */
 package se.wegelius.olpstudenthandler.dao;
 
-import java.util.Set;
 import se.wegelius.olpstudenthandler.model.persistance.CourseTypePersistance;
 
 /**

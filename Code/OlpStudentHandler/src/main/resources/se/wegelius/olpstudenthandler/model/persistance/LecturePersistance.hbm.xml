@@ -20,6 +20,9 @@
         <property name="duration" type="time">
             <column name="duration" length="8" />
         </property>
+        <property name="description" type="string">
+            <column name="description" length="255" />
+        </property>
         <set name="multipleChoiceQuestions" table="multiple_choice_question" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="mcq_lecture_fk" not-null="true" />

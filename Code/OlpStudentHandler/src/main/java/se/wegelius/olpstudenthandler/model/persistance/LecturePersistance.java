@@ -2,7 +2,7 @@ package se.wegelius.olpstudenthandler.model.persistance;
 // Generated May 10, 2016 4:15:18 PM by Hibernate Tools 4.3.1
 
 
-import java.util.Date;
+import java.sql.Time;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +16,8 @@ public class LecturePersistance  implements java.io.Serializable {
      private CoursePersistance course;
      private String lectureName;
      private String video;
-     private Date duration;
+     private Time duration;
+     private String description;
      private Set<MultipleChoiceQuestionPersistance> multipleChoiceQuestions = new HashSet<MultipleChoiceQuestionPersistance>(0);
 
     public LecturePersistance() {
@@ -26,11 +27,12 @@ public class LecturePersistance  implements java.io.Serializable {
     public LecturePersistance(CoursePersistance course) {
         this.course = course;
     }
-    public LecturePersistance(CoursePersistance course, String lectureName, String video, Date duration, Set<MultipleChoiceQuestionPersistance> multipleChoiceQuestions) {
+    public LecturePersistance(CoursePersistance course, String lectureName, String video, Time duration, String description, Set<MultipleChoiceQuestionPersistance> multipleChoiceQuestions) {
        this.course = course;
        this.lectureName = lectureName;
        this.video = video;
        this.duration = duration;
+       this.description = description;
        this.multipleChoiceQuestions = multipleChoiceQuestions;
     }
    
@@ -62,11 +64,11 @@ public class LecturePersistance  implements java.io.Serializable {
     public void setVideo(String video) {
         this.video = video;
     }
-    public Date getDuration() {
+    public Time getDuration() {
         return this.duration;
     }
     
-    public void setDuration(Date duration) {
+    public void setDuration(Time duration) {
         this.duration = duration;
     }
     public Set<MultipleChoiceQuestionPersistance> getMultipleChoiceQuestions() {
@@ -75,6 +77,14 @@ public class LecturePersistance  implements java.io.Serializable {
     
     public void setMultipleChoiceQuestions(Set<MultipleChoiceQuestionPersistance> multipleChoiceQuestions) {
         this.multipleChoiceQuestions = multipleChoiceQuestions;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 
