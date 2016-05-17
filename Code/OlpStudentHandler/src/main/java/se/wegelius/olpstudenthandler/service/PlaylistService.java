@@ -359,19 +359,19 @@ public class PlaylistService {
             }
         }
     }
-    
-    
+
+
 
     @DELETE
     @Produces({MediaType.TEXT_PLAIN})
     @Path("/plain/delete/{id: \\d+}")
-    public Response delete(@QueryParam("id") int id
+    public Response delete(@PathParam("id") int id
     ) {
         checkContext();
         String msg;
         PlaylistPersistance playlist = dao.findByID(id);
         if (playlist == null) {
-            msg = "user missing.\n";
+            msg = "playlist missing.\n";
             return Response.status(Response.Status.BAD_REQUEST).
                     entity(msg).
                     type(MediaType.TEXT_PLAIN).

@@ -41,6 +41,14 @@ public class PlaylistServlet extends HttpServlet {
         // get request parameters for userID and password
         String courseid = request.getParameter("courseid");
         String userid = request.getParameter("userid");
+        String action = request.getParameter("action");
+        if (action!=null){
+            if (action.equalsIgnoreCase("delete")){
+                   doDelete(request, response);
+                   return;
+            }
+        }
+                
         logger.info("userid : " + userid + " courseid : " + courseid);
         
         PlaylistClient playlist = new PlaylistClient();
@@ -54,6 +62,18 @@ public class PlaylistServlet extends HttpServlet {
         response.sendRedirect("/OLP/course.jsp");
     }
 
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        String playlistid = request.getParameter("playlistid");
+        logger.info("playlistid : " + playlistid);
+        PlaylistClient playlist = new PlaylistClient();
+        ClientResponse playlistResponse = playlist.delete(playlistid);
+        logger.info("playlistResponse = " + playlistResponse);
+        response.sendRedirect("/OLP/course.jsp");
+    }
+
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

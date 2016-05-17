@@ -276,16 +276,34 @@ Adrian Holm, Ionut Vieru
 
 ______________________________________________________________________________________________________________________________________
 ### Meeting Attended by: 
+Åsa Wegelius, Clovis Lebret, Adrian Holm, Ionut Vieru
 
 ### Absent from meeting:
+Tudor Stoica
 
 ### Date:
+16-05-16
 
 ### Time:
+21:00-12:45
 
 ### Faciliator:
+Åsa Wegelius
 
 ### Notes:
+#### What we have done
+- Clovis Lebret have added browse and add playlist function on the client
+- Åsa Wegelius are working on the course info page on the client
+- Åsa Wegelius have worked on the documents OperationDocument, PMReport, TestDocument and SystemIntegrationReport
+
+#### What we will do:
+- Ionut Vieru will work on the reports
+- Adrian Holm will work on the reports and finish the burndown charts for the sprints
+- Clovis Lebred will add two factor authentication with Google Authenticator to the client
+- Åsa will finish the work on the course info page in the client
+- Åsa will deploy the application on the server with master-slave MySQL and loadbalancer for the jersey services on thursday and friday. She will add time and address on facebook for those that want to join, and share the screen on skype for those that want to watch
+
+
 
 ______________________________________________________________________________________________________________________________________
 ### Meeting Attended by: 

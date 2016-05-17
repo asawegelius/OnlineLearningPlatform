@@ -5,7 +5,10 @@
  */
 package se.wegelius.olp.client;
 
+import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.GenericType;
+import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import javax.ws.rs.core.MultivaluedMap;
@@ -38,8 +41,7 @@ public class PlaylistClient extends GenericClient {
         queryParams.add("course_id", Integer.toString(courseId));
         queryParams.add("user_id", Integer.toString(userId));
         return queryParams;
-    }    
-        
+    }
     public ClientResponse getJsonByUser(int id) {
         WebResource resource = super.getWebResource();
         resource = resource.path("json/user/"+id);

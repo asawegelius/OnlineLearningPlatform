@@ -4,9 +4,7 @@
   <session-factory>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/onlinelearningplatform</property>
-    <property name="hibernate.connection.username">olp</property>
-    <property name="hibernate.connection.password">olppassword1</property>
-    <property name="hibernate.current_session_context_class">thread</property>
+    <property name="hibernate.connection.username">root</property>
     <mapping resource="se/wegelius/olpstudenthandler/model/persistance/ContentProviderPersistance.hbm.xml"/>
     <mapping resource="se/wegelius/olpstudenthandler/model/persistance/CourseBranchPersistance.hbm.xml"/>
     <mapping resource="se/wegelius/olpstudenthandler/model/persistance/CoursePersistance.hbm.xml"/>
