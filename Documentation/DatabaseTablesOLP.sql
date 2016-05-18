@@ -52,11 +52,13 @@ CREATE TABLE `lecture` (
   `lecture_name` varchar(45) DEFAULT NULL,
   `video` varchar(45) DEFAULT NULL,
   `duration` time DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
   `l_course_fk` int(10) unsigned NOT NULL,
   PRIMARY KEY (`lecture_id`),
   KEY `l_course_fk_idx` (`l_course_fk`),
   CONSTRAINT `l_course_fk` FOREIGN KEY (`l_course_fk`) REFERENCES `course` (`course_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
 
 CREATE TABLE `multiple_choice_question` (
   `multiple_choice_question_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
