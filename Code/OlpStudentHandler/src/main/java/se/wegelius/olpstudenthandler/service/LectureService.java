@@ -7,7 +7,9 @@ package se.wegelius.olpstudenthandler.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.sql.Time;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import javax.servlet.ServletContext;
 import javax.ws.rs.DELETE;
@@ -21,6 +23,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import org.slf4j.LoggerFactory;
 import se.wegelius.olpstudenthandler.dao.CourseDao;
 import se.wegelius.olpstudenthandler.dao.LectureDao;
 import se.wegelius.olpstudenthandler.model.Lecture;
@@ -34,6 +37,7 @@ import se.wegelius.olpstudenthandler.model.persistance.LecturePersistance;
 @Path("/lecture")
 public class LectureService {
 
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(LectureService.class);
     @Context
     private ServletContext sctx;          // dependency injection
     private static LectureDao dao;
@@ -108,6 +112,22 @@ public class LectureService {
         return msg;
     }
 
+    @GET
+    @Path("/json/course/{id: \\d+}")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getJsonCourse(@PathParam("id") int id) {
+        checkContext();
+        Map params = new HashMap();
+        params.put("course_id", id);
+        Set<LecturePersistance> set = dao.query("SELECT l FROM LecturePersistance AS l WHERE l.course.courseId = :course_id", params);
+        logger.info("lectures found: " + set.size() + " for course id " + id);
+        Set<Lecture> lectures = new HashSet<>();
+        for (LecturePersistance p : set) {
+            lectures.add(new Lecture(p));
+        }
+        return Response.ok(toJson(lectures), "application/json").build();
+    }
+
     @POST
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/json/create")
@@ -139,11 +159,12 @@ public class LectureService {
         } else {
             dur = new Time(duration);
         }
-        if(description == null){
-            if(msg == null){
+        if (description == null) {
+            if (msg == null) {
                 msg = "description missing";
+            } else {
+                msg = msg + ";description missing";
             }
-            else msg = msg + ";description missing";
         }
         if (msg != null) {
             return Response.status(Response.Status.BAD_REQUEST).
@@ -202,11 +223,12 @@ public class LectureService {
         } else {
             dur = new Time(duration);
         }
-        if(description == null){
-            if(msg == null){
+        if (description == null) {
+            if (msg == null) {
                 msg = "description missing";
+            } else {
+                msg = msg + ";description missing";
             }
-            else msg = msg + ";description missing";
         }
         if (msg != null) {
             return Response.status(Response.Status.BAD_REQUEST).
@@ -268,11 +290,12 @@ public class LectureService {
         } else {
             dur = new Time(duration);
         }
-        if(description == null){
-            if(msg == null){
+        if (description == null) {
+            if (msg == null) {
                 msg = "description missing";
+            } else {
+                msg = msg + ";description missing";
             }
-            else msg = msg + ";description missing";
         }
         if (msg != null) {
             return Response.status(Response.Status.BAD_REQUEST).
@@ -340,11 +363,12 @@ public class LectureService {
         } else {
             dur = new Time(duration);
         }
-        if(description == null){
-            if(msg == null){
+        if (description == null) {
+            if (msg == null) {
                 msg = "description missing";
+            } else {
+                msg = msg + ";description missing";
             }
-            else msg = msg + ";description missing";
         }
         if (msg != null) {
             return Response.status(Response.Status.BAD_REQUEST).
@@ -424,6 +448,7 @@ public class LectureService {
         try {
             json = new ObjectMapper().writeValueAsString(lectureSet);
         } catch (Exception e) {
+            logger.info(e.getLocalizedMessage());
         }
         return json;
     }

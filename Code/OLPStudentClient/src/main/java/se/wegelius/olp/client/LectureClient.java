@@ -5,11 +5,12 @@
  */
 package se.wegelius.olp.client;
 
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import java.sql.Time;
 import javax.ws.rs.core.MultivaluedMap;
 import org.slf4j.LoggerFactory;
-import se.wegelius.olp.model.Course;
 
 /**
  *
@@ -24,7 +25,18 @@ public class LectureClient extends GenericClient{
     public LectureClient() {
         super(BASE_URI);
     }
-    
+ 
+        public ClientResponse getJsonCourse(int courseId) {
+
+        return getJsonCourse(ClientResponse.class, courseId);
+    }
+
+    public ClientResponse getJsonCourse(Class<ClientResponse> responseType, int courseId) {
+        WebResource resource = super.getWebResource();
+        resource = resource.path(java.text.MessageFormat.format("json/course/{0}", new Object[]{courseId}));
+        return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
+
+    }
     
     public MultivaluedMap getParameters(int id, int courseId, String lectureName, String video, Time duration, String description) {
         MultivaluedMap queryParams = new MultivaluedMapImpl();

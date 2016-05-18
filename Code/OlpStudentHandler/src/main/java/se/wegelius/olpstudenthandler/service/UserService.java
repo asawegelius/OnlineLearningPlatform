@@ -11,7 +11,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import javax.servlet.ServletContext;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -34,7 +33,6 @@ import se.wegelius.olpstudenthandler.model.persistance.UserPersistance;
  */
 @Path("/user")
 public class UserService {
-
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserService.class);
     @Context
     private ServletContext sctx;          // dependency injection

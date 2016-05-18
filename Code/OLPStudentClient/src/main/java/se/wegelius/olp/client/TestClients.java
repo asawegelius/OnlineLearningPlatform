@@ -6,17 +6,20 @@
 package se.wegelius.olp.client;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.sun.jersey.api.client.ClientResponse;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.Time;
 import java.util.List;
 import javax.ws.rs.core.MultivaluedMap;
 import org.slf4j.LoggerFactory;
 import se.wegelius.olp.model.Course;
 import se.wegelius.olp.model.CourseBranch;
 import se.wegelius.olp.model.Encryptor;
+import se.wegelius.olp.model.TimeDeserializer;
 import se.wegelius.olp.model.User;
 
 /**
@@ -66,8 +69,24 @@ public class TestClients {
         logger.info(jsonCourses);
         List<Course> courses = new Gson().fromJson(jsonCourses, new TypeToken<List<Course>>() {
         }.getType());
-        
+        GsonBuilder gSonBuilder = new GsonBuilder();
+        gSonBuilder.registerTypeAdapter(Time.class, new TimeDeserializer());
+        Gson gson1 = new GsonBuilder().create();
 
+        String time = "\"00:13:29\"";
+        Time test = gson1.fromJson(time, Time.class);
+        System.out.println("date:" + test);
+
+        LectureClient lClient = new LectureClient();
+        String jsonLectures = lClient.getJsonCourse(1).getEntity(String.class);
+
+        logger.info(jsonLectures);/*
+        Gson gson = new GsonBuilder().setDateFormat("HH:mm:ss").create();
+        Set<Lecture> lectures = gson.fromJson(jsonLectures, new TypeToken<Set<Lecture>>() {
+        }.getType());
+        for (Lecture l : lectures) {
+            logger.info(l.getLectureName());
+        }*/
     }
 
 }

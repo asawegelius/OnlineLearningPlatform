@@ -81,9 +81,8 @@
                     out.write("<li class='dropdown'><a href='#' class='dropdown-toggle' data-toggle='dropdown'>"+branch.getCourseBranchName() +"<span class='caret'></span></a>");
                         out.write("<ul class='dropdown-menu' role='menu'>");
                             for(Course c: courses){
-        System.out.println(c.getCourseName() + " branchId " + c.getCourseBranch().getCourseBranchId() + " branch branchid " + branch.getCourseBranchId());
                                 if(c.getCourseBranch().getCourseBranchId() == branch.getCourseBranchId()){
-                                    out.write("<li><a href='course.jsp'>" + c.getCourseName() + "</a></li>");
+                                    out.write("<li><a href='course.jsp?courseId=" + c.getCourseId() + "'>" + c.getCourseName() + "</a></li>");
                                 }
                             }
                         out.write("</ul>");

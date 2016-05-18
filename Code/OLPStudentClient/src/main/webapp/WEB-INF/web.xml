@@ -6,10 +6,6 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
     <servlet>
-        <servlet-name>OLPStudentClientServlet</servlet-name>
-        <servlet-class>se.wegelius.olp.servlet.OLPStudentClientServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>RegisterEmail</servlet-name>
         <servlet-class>se.wegelius.olp.servlet.RegisterEmail</servlet-class>
     </servlet>
@@ -29,10 +25,10 @@
         <servlet-name>PlaylistServlet</servlet-name>
         <servlet-class>se.wegelius.olp.servlet.PlaylistServlet</servlet-class>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>OLPStudentClientServlet</servlet-name>
-        <url-pattern>/OLPStudentClientServlet</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>CourseServlet</servlet-name>
+        <servlet-class>se.wegelius.olp.servlet.CourseServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterEmail</servlet-name>
         <url-pattern>/register</url-pattern>
@@ -52,6 +48,10 @@
     <servlet-mapping>
         <servlet-name>PlaylistServlet</servlet-name>
         <url-pattern>/playlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CourseServlet</servlet-name>
+        <url-pattern>/course</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

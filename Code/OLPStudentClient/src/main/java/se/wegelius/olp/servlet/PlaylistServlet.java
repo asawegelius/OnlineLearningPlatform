@@ -5,11 +5,9 @@
  */
 package se.wegelius.olp.servlet;
 
-import se.wegelius.olp.servlet.LoginServlet;
 import com.google.gson.Gson;
 import com.sun.jersey.api.client.ClientResponse;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +23,7 @@ import se.wegelius.olp.model.Playlist;
  */
 public class PlaylistServlet extends HttpServlet {
     
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(LoginServlet.class);
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(PlaylistServlet.class);
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
