@@ -141,7 +141,10 @@ The Apache HTTP Server Project itself does not provide binary releases, only sou
 - This distribution comes pre-configured for localhost. You can now test your installation by opening up your Web Browser and typing in the address: _http://localhost_. If everything is working properly you should see the Apache Haus's test page.
 - You can shut down Apache by pressing Ctrl+C (It may take a few seconds)
 
-####Install Apache HTTP Server as service
+#####Change port for Apache HTTP Server
+Open httpd.conf in the folder c:\Apache24\conf. Find _Listen 80_ and change to _Listen 8089_. Next find ServerName localhost:80 and change to _localhost:8089_
+
+#####Install Apache HTTP Server as service
 In most cases you will want to run Apache as a Windows Service. 
 To do so you install Apache as a service by typing at the command prompt [1];
 
@@ -151,26 +154,59 @@ You can then start Apache by typing
 _httpd -k start_
 Apache will then start and eventually release the command prompt window.
 
-####Adding mod_jk
+#####Adding mod_jk
 You need a mod_jk. It is an Apache module used to connect the Tomcat servlet container with other web servers. Find and download the binary release you need from [Apache](http://tomcat.apache.org/connectors-doc/index.html "mod_jk"). Unzip and place the mod_jk.so in the _c:\apache\modules_ folder. 
 
-Edit Tomcat's server.xml file and add these lines:
-Just below the line:
-<Server port="8005" shutdown="SHUTDOWN" debug="0"> 
-Add the following:
-<Listener className="org.apache.jk.config.ApacheConfig" modJk="c:/apache/httpd/modules/mod_jk.so" 
-workersConfig="c:/apache/tomcat/conf/jk/workers.properties" />
-And just below the line:
-<Host name="localhost" appBase="webapps" unpackWARs="true"
-autoDeploy="true" xmlValidation="false" xmlNamespaceAware="false">
-Add the following line:
-<Listener className="org.apache.jk.config.ApacheConfig" append="true"
-forwardAll="false" modJk="c:/apache/httpd/modules/mod_jk.so" /> 
+#####Configure mod_jk in C:\Apache24\conf\httpd.conf
+Open httpd.conf and add this:
+```
+# START configs for load balancing
+LoadModule jk_module C:\Apache24\modules\mod_jk.so
+#the worker configuration file
+JkWorkersFile C:\Apache24\conf\workers.properties
+#for logging and memory usage
+JkShmFile  C:\Apache24\logs\mod_jk.shm
+JkLogFile C:\Apache24\logs\mod_jk.log
+JkLogLevel info
 
-Save the changes made to server.xml and restart the Tomcat service.
-Wait a few seconds, and then check to see if there is a file called mod_jk.conf in tomcat/conf/auto directory.
+# monitoring of the cluster
+JkMount /jkmanager/* jkstatus
+<Location /jkmanager>
+    Order deny, allow
+    Deny from all
+    Allow from localhost
+</Location>
+#Map all requests to our web application to the load balancer
+JkMount  /* LoadBalancer
+# END configs for load balancing
+```
+#####Configure C:\Apache24\conf\workers.properties file
+Create a workers.properties file in C:\Apache24\conf\ and add the code below
+```
+# define virtual worker's list
+worker.list=jkstatus, LoadBalancer
 
-If there is not, you did something wrong!
+# Enable virtual workers earlier
+worker.jkstatus.type=status
+worker.LoadBalancer.type=lb
+
+# Add Tomcat instances as workers, three workers in our case
+worker.worker1.type=ajp13
+worker.worker1.host=localhost
+worker.worker1.port=8009
+
+worker.worker2.type=ajp13
+worker.worker2.host=localhost
+worker.worker2.port=8010
+
+worker.worker3.type=ajp13
+worker.worker3.host=localhost
+worker.worker3.port=8011
+
+# Provide workers list to the load balancer
+worker.LoadBalancer.balance_workers=worker1,worker2,worker3
+```
+####Configuring Tomcat instances for the cluster
 
 
 ##9.  Appendices
