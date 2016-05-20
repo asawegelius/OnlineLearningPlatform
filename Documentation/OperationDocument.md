@@ -5,7 +5,7 @@
 | version   | Revision               | date    |	Implemented by| 
 | --------- |------------------------| ------- |--------------| 
 | 1.0       | Master Slave replica on MySQL|15-05-16 |Åsa Wegelius  |
-|           |                        |         |               |
+| 1.1       |Tomcat cluster          |20-05-16 | Åsa Wegelius  |
 |           |                        |         |               |
 
 ###1.3	Approvals
@@ -46,7 +46,8 @@
 3.	General  
 4.  Architecture Overview
 5.	Installation Manual   
-  5.2	Master Slave replica on MySQL 
+  5.2	Master Slave replica on MySQL  
+  5.3	Tomcat cluster 
 6.  Operation Manuel
 7.  Troubleshooting guide
 8.  Traceability Matrix
@@ -129,6 +130,28 @@ mysql> START SLAVE;
 ```
 After you have performed this procedure, the slave connects to the master and replicates any updates that have occurred on the master since the snapshot was taken.
 
+###Tomcat cluster
+
+#### Install Apache HTTP Server on Windows
+The Apache HTTP Server Project itself does not provide binary releases, only source code. But there are binary distributions available on the Internet. You can find one at [Apache Haus](http://www.apachehaus.com/cgi-bin/download.plx "Binary").
+#####Steps after downloading the binary:
+- Ensure you have Visual C++ 2008 Redistributable Package. If not, you need to install it. You can find it at [Microsoft](https://www.microsoft.com/en-us/download/details.aspx?id=48145 "Visual C++ 2008 Redistributable Package").
+- Unzip the Apache24 folder in the package zip file to the root directory on any drive. Example: c:\Apache24.
+- Open a command prompt window and cd to the \Apace24\bin folder on the drive you unzipped the zip file to. To Start Apache in the command prompt type: _httpd.exe_
+- This distribution comes pre-configured for localhost. You can now test your installation by opening up your Web Browser and typing in the address: _http://localhost_. If everything is working properly you should see the Apache Haus's test page.
+- You can shut down Apache by pressing Ctrl+C (It may take a few seconds)
+
+####Install Apache HTTP Server as service
+In most cases you will want to run Apache as a Windows Service. 
+To do so you install Apache as a service by typing at the command prompt [1];
+
+_httpd -k install_
+You can then start Apache by typing
+
+_httpd -k start_
+Apache will then start and eventually release the command prompt window.
+
+
 ##9.  Appendices
 ###9.2 References
 MySQL Manual (version 5.6) _18.1.2.1 Setting the Replication Master Configuration_  Retrieved 05 15, 2016, from https://dev.mysql.com/doc/refman/5.6/en/replication-howto-masterbaseconfig.html
@@ -144,4 +167,6 @@ MySQL Manual (version 5.6) _17.1.1.5 Creating a Data Snapshot Using mysqldump_ R
 MySQL Manual (version 5.6) _17.1.1.10 Setting the Master Configuration on the Slave_ Retrieved 05 15, 2016, from https://dev.mysql.com/doc/refman/5.6/en/replication-howto-slaveinit.html
 
 MySQL Manual (version 5.6) _18.1.2.5 Setting Up Replication Slaves_ Retrieved 05 16, 2016, from http://dev.mysql.com/doc/refman/5.7/en/replication-setup-slaves.html
+
+Apache _Apache HTTP Server Version 2.4_ Retrieved 05 20, 2016, from https://httpd.apache.org/docs/2.4/platform/windows.html
 
