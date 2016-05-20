@@ -151,6 +151,27 @@ You can then start Apache by typing
 _httpd -k start_
 Apache will then start and eventually release the command prompt window.
 
+####Adding mod_jk
+You need a mod_jk. It is an Apache module used to connect the Tomcat servlet container with other web servers. Find and download the binary release you need from [Apache](http://tomcat.apache.org/connectors-doc/index.html "mod_jk"). Unzip and place the mod_jk.so in the _c:\apache\modules_ folder. 
+
+Edit Tomcat's server.xml file and add these lines:
+Just below the line:
+<Server port="8005" shutdown="SHUTDOWN" debug="0"> 
+Add the following:
+<Listener className="org.apache.jk.config.ApacheConfig" modJk="c:/apache/httpd/modules/mod_jk.so" 
+workersConfig="c:/apache/tomcat/conf/jk/workers.properties" />
+And just below the line:
+<Host name="localhost" appBase="webapps" unpackWARs="true"
+autoDeploy="true" xmlValidation="false" xmlNamespaceAware="false">
+Add the following line:
+<Listener className="org.apache.jk.config.ApacheConfig" append="true"
+forwardAll="false" modJk="c:/apache/httpd/modules/mod_jk.so" /> 
+
+Save the changes made to server.xml and restart the Tomcat service.
+Wait a few seconds, and then check to see if there is a file called mod_jk.conf in tomcat/conf/auto directory.
+
+If there is not, you did something wrong!
+
 
 ##9.  Appendices
 ###9.2 References
