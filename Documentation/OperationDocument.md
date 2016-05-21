@@ -161,23 +161,13 @@ You need a mod_jk. It is an Apache module used to connect the Tomcat servlet con
 Open httpd.conf and add this:
 ```
 # START configs for load balancing
-LoadModule jk_module C:\Apache24\modules\mod_jk.so
+LoadModule jk_module modules\mod_jk.so
 #the worker configuration file
 JkWorkersFile C:\Apache24\conf\workers.properties
 #for logging and memory usage
 JkShmFile  C:\Apache24\logs\mod_jk.shm
 JkLogFile C:\Apache24\logs\mod_jk.log
 JkLogLevel info
-
-# monitoring of the cluster
-JkMount /jkmanager/* jkstatus
-<Location /jkmanager>
-    Order deny, allow
-    Deny from all
-    Allow from localhost
-</Location>
-#Map all requests to our web application to the load balancer
-JkMount  /* LoadBalancer
 # END configs for load balancing
 ```
 #####Configure C:\Apache24\conf\workers.properties file
@@ -192,22 +182,67 @@ worker.LoadBalancer.type=lb
 
 # Add Tomcat instances as workers, three workers in our case
 worker.worker1.type=ajp13
-worker.worker1.host=localhost
+worker.worker1.host=192.168.1.144
 worker.worker1.port=8009
 
 worker.worker2.type=ajp13
 worker.worker2.host=localhost
-worker.worker2.port=8010
+worker.worker2.port=8009
 
 worker.worker3.type=ajp13
 worker.worker3.host=localhost
-worker.worker3.port=8011
+worker.worker3.port=8009
 
 # Provide workers list to the load balancer
 worker.LoadBalancer.balance_workers=worker1,worker2,worker3
 ```
 ####Configuring Tomcat instances for the cluster
+Edit the server.xml in Tomcat's conf folder. Add  attribute jvmRoute with the name of the worker to the existing element as below (here worker1 as in the workers.properties file):
+```
+    <Engine name="Catalina" defaultHost="localhost" jvmRoute="worker1">
+```
+Uncomment the Cluster element, add channelSendOptions="8" attribute to set clustering communication to asynchronous. All other clustering elements are nested within the Cluster element:
+```
+       <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster"
+                 channelSendOptions="8">
 
+          <Manager className="org.apache.catalina.ha.session.DeltaManager"
+                   expireSessionsOnShutdown="false"
+                   notifyListenersOnReplication="true"/>
+
+          <Channel className="org.apache.catalina.tribes.group.GroupChannel">
+            <Membership className="org.apache.catalina.tribes.membership.McastService"
+                        address="228.0.0.4"
+                        port="45564"
+                        frequency="500"
+                        dropTime="3000"/>
+            <Receiver className="org.apache.catalina.tribes.transport.nio.NioReceiver"
+                      address="auto"
+                      port="4000"
+                      autoBind="100"
+                      selectorTimeout="5000"
+                      maxThreads="6"/>
+
+            <Sender className="org.apache.catalina.tribes.transport.ReplicationTransmitter">
+              <Transport className="org.apache.catalina.tribes.transport.nio.PooledParallelSender"/>
+            </Sender>
+            <Interceptor className="org.apache.catalina.tribes.group.interceptors.TcpFailureDetector"/>
+            <Interceptor className="org.apache.catalina.tribes.group.interceptors.MessageDispatch15Interceptor"/>
+          </Channel>
+
+          <Valve className="org.apache.catalina.ha.tcp.ReplicationValve"
+                 filter=""/>
+          <Valve className="org.apache.catalina.ha.session.JvmRouteBinderValve"/>
+
+          <Deployer className="org.apache.catalina.ha.deploy.FarmWarDeployer"
+                    tempDir="/tmp/war-temp/"
+                    deployDir="/tmp/war-deploy/"
+                    watchDir="/tmp/war-listen/"
+                    watchEnabled="false"/>
+
+          <ClusterListener className="org.apache.catalina.ha.session.ClusterSessionListener"/>
+        </Cluster>
+```
 
 ##9.  Appendices
 ###9.2 References
@@ -226,4 +261,5 @@ MySQL Manual (version 5.6) _17.1.1.10 Setting the Master Configuration on the Sl
 MySQL Manual (version 5.6) _18.1.2.5 Setting Up Replication Slaves_ Retrieved 05 16, 2016, from http://dev.mysql.com/doc/refman/5.7/en/replication-setup-slaves.html
 
 Apache _Apache HTTP Server Version 2.4_ Retrieved 05 20, 2016, from https://httpd.apache.org/docs/2.4/platform/windows.html
+Aoache _workers.properties configuration_ Retrieved 05 21,2016, from http://tomcat.apache.org/connectors-doc/reference/workers.html
 
