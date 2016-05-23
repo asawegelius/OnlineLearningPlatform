@@ -5,7 +5,7 @@
 | version   | Revision               | date    |	Implemented by| 
 | --------- |------------------------| ------- |--------------| 
 | 1.0       | Master Slave replica on MySQL|15-05-16 |Åsa Wegelius  |
-|           |                        |         |               |
+| 1.1       |Tomcat cluster          |20-05-16 | Åsa Wegelius  |
 |           |                        |         |               |
 
 ###1.3	Approvals
@@ -46,7 +46,8 @@
 3.	General  
 4.  Architecture Overview
 5.	Installation Manual   
-  5.2	Master Slave replica on MySQL 
+  5.2	Master Slave replica on MySQL  
+  5.3	Tomcat cluster 
 6.  Operation Manuel
 7.  Troubleshooting guide
 8.  Traceability Matrix
@@ -129,6 +130,120 @@ mysql> START SLAVE;
 ```
 After you have performed this procedure, the slave connects to the master and replicates any updates that have occurred on the master since the snapshot was taken.
 
+###Tomcat cluster
+
+#### Install Apache HTTP Server on Windows
+The Apache HTTP Server Project itself does not provide binary releases, only source code. But there are binary distributions available on the Internet. You can find one at [Apache Haus](http://www.apachehaus.com/cgi-bin/download.plx "Binary").
+#####Steps after downloading the binary:
+- Ensure you have Visual C++ 2008 Redistributable Package. If not, you need to install it. You can find it at [Microsoft](https://www.microsoft.com/en-us/download/details.aspx?id=48145 "Visual C++ 2008 Redistributable Package").
+- Unzip the Apache24 folder in the package zip file to the root directory on any drive. Example: c:\Apache24.
+- Open a command prompt window and cd to the \Apace24\bin folder on the drive you unzipped the zip file to. To Start Apache in the command prompt type: _httpd.exe_
+- This distribution comes pre-configured for localhost. You can now test your installation by opening up your Web Browser and typing in the address: _http://localhost_. If everything is working properly you should see the Apache Haus's test page.
+- You can shut down Apache by pressing Ctrl+C (It may take a few seconds)
+
+#####Change port for Apache HTTP Server
+Open httpd.conf in the folder c:\Apache24\conf. Find _Listen 80_ and change to _Listen 8089_. Next find ServerName localhost:80 and change to _localhost:8089_
+
+#####Install Apache HTTP Server as service
+In most cases you will want to run Apache as a Windows Service. 
+To do so you install Apache as a service by typing at the command prompt [1];
+
+_httpd -k install_
+You can then start Apache by typing
+
+_httpd -k start_
+Apache will then start and eventually release the command prompt window.
+
+#####Adding mod_jk
+You need a mod_jk. It is an Apache module used to connect the Tomcat servlet container with other web servers. Find and download the binary release you need from [Apache](http://tomcat.apache.org/connectors-doc/index.html "mod_jk"). Unzip and place the mod_jk.so in the _c:\apache\modules_ folder. 
+
+#####Configure mod_jk in C:\Apache24\conf\httpd.conf
+Open httpd.conf and add this:
+```
+# START configs for load balancing
+LoadModule jk_module modules\mod_jk.so
+#the worker configuration file
+JkWorkersFile C:\Apache24\conf\workers.properties
+#for logging and memory usage
+JkShmFile  C:\Apache24\logs\mod_jk.shm
+JkLogFile C:\Apache24\logs\mod_jk.log
+JkLogLevel info
+# END configs for load balancing
+```
+#####Configure C:\Apache24\conf\workers.properties file
+Create a workers.properties file in C:\Apache24\conf\ and add the code below
+```
+# define virtual worker's list
+worker.list=jkstatus, LoadBalancer
+
+# Enable virtual workers earlier
+worker.jkstatus.type=status
+worker.LoadBalancer.type=lb
+
+# Add Tomcat instances as workers, three workers in our case
+worker.worker1.type=ajp13
+worker.worker1.host=192.168.1.144
+worker.worker1.port=8009
+
+worker.worker2.type=ajp13
+worker.worker2.host=localhost
+worker.worker2.port=8009
+
+worker.worker3.type=ajp13
+worker.worker3.host=localhost
+worker.worker3.port=8009
+
+# Provide workers list to the load balancer
+worker.LoadBalancer.balance_workers=worker1,worker2,worker3
+```
+####Configuring Tomcat instances for the cluster
+Edit the server.xml in Tomcat's conf folder. Add  attribute jvmRoute with the name of the worker to the existing element as below (here worker1 as in the workers.properties file):
+```
+    <Engine name="Catalina" defaultHost="localhost" jvmRoute="worker1">
+```
+Uncomment the Cluster element, add channelSendOptions="8" attribute to set clustering communication to asynchronous. All other clustering elements are nested within the Cluster element:
+```
+       <Cluster className="org.apache.catalina.ha.tcp.SimpleTcpCluster"
+                 channelSendOptions="8">
+
+          <Manager className="org.apache.catalina.ha.session.DeltaManager"
+                   expireSessionsOnShutdown="false"
+                   notifyListenersOnReplication="true"/>
+
+          <Channel className="org.apache.catalina.tribes.group.GroupChannel">
+            <Membership className="org.apache.catalina.tribes.membership.McastService"
+                        address="228.0.0.4"
+                        port="45564"
+                        frequency="500"
+                        dropTime="3000"/>
+            <Receiver className="org.apache.catalina.tribes.transport.nio.NioReceiver"
+                      address="auto"
+                      port="4000"
+                      autoBind="100"
+                      selectorTimeout="5000"
+                      maxThreads="6"/>
+
+            <Sender className="org.apache.catalina.tribes.transport.ReplicationTransmitter">
+              <Transport className="org.apache.catalina.tribes.transport.nio.PooledParallelSender"/>
+            </Sender>
+            <Interceptor className="org.apache.catalina.tribes.group.interceptors.TcpFailureDetector"/>
+            <Interceptor className="org.apache.catalina.tribes.group.interceptors.MessageDispatch15Interceptor"/>
+          </Channel>
+
+          <Valve className="org.apache.catalina.ha.tcp.ReplicationValve"
+                 filter=""/>
+          <Valve className="org.apache.catalina.ha.session.JvmRouteBinderValve"/>
+
+          <Deployer className="org.apache.catalina.ha.deploy.FarmWarDeployer"
+                    tempDir="/tmp/war-temp/"
+                    deployDir="/tmp/war-deploy/"
+                    watchDir="/tmp/war-listen/"
+                    watchEnabled="false"/>
+
+          <ClusterListener className="org.apache.catalina.ha.session.ClusterSessionListener"/>
+        </Cluster>
+```
+
 ##9.  Appendices
 ###9.2 References
 MySQL Manual (version 5.6) _18.1.2.1 Setting the Replication Master Configuration_  Retrieved 05 15, 2016, from https://dev.mysql.com/doc/refman/5.6/en/replication-howto-masterbaseconfig.html
@@ -144,4 +259,7 @@ MySQL Manual (version 5.6) _17.1.1.5 Creating a Data Snapshot Using mysqldump_ R
 MySQL Manual (version 5.6) _17.1.1.10 Setting the Master Configuration on the Slave_ Retrieved 05 15, 2016, from https://dev.mysql.com/doc/refman/5.6/en/replication-howto-slaveinit.html
 
 MySQL Manual (version 5.6) _18.1.2.5 Setting Up Replication Slaves_ Retrieved 05 16, 2016, from http://dev.mysql.com/doc/refman/5.7/en/replication-setup-slaves.html
+
+Apache _Apache HTTP Server Version 2.4_ Retrieved 05 20, 2016, from https://httpd.apache.org/docs/2.4/platform/windows.html
+Aoache _workers.properties configuration_ Retrieved 05 21,2016, from http://tomcat.apache.org/connectors-doc/reference/workers.html
 
