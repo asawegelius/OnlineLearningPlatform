@@ -323,16 +323,16 @@ Adrian Holm
 
 ### Notes:
 #### What we have done
-Åsa Wegelius have deployed a master-slave replication for MySQL and a Tomcat cluster with Apache http as loadbalancer. She have described in Operational Document how it was done. She have implemented LectureService, LectureDao & LectureClient and solved the deserialization problem with sql.Time. 
-Tudor Stoica have done nothing.
-Ionut Vieru have done a list of what reports shall be handed in.
-Clovis Lebet have done nothing.
+- Åsa Wegelius have deployed a master-slave replication for MySQL and a Tomcat cluster with Apache http as loadbalancer. She have described in Operational Document how it was done. She have implemented LectureService, LectureDao & LectureClient and solved the deserialization problem with sql.Time. 
+- Tudor Stoica have done nothing.
+- Ionut Vieru have done a list of what reports shall be handed in.
+- Clovis Lebet have done nothing.
 
 #### What we shall do
-Åsa Wegelius will do  the JMeter tests and add them in the Test Document. She will work on the rest of the documentation.
-Tudor Stoica will write Test Cases and try deploy the application on his computer. He will work on the rest of the documentation.
-Ionut Vieru will work on the rest of the documentation.
-Clovis Lebret will work on the rest of the documentation.
+- Åsa Wegelius will do  the JMeter tests and add them in the Test Document. She will work on the rest of the documentation.
+- Tudor Stoica will write Test Cases and try deploy the application on his computer. He will work on the rest of the documentation.
+- Ionut Vieru will work on the rest of the documentation.
+- Clovis Lebret will work on the rest of the documentation.
 
 
 ______________________________________________________________________________________________________________________________________
