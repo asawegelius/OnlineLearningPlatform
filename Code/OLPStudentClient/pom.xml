@@ -86,6 +86,13 @@
             <artifactId>commons-codec</artifactId>
             <version>1.9</version>
         </dependency>
+        <!-- http://mvnrepository.com/artifact/joda-time/joda-time -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.9.3</version>
+        </dependency>
+
         <!-- http://mvnrepository.com/artifact/net.bramp.ffmpeg/ffmpeg -->
         <dependency>
             <groupId>net.bramp.ffmpeg</groupId>

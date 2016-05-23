@@ -6,6 +6,8 @@
 package se.wegelius.olpstudenthandler.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import java.sql.Time;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -436,6 +438,7 @@ public class LectureService {
     private String toJson(Lecture lecture) {
         String json = "If you see this, there's a problem.";
         try {
+            logger.info(lecture.getDuration().toString());
             json = new ObjectMapper().writeValueAsString(lecture);
         } catch (Exception e) {
         }

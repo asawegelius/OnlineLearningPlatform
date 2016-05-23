@@ -4,6 +4,8 @@
     Author     : asawe
 --%>
 
+<%@page import="se.wegelius.olp.model.LectureDeserializer"%>
+<%@page import="com.google.gson.GsonBuilder"%>
 <%@page import="se.wegelius.olp.client.LectureClient"%>
 <%@page import="java.util.HashSet"%>
 <%@page import="java.util.Set"%>
@@ -18,9 +20,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     Object userId = session.getAttribute("userId");
+    GsonBuilder builder = new GsonBuilder();
+    builder.registerTypeAdapter(Lecture.class, new LectureDeserializer());
+
+    Gson gson = builder.create();
     int courseId = -1;
     Course course = null;
-    Set<Lecture> lectures = new HashSet<>();
+    Lecture[] lectureArray = new Lecture[0];
     if (!request.getParameter("courseId").isEmpty()) {
         courseId = Integer.parseInt(request.getParameter("courseId"));
         CourseClient cClient = new CourseClient();
@@ -28,8 +34,7 @@
         course = new Gson().fromJson(jsonCourse, Course.class);
         LectureClient lClient = new LectureClient();
         String jsonLectures = lClient.getJsonCourse(courseId).getEntity(String.class);
-        lectures = new Gson().fromJson(jsonLectures, new TypeToken<Set<Lecture>>() {
-        }.getType());
+        lectureArray = (Lecture[]) gson.fromJson(jsonLectures, Lecture[].class);
     }
     boolean isInPlaylist = false;
     Playlist current = null;
@@ -65,14 +70,11 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="one">
                         <ul>
-<%
-    
-%>
-                            <li><a>Lecture 1</a></li>
-                            <li><a>Lecture 2</a></li>
-                            <li><a>Lecture 3</a></li>
-                            <li><a>Lecture 4</a></li>
-                            <li><a>Lecture 5</a></li>
+                            <%
+                                for(Lecture l : lectureArray){
+                                    out.write("<li><a>" + l.getLectureName()+"</a></li>");
+                                }
+                            %>
                         </ul>
                     </div>
                     <div class="tab-pane" id="two">
@@ -86,8 +88,7 @@
                     </div>
 
                 </div>
-                <%
-                    if (userId != null) {
+                <%                    if (userId != null) {
                         if (!isInPlaylist) {
                             out.write("<form action='playlist' method='post' id='followForm'>");
                             out.write("<input type='hidden' name='userid' value='" + userId.toString() + "' />");
@@ -112,7 +113,7 @@
 
         <div class="col-md-9 course-content">
             <!--Body content-->        
-            <p> <h3>awesome course!</h3></p>
+            <p> <h3><% out.write(course.getCourseName());%></h3></p>
             <div style="position: relative; width: 640px;">
                 <video id=0 controls width=640 height=360>
                     <source src="assets/img/videos/test.ogv" type='video/ogg; codecs="theora, vorbis"'/>

@@ -12,14 +12,15 @@ import com.sun.jersey.api.client.ClientResponse;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.sql.Time;
+import java.text.ParseException;
 import java.util.List;
 import javax.ws.rs.core.MultivaluedMap;
 import org.slf4j.LoggerFactory;
 import se.wegelius.olp.model.Course;
 import se.wegelius.olp.model.CourseBranch;
 import se.wegelius.olp.model.Encryptor;
-import se.wegelius.olp.model.TimeDeserializer;
+import se.wegelius.olp.model.Lecture;
+import se.wegelius.olp.model.LectureDeserializer;
 import se.wegelius.olp.model.User;
 
 /**
@@ -30,7 +31,7 @@ public class TestClients {
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestClients.class);
 
-    public static void main(String[] args) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeySpecException {
+    public static void main(String[] args) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeySpecException, ParseException {
         //VerificationTokenClient tokenClient = new VerificationTokenClient();
         UserClient userClient = new UserClient();
         Encryptor encryptor = new Encryptor();
@@ -69,24 +70,22 @@ public class TestClients {
         logger.info(jsonCourses);
         List<Course> courses = new Gson().fromJson(jsonCourses, new TypeToken<List<Course>>() {
         }.getType());
-        GsonBuilder gSonBuilder = new GsonBuilder();
-        gSonBuilder.registerTypeAdapter(Time.class, new TimeDeserializer());
-        Gson gson1 = new GsonBuilder().create();
 
-        String time = "\"00:13:29\"";
-        Time test = gson1.fromJson(time, Time.class);
-        System.out.println("date:" + test);
-
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(Lecture.class, new LectureDeserializer());
+        
+        Gson gson = builder.create();
         LectureClient lClient = new LectureClient();
         String jsonLectures = lClient.getJsonCourse(1).getEntity(String.class);
-
-        logger.info(jsonLectures);/*
-        Gson gson = new GsonBuilder().setDateFormat("HH:mm:ss").create();
-        Set<Lecture> lectures = gson.fromJson(jsonLectures, new TypeToken<Set<Lecture>>() {
-        }.getType());
-        for (Lecture l : lectures) {
-            logger.info(l.getLectureName());
-        }*/
+        logger.info(jsonLectures);
+        String jLecture = lClient.getJson(1).getEntity(String.class);
+        logger.info(jLecture);
+        Lecture lecture = gson.fromJson(jLecture, Lecture.class);
+        logger.info(lecture.getLectureName());
+        Lecture[] lectureArray = (Lecture[]) gson.fromJson(jsonLectures, Lecture[].class);
+        for (Lecture lect : lectureArray) {
+            logger.info(lect.getLectureName());
+        }
     }
 
 }
