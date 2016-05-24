@@ -22,9 +22,9 @@ import se.wegelius.olp.model.Playlist;
  * @author asawe
  */
 public class PlaylistServlet extends HttpServlet {
-    
+
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(PlaylistServlet.class);
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,15 +40,15 @@ public class PlaylistServlet extends HttpServlet {
         String courseid = request.getParameter("courseid");
         String userid = request.getParameter("userid");
         String action = request.getParameter("action");
-        if (action!=null){
-            if (action.equalsIgnoreCase("delete")){
-                   doDelete(request, response);
-                   return;
+        if (action != null) {
+            if (action.equalsIgnoreCase("delete")) {
+                doDelete(request, response);
+                return;
             }
         }
-                
+
         logger.info("userid : " + userid + " courseid : " + courseid);
-        
+
         PlaylistClient playlist = new PlaylistClient();
         MultivaluedMap params = playlist.getParameters(Integer.parseInt(courseid), Integer.parseInt(userid));
         ClientResponse playlistResponse = playlist.createJson(params);
@@ -56,13 +56,13 @@ public class PlaylistServlet extends HttpServlet {
         String jsonPlaylist = playlistResponse.getEntity(String.class);
         logger.info("jsonPlaylist = " + jsonPlaylist);
         Playlist p = new Gson().fromJson(jsonPlaylist, Playlist.class);
-        logger.info("the new playlist: " + p.getPlaylistId()+ ", " + p.getCourseId()+ ", " + p.getUserId());
+        logger.info("the new playlist: " + p.getPlaylistId() + ", " + p.getCourseId() + ", " + p.getUserId());
         response.sendRedirect("/OLP/course.jsp");
     }
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+
         String playlistid = request.getParameter("playlistid");
         logger.info("playlistid : " + playlistid);
         PlaylistClient playlist = new PlaylistClient();
@@ -71,7 +71,6 @@ public class PlaylistServlet extends HttpServlet {
         response.sendRedirect("/OLP/course.jsp");
     }
 
-    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

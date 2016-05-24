@@ -18,8 +18,8 @@ import org.slf4j.LoggerFactory;
 public class UserClient extends GenericClient {
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserClient.class);
-    private static final String BASE_URI = "http://localhost:8080/OlpStudentHandler/rest/user/";
-    //private static final String BASE_URI = "http://188.181.85.75/OlpStudentHandler/rest/user/";
+    //private static final String BASE_URI = "http://localhost:8080/OlpStudentHandler/rest/user/";
+    private static final String BASE_URI = "http://188.181.85.75/OlpStudentHandler/rest/user/";
 
     public UserClient() {
         super(BASE_URI);

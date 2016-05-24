@@ -73,7 +73,7 @@ public class TestClients {
 
         GsonBuilder builder = new GsonBuilder();
         builder.registerTypeAdapter(Lecture.class, new LectureDeserializer());
-        
+
         Gson gson = builder.create();
         LectureClient lClient = new LectureClient();
         String jsonLectures = lClient.getJsonCourse(1).getEntity(String.class);

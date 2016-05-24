@@ -7,11 +7,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <script>
-function myFunction() {
-    document.getElementById('loginForm').reset();
-    document.getElementById('registerForm').reset();
-    document.getElementById('forgotForm').reset();
-}
+    function myFunction() {
+        document.getElementById('loginForm').reset();
+        document.getElementById('registerForm').reset();
+        document.getElementById('forgotForm').reset();
+    }
 </script>
 <!-- -Login Modal -->
 

@@ -5,15 +5,15 @@
  */
 package se.wegelius.olp.model;
 
-
 /**
  *
  * @author asawe
  */
 public class Playlist {
-     private Integer playlistId;
-     private int courseId;
-     private int userId;
+
+    private Integer playlistId;
+    private int courseId;
+    private int userId;
 
     public Playlist(Integer playlistId, int courseId, int userId) {
         this.playlistId = playlistId;
@@ -44,5 +44,5 @@ public class Playlist {
     public void setUserId(int userId) {
         this.userId = userId;
     }
-    
+
 }

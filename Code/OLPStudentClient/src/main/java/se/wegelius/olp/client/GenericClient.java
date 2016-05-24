@@ -66,7 +66,6 @@ public class GenericClient {
         resource = resource.path("json");
         return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
     }
-    
 
     public ClientResponse getJson(int id) {
         /*GenericType<Course> gType = new GenericType<Course>() {

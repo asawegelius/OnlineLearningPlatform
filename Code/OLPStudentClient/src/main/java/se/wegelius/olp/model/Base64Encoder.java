@@ -10,9 +10,9 @@ package se.wegelius.olp.model;
  * @author asawe
  */
 public class Base64Encoder {
-    
+
     private static final String CODES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-    
+
     public static byte[] base64Decode(String input) {
         if (input.length() % 4 != 0) {
             throw new IllegalArgumentException("Invalid base64 input");

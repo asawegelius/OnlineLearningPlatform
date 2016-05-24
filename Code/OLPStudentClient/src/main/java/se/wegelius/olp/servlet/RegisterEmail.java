@@ -99,7 +99,7 @@ public class RegisterEmail extends HttpServlet {
                 String badrequest;
                 if (msg.contains(";")) {
                     badrequest = msg.substring(0, msg.indexOf(";"));
-                } else{
+                } else {
                     badrequest = msg;
                 }
                 // user exists but is inactive so send a new verification email

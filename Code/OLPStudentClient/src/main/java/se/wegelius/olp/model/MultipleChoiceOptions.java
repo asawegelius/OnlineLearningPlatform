@@ -1,7 +1,6 @@
 package se.wegelius.olp.model;
 // Generated Mar 20, 2016 4:31:10 PM by Hibernate Tools 4.3.1
 
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,62 +9,60 @@ import java.util.Set;
  */
 public class MultipleChoiceOptions {
 
-
-     private Integer multipleChoiceOptionsId;
-     private MultipleChoiceQuestion multipleChoiceQuestion;
-     private String mcoSequence;
-     private String mcoTheOption;
-     private Set<MultipleChoiceAnswer> multipleChoiceAnswers = new HashSet<>(0);
+    private Integer multipleChoiceOptionsId;
+    private MultipleChoiceQuestion multipleChoiceQuestion;
+    private String mcoSequence;
+    private String mcoTheOption;
+    private Set<MultipleChoiceAnswer> multipleChoiceAnswers = new HashSet<>(0);
 
     public MultipleChoiceOptions() {
     }
 
     public MultipleChoiceOptions(MultipleChoiceQuestion multipleChoiceQuestion, String mcoSequence, String mcoTheOption, Set<MultipleChoiceAnswer> multipleChoiceAnswers) {
-       this.multipleChoiceQuestion = multipleChoiceQuestion;
-       this.mcoSequence = mcoSequence;
-       this.mcoTheOption = mcoTheOption;
-       this.multipleChoiceAnswers = multipleChoiceAnswers;
+        this.multipleChoiceQuestion = multipleChoiceQuestion;
+        this.mcoSequence = mcoSequence;
+        this.mcoTheOption = mcoTheOption;
+        this.multipleChoiceAnswers = multipleChoiceAnswers;
     }
-   
+
     public Integer getMultipleChoiceOptionsId() {
         return this.multipleChoiceOptionsId;
     }
-    
+
     public void setMultipleChoiceOptionsId(Integer multipleChoiceOptionsId) {
         this.multipleChoiceOptionsId = multipleChoiceOptionsId;
     }
+
     public MultipleChoiceQuestion getMultipleChoiceQuestion() {
         return this.multipleChoiceQuestion;
     }
-    
+
     public void setMultipleChoiceQuestion(MultipleChoiceQuestion multipleChoiceQuestion) {
         this.multipleChoiceQuestion = multipleChoiceQuestion;
     }
+
     public String getMcoSequence() {
         return this.mcoSequence;
     }
-    
+
     public void setMcoSequence(String mcoSequence) {
         this.mcoSequence = mcoSequence;
     }
+
     public String getMcoTheOption() {
         return this.mcoTheOption;
     }
-    
+
     public void setMcoTheOption(String mcoTheOption) {
         this.mcoTheOption = mcoTheOption;
     }
+
     public Set<MultipleChoiceAnswer> getMultipleChoiceAnswers() {
         return this.multipleChoiceAnswers;
     }
-    
+
     public void setMultipleChoiceAnswers(Set<MultipleChoiceAnswer> multipleChoiceAnswers) {
         this.multipleChoiceAnswers = multipleChoiceAnswers;
     }
 
-
-
-
 }
-
-

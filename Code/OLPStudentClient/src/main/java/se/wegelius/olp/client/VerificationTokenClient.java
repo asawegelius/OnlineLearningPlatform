@@ -16,21 +16,18 @@ import javax.ws.rs.core.MultivaluedMap;
  */
 public class VerificationTokenClient extends GenericClient {
 
-    private static final String BASE_URI = "http://localhost:8080/OlpStudentHandler/rest/token/";
-    //private static final String BASE_URI = "http://188.181.85.75/OlpStudentHandler/rest/token/";   
+    //private static final String BASE_URI = "http://localhost:8080/OlpStudentHandler/rest/token/";
+    private static final String BASE_URI = "http://188.181.85.75/OlpStudentHandler/rest/token/";   
 
     public VerificationTokenClient() {
         super(BASE_URI);
     }
 
-   
     public ClientResponse getJsonToken(String token) {
 
         return getJsonToken(ClientResponse.class, token);
     }
-    
-   
-    
+
     public ClientResponse getJsonToken(Class<ClientResponse> responseType, String token) {
         WebResource resource = super.getWebResource();
         resource = resource.path(java.text.MessageFormat.format("jsontoken/{0}", new Object[]{token}));

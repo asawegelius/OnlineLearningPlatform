@@ -18,8 +18,8 @@ import org.slf4j.LoggerFactory;
 public class PlaylistClient extends GenericClient {
 
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(PlaylistClient.class);
-    private static final String BASE_URI = "http://localhost:8080/OlpStudentHandler/rest/playlist/";
-    //private static final String BASE_URI = "http://188.181.85.75/OlpStudentHandler/rest/playlist/";
+    //private static final String BASE_URI = "http://localhost:8080/OlpStudentHandler/rest/playlist/";
+    private static final String BASE_URI = "http://188.181.85.75/OlpStudentHandler/rest/playlist/";
 
     public PlaylistClient() {
         super(BASE_URI);
@@ -39,9 +39,10 @@ public class PlaylistClient extends GenericClient {
         queryParams.add("user_id", Integer.toString(userId));
         return queryParams;
     }
+
     public ClientResponse getJsonByUser(int id) {
         WebResource resource = super.getWebResource();
-        resource = resource.path("json/user/"+id);
+        resource = resource.path("json/user/" + id);
         return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
     }
 }

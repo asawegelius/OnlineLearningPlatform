@@ -10,5 +10,5 @@ package se.wegelius.olp.model;
  * @author asawe
  */
 public class javax {
-    
+
 }

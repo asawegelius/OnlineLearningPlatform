@@ -66,7 +66,7 @@ public class OLPRegister extends HttpServlet {
         logger.info(jsonToken);
         //update the user to enabled = true;
         UserClient userClient = new UserClient();
-        MultivaluedMap queryParam = userClient.getParameters(token.getUser().getUserId(), null,  token.getUser().getEmail(), token.getUser().getPassword(), 1);
+        MultivaluedMap queryParam = userClient.getParameters(token.getUser().getUserId(), null, token.getUser().getEmail(), token.getUser().getPassword(), 1);
         userClient.updateJson(queryParam, token.getUser().getUserId());
         //redirect to index with user logged in
         HttpSession session = request.getSession();

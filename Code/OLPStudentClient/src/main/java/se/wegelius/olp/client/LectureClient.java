@@ -16,17 +16,17 @@ import org.slf4j.LoggerFactory;
  *
  * @author asawe
  */
-public class LectureClient extends GenericClient{
-    
+public class LectureClient extends GenericClient {
+
     private static final org.slf4j.Logger logger = LoggerFactory.getLogger(LectureClient.class);
-    private static final String BASE_URI = "http://localhost:8080/OlpStudentHandler/rest/lecture/";
-    //private static final String BASE_URI = "http://188.181.85.75/OlpStudentHandler/rest/lecture/";
+    //private static final String BASE_URI = "http://localhost:8080/OlpStudentHandler/rest/lecture/";
+    private static final String BASE_URI = "http://188.181.85.75/OlpStudentHandler/rest/lecture/";
 
     public LectureClient() {
         super(BASE_URI);
     }
- 
-        public ClientResponse getJsonCourse(int courseId) {
+
+    public ClientResponse getJsonCourse(int courseId) {
 
         return getJsonCourse(ClientResponse.class, courseId);
     }
@@ -37,7 +37,7 @@ public class LectureClient extends GenericClient{
         return resource.accept(javax.ws.rs.core.MediaType.APPLICATION_JSON).get(ClientResponse.class);
 
     }
-    
+
     public MultivaluedMap getParameters(int id, int courseId, String lectureName, String video, Time duration, String description) {
         MultivaluedMap queryParams = new MultivaluedMapImpl();
         queryParams.add("id", Integer.toString(id));

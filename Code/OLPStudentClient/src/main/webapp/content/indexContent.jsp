@@ -5,11 +5,11 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-    <!-- Begin container -->
-    <div class="container">
+<!-- Begin container -->
+<div class="container">
 
-          
 
-    </div>      
 
-    <!-- End container -->
+</div>      
+
+<!-- End container -->

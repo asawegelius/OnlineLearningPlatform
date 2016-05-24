@@ -14,29 +14,30 @@ import java.util.Date;
  * @author asawe
  */
 public class VerificationToken {
+
     private static final int EXPIRATION = 60 * 24;
-    private int id;    
+    private int id;
     private String token;
-    private User user;    
+    private User user;
     private Date expiryDate;
- 
+
     public VerificationToken() {
         super();
     }
+
     public VerificationToken(String token, User user) {
         super();
         this.token = token;
         this.user = user;
         this.expiryDate = calculateExpiryDate(EXPIRATION);
     }
-     
+
     private Date calculateExpiryDate(int expiryTimeInMinutes) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Timestamp(cal.getTime().getTime()));
         cal.add(Calendar.MINUTE, expiryTimeInMinutes);
         return new Date(cal.getTime().getTime());
     }
-
 
     public int getId() {
         return id;

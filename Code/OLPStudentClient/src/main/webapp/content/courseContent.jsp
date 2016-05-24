@@ -22,19 +22,25 @@
     Object userId = session.getAttribute("userId");
     GsonBuilder builder = new GsonBuilder();
     builder.registerTypeAdapter(Lecture.class, new LectureDeserializer());
-
+    Object lectId = session.getAttribute("lectureId");
     Gson gson = builder.create();
     int courseId = -1;
+    int lectureId;
     Course course = null;
+    LectureClient lClient = new LectureClient();
     Lecture[] lectureArray = new Lecture[0];
     if (!request.getParameter("courseId").isEmpty()) {
         courseId = Integer.parseInt(request.getParameter("courseId"));
         CourseClient cClient = new CourseClient();
         String jsonCourse = cClient.getJson(courseId).getEntity(String.class);
         course = new Gson().fromJson(jsonCourse, Course.class);
-        LectureClient lClient = new LectureClient();
         String jsonLectures = lClient.getJsonCourse(courseId).getEntity(String.class);
         lectureArray = (Lecture[]) gson.fromJson(jsonLectures, Lecture[].class);
+    }
+    if (lectId != null) {
+        lectureId = (int)lectId;
+    } else {
+        lectureId = 1;
     }
     boolean isInPlaylist = false;
     Playlist current = null;
@@ -71,8 +77,8 @@
                     <div class="tab-pane active" id="one">
                         <ul>
                             <%
-                                for(Lecture l : lectureArray){
-                                    out.write("<li><a>" + l.getLectureName()+"</a></li>");
+                                for (Lecture l : lectureArray) {
+                                    out.write("<li><a>" + l.getLectureName() + "</a></li>");
                                 }
                             %>
                         </ul>
@@ -112,13 +118,15 @@
         </div>
 
         <div class="col-md-9 course-content">
-            <!--Body content-->        
+            <!--Body content    /-->        
             <p> <h3><% out.write(course.getCourseName());%></h3></p>
+
+            <p> <h4><% out.write(lectureArray[lectureId].getLectureName());%></h4></p>
             <div style="position: relative; width: 640px;">
                 <video id=0 controls width=640 height=360>
-                    <source src="assets/img/videos/test.ogv" type='video/ogg; codecs="theora, vorbis"'/>
-                    <source src="assets/img/videos/test.webm" type='video/webm' >
-                    <source src="assets/img/videos/test.mp4" type='video/mp4'>
+                    <% out.write("<source src='assets/img/videos/" + lectureArray[lectureId].getVideo() + ".ogv' type='video/ogg;codecs=\"theora, vorbis\"'>");%>
+                    <% out.write("<source src='assets/img/videos/" + lectureArray[lectureId].getVideo() + ".webm' type='video/webm'>");%>
+                    <% out.write("<source src='assets/img/videos/" + lectureArray[lectureId].getVideo() + ".mp4' type='video/mp4'>");%>
                     <p>Video is not visible, most likely your browser does not support HTML5 video</p>
                 </video>
             </div>
