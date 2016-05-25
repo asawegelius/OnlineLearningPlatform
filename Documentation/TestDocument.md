@@ -5,7 +5,7 @@
 | version   | Revision               | date    |	Implemented by| 
 | --------- |------------------------| ------- |--------------| 
 | 1.0       |  Added Junit tests     |14-05-16 |Åsa Wegelius   |
-|           |                        |         |               |
+| 1.2       | Load, Stress, Spike, Soak Test|25-05-16|Åsa Wegelius|
 |           |                        |         |               |
 
 ###1.3	Approvals
@@ -36,18 +36,74 @@
 ##2.	Table of Contents
 
 ###Table of Contents
-1.	Test Document History  
-  1.2	Revision History  
-  1.3	Approvals  
-  1.4	Distribution 
-  1.5 Confidentiality Rating
-  1.6 Link to online version
+1.	Test Document History
+    2.	Revision History 
+    3.	Approvals  	
+    4.	Distribution 
+    5.	5 Confidentiality Rating
+    6.	Link to online version
 2.	Table of Contents  
 3.	General  
-4.  Stress Performance Test
+4.  Load, Stress, Spike, Soak Test 
+    2.  Test objectives   
+    3.  General test conditions  
+    4.  Tests performed 
+        2.  Load tests 
+        3.  Stress test
+        4.  Spike test
+        5.  Soak test
+    5. Test results
+        2. Load test
+        3. Stress test
+        4. Spike test
+        5. Soak test
 5.  User Acceptance Test
 6.  Unit tests
   
+## 4. Load, Stress, Spike, Soak Test
+### Test objectives
+Our goal is to find out if the web site meets the performance requirements as specified below.
+
+The site needs to be able to handle 20000 unique visitors per day providing the industry standard level of service in terms of response time and error rate. Average response time should be less than 7 seconds and error rate should be less than 1%.
+
+The assumtions for the load test is that qe expect the average number of simultaneous users will be about 100.
+And that the average number of simultaneous users during peak hours will increase to 300.
+
+### General test conditions
+These general test conditions are appropriate for an average user:
+
+1. Ask for all branches 
+2. Ask for all courses
+3. Select a course
+4. Watch the course
+
+### Tests performed
+The folowing tests have been designed and executed
+#### Load tests
+#####OLPStudentHandler load test:
+
+- 100 unique users
+- 10 seconds ramp up period
+- 10 loops/user
+- request branches
+- request courses
+- request random course
+
+### Test results
+#### Load tests
+#####OlpStudentHandler load test:
+The test shows that the servers easily supports the demand of 100 simultanious users. 
+![Graph of the result](http://wegelius.se/bilder/spring16/LoadGraph.png "Result Graph")
+
+![Summary of the result](http://wegelius.se/bilder/spring16/LoadReport.png "Result Report")
+The request for courses is significant higher, but within boundarys, than the other requests. It suggests there are room for investigatin and tweeking to increase performance.
+
+![CPU use main server](http://wegelius.se/bilder/spring16/LoadMain.png "CPU main")
+The main server have no problems with the workload of 100 users.
+
+![CPU use seccondary server](http://wegelius.se/bilder/spring16/LoadSec.png "CPU seccondary")
+The seccondary server have no problem with the workload of 100 users
+
 
 ## 6. Unit tests
 We used unit tests to verify some crusial classes and methods like ensuring our generic dao setup works. Looking at the OLPStudentHandler we have over all 26 Junit tests: 
