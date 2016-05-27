@@ -43,7 +43,10 @@
     5.	5 Confidentiality Rating
     6.	Link to online version
 2.	Table of Contents  
-3.	General  
+3.	General
+	1. Purpose
+	2. Reasons
+	3. 
 4.  Load, Stress, Spike, Soak Test 
     2.  Test objectives   
     3.  General test conditions  
@@ -59,7 +62,27 @@
         5. Soak test
 5.  User Acceptance Test
 6.  Unit tests
-  
+ 
+## 3. General
+
+### 1. Purpose
+
+The Test Document presents the test scenario proposed to verify and validate the application functionalities according to the business requirements.
+The test cases are designed having as starting point the User Stories. These test cases cover the applications functionality area and assure that the user stories are covered.
+Another set of test cases cover the non-functional part of the application. These tests assure that the application is working under load and stress conditions. 
+Due to dimension of the actual version of the application and the small number of users, the test scenarios will not address tests to validate the infrastructure reliability and redundancy or crash and disaster recovery.
+
+Tests were split in four main areas thus they cover the main areas of the software testing process:
+- 	Unit testing during the development process to assure that the main code sections are functional during the development sprints and in the deployment phases;;
+- 	System Testing executed locally on the development environment to assure that the application is running in accordance with the development exit criteria;
+- 	User Acceptance Testing (UAT) executed by third party team to assure that the application meets the business requirements;
+- 	Performance Testing was executed to assure that the applications assure functionality in conditions of high usability and to determine what the conditions are when scalability should be implemented.
+
+
+### 2. Reasons
+
+The Tests series are mandatory to assure that the applications satisfy the customers need to use an online platform to improve and test their software knowledge.
+ 
 ## 4. Load, Stress, Spike, Soak Test
 ### Test objectives
 Our goal is to find out if the web site meets the performance requirements as specified below.
