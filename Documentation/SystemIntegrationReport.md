@@ -4,7 +4,7 @@
 | version   | Revision               | date    |	Implemented by| 
 | --------- |------------------------| ------- |--------------| 
 | 1.0       |  added part about ORM  |13-05-16 |  Åsa Wegelius |
-|           |                        |         |               |
+| 1.1       |  added intro and a small part about jersey  |  28/05/2016       |  Clovis Lebret             |
 |           |                        |         |               |
 
 ###1.3	Approvals
@@ -51,7 +51,9 @@
 ###Table of Contents
 
 ##3. Introduction
+This report documents the development process and our learning experiences over the course of implementing our project for the course _System Integration_ , as part of the Software Development education at The Copenhagen School of Design and Technology.
 
+Through this report we explain how we implemented system integration techniques and technologies within the context of our project. In each section, we will provide a brief introduction to the theory behind the specific topic to give a better understanding of our reasoning and the choices we have made throughout the development, particularly in regards to our design and implementation as it relates to achieving particular integration goals, and what tradeoffs, if any, were made.
 ##4. Integration
 ###4.2 Object Relational Mapping
 In object-oriented programming you work on Objects that are almost always non-scalar values. In a relational DBMS you store and manipulate scalar values in tables. To integrate you must either convert the objects to groups of simple values for storage and then convert back upon retrieval or you can use only simple scalar values within the program. Object-relational mapping implements the first approach. 
@@ -329,6 +331,16 @@ public class CourseDao extends OlpDao<CoursePersistance, Integer> {
 You see how we only need to override the methods where the lazy fetch is "too lazy", where we need to initialize a child. 
 
 ###4.3 Jersey Services
+ Jersey is the reference implementation for the JSR 311 specification.
+
+The Jersey implementation provides a library to implement Restful webservices in our Java servlet container. On the server side Jersey provides the servlet implementation which scans predefined classes to identify RESTful resources. In our web.xml configuration file we registered this servlet for our web application. The Jersey implementation also provides a client library to communicate with the RESTful webservice.
+
+The base URL of this servlet is: 
+```
+http://localhost:8080/OlpStudentHandler/rest/class_name/type_of_return/
+```
+
+Where the type of return can be either json, plain, or xml.
 
 ##5. Integration patterns
 
