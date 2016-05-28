@@ -333,14 +333,175 @@ You see how we only need to override the methods where the lazy fetch is "too la
 ###4.3 Jersey Services
  Jersey is the reference implementation for the JSR 311 specification.
 
-The Jersey implementation provides a library to implement Restful webservices in our Java servlet container. On the server side Jersey provides the servlet implementation which scans predefined classes to identify RESTful resources. In our web.xml configuration file we registered this servlet for our web application. The Jersey implementation also provides a client library to communicate with the RESTful webservice.
+The Jersey implementation provides a library to implement Restful webservices in our Java servlet container. On the server side Jersey provides the servlet implementation which scans predefined classes to identify RESTful resources. In our web.xml configuration file we registered this servlet for our web application. 
 
-The base URL of this servlet is: 
+#####our xml file:
+```
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <display-name>OLP Student Handler</display-name>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <servlet>  
+        <servlet-name>jersey</servlet-name>  
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>  
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>jersey</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+    <distributable/>
+</web-app>
+```
+As you can see, the path is defined in the servlet-mapping right after the jersey servlet implementation.
+This implementation also provides a client library to communicate with the RESTful webservice, which base URL is: 
 ```
 http://localhost:8080/OlpStudentHandler/rest/class_name/type_of_return/
 ```
 
-Where the type of return can be either json, plain, or xml.
+Where the type of return can be either json, plain, or xml. Here's an example with the Course rest service :
+
+#####CourseService.java
+```
+@Path("/course")
+public class CourseService {
+
+    @Context
+    private ServletContext sctx;          // dependency injection
+    private static CourseDao dao;
+
+    public CourseService() {
+    }
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("/json")
+    public Response getJson() {
+        checkContext();
+        Set<CoursePersistance> set = dao.getAll();
+        Set<Course> courses = new HashSet<>();
+        for(CoursePersistance p:set){
+            courses.add(new Course(p));
+        }
+        return Response.ok(toJson(courses), "application/json").build();
+    }
+```
+And to trigger the getJson method, we use the following url :
+
+```
+http://localhost:8080/OlpStudentHandler/rest/course/json
+```
+
+To get the following answer :
+```
+[{"courseId":2,"contentProvider":{"contentProviderId":1,"contentProviderName":"Lina","contentProviderDescription":"Speciality : MS office","contentProviderEmail":"lina@nerdson.dk"},"courseBranch":{"courseBranchId":2,"courseBranchName":"Network"},"courseType":{"courseTypeId":2,"courseBranchId":2,"courseTypeName":"Project Management"},"courseName":"Gant diagram","courseDescription":"blah blah","released":null,"language":"english","skillLevel":"intermediate"},{"courseId":1,"contentProvider":{"contentProviderId":1,"contentProviderName":"Lina","contentProviderDescription":"Speciality : MS office","contentProviderEmail":"lina@nerdson.dk"},"courseBranch":{"courseBranchId":1,"courseBranchName":"IT"},"courseType":{"courseTypeId":1,"courseBranchId":1,"courseTypeName":"Mobile apps"},"courseName":"Android","courseDescription":"blah","released":null,"language":"english","skillLevel":"beginner"}]
+```
+We then implemented most of the basic CRUD operation over all of our entities according to the application requirements.
+
+#####course create json example:
+```
+    @POST
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("/json/create")
+    public Response createJson(@QueryParam("course_name") String course_name,
+            @QueryParam("description") String description,
+            @QueryParam("skill_level") String skill_level,
+            @QueryParam("language") String language) {
+        checkContext();
+        // Require name to create.
+        if (course_name == null) {
+            String msg = "Property 'course_name' is missing.\n";
+            return Response.status(Response.Status.BAD_REQUEST).
+                    entity(msg).
+                    type(MediaType.APPLICATION_JSON).
+                    build();
+        }
+        // Otherwise, create the Mail and add it to the database.
+        CoursePersistance coursePersistance = new CoursePersistance();
+        coursePersistance.setCourseName(course_name);
+        coursePersistance.setCourseDescription(description);
+        coursePersistance.setLanguage(language);
+        coursePersistance.setSkillLevel(skill_level);
+        dao.save(coursePersistance);
+        Course course = new Course(coursePersistance);
+        return Response.ok(toJson(course), MediaType.APPLICATION_JSON).build();
+    }
+```
+
+#####course delete plain example:
+```
+    @DELETE
+    @Produces({MediaType.TEXT_PLAIN})
+    @Path("/plain/delete/{id: \\d+}")
+    public Response delete(@PathParam("id") int id) {
+        checkContext();
+        String msg = null;
+        CoursePersistance course = dao.findByID(id);
+        if (course == null) {
+            msg = "There is no course with id " + id + ". Cannot delete.\n";
+            return Response.status(Response.Status.BAD_REQUEST).
+                    entity(msg).
+                    type(MediaType.TEXT_PLAIN).
+                    build();
+        }
+        dao.delete(course);
+        msg = "Course " + id + " deleted.\n";
+
+        return Response.ok(msg, "text/plain").build();
+    }
+```
+#####course put json example:
+```
+    @PUT
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("json/update/{id: \\d+}")
+    public Response updateJson(@QueryParam("id") int id,
+            @QueryParam("course_name") String course_name,
+            @QueryParam("description") String description,
+            @QueryParam("skill_level") String skill_level,
+            @QueryParam("language") String language) {
+        checkContext();
+
+        System.out.println("in put json got request for id " + id);
+        CoursePersistance course = dao.findByID(id);
+        // Check that sufficient data are present to do an edit.
+        String msg = null;
+        if (course_name == null && description == null && skill_level == null && language == null) {
+            msg = "No parameters is given: nothing to edit\n";
+        } else if (course == null) {
+            msg = "There is no course with id " + id + "\n";
+        }
+
+        if (msg != null) {
+            return Response.status(Response.Status.BAD_REQUEST).
+                    entity(msg).
+                    type(MediaType.APPLICATION_JSON).
+                    build();
+        } else {
+            // Update.
+            course.setCourseName(course_name);
+            course.setCourseDescription(description);
+            course.setLanguage(language);
+            course.setSkillLevel(skill_level);
+        }
+        dao.update(course);
+
+        return Response.ok(toJson(new Course(course)), MediaType.APPLICATION_JSON).build();
+    }
+```
 
 ##5. Integration patterns
 
