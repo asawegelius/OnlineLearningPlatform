@@ -5,7 +5,7 @@
 | --------- |------------------------| ------- |--------------| 
 | 1.0       |  added part about ORM  |13-05-16 |  Åsa Wegelius |
 | 1.1       |  added intro and a small part about jersey  |  28/05/2016       |  Clovis Lebret             |
-|           |                        |         |               |
+| 1.2       |  added conclusion and added a small part in integration patterns  |  30/05/2016       |  Clovis Lebret             |
 
 ###1.3	Approvals
 
@@ -505,10 +505,35 @@ We then implemented most of the basic CRUD operation over all of our entities ac
 
 ##5. Integration patterns
 
+Web service-oriented architectures put interaction into the spotlight and will most of the time implement lots of different  integration patterns.
+
+###5.1 Conversation patterns
+A conversation pattern provide a catalog of common scenarios and offer integration solutions on specific design problems, but the good thing is that they put focus on those particular design intents and trade-offs. 
+####A. Request-Reply
+ ![Request-Reply](http://puu.sh/pauVm/9cd509f9db.png "Request-Reply pattern")
+ 
+•   Single Conversation state: waiting for reply, complete
+•   More complicated once error conditions considered
+
+This is a very simple interaction between two systems, which mimics a procedure call from one system to the other: here the client sends a request to the rest service, expecting a response message in return. The message-based interaction uses separate request and response messages.
+
+####B. Subscribe-Notify 
+ ![Subscribe-Notify](http://puu.sh/pavGH/9cbada7007.png "Subscribe-Notify pattern")
+
+•    Subscriber expresses interest in receiving notifications
+•    Subscriber receives messages until a stop condition is reached : sends a stop request
+
+Subscribe-Notify assumes that the originator can receive inbound messages. It makes more efficient use of network resources  than repeated Request-Response. Not counting administrative messages, such as renewals, Subscribe-Notify transmits only half as many messages as a repeated Request-Response. This is perfectly illustrated when for exemple a user wants to follow a course in our system. 
+	
 ##6. Conclusion
+To conclude this report, we would say we were successful in the application of system integration concepts to our web service application. At the time of this writing, the project does not entirely fulfill our own requirements for what the application should do, but there are no technical barriers to fulfilling them. It has simply been due to a shortage of available development time. We are confident that, given another sprint’s worth of time, we would have implemented all of the desired functionalities. The technologies we have been using so far have been really interesting to work with and were successful in showing off the main points of this course. Web services proved themselves great at exposing software functionality to customers and integrating heterogeneous platforms using open and commonly accepted Internet protocols.
+
+The insights we have gained and shared in this report, section by section, helped us in our understanding of system design and integration patterns, and the lessons learned will aid us in our future iterations on similar application.
 
 ##7. Appendices
 ###7.1 References
 RedHat _Hibernate_ Retrieved Retrieved 05 13, 2016, from http://hibernate.org/orm/ 
 
 Martin Fowler (8 May 2012) _OrmHate_  Retrieved 05 13, 2016, from http://martinfowler.com/bliki/OrmHate.html
+
+Gregor Hohpe (18 June 2008) _EIP_ Retrieved 29 05, 2016 from http://www.enterpriseintegrationpatterns.com/
