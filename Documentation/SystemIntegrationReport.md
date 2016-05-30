@@ -513,6 +513,7 @@ A conversation pattern provide a catalog of common scenarios and offer integrati
  ![Request-Reply](http://puu.sh/pauVm/9cd509f9db.png "Request-Reply pattern")
  
 •   Single Conversation state: waiting for reply, complete
+
 •   More complicated once error conditions considered
 
 This is a very simple interaction between two systems, which mimics a procedure call from one system to the other: here the client sends a request to the rest service, expecting a response message in return. The message-based interaction uses separate request and response messages.
@@ -521,6 +522,7 @@ This is a very simple interaction between two systems, which mimics a procedure 
  ![Subscribe-Notify](http://puu.sh/pavGH/9cbada7007.png "Subscribe-Notify pattern")
 
 •    Subscriber expresses interest in receiving notifications
+
 •    Subscriber receives messages until a stop condition is reached : sends a stop request
 
 Subscribe-Notify assumes that the originator can receive inbound messages. It makes more efficient use of network resources  than repeated Request-Response. Not counting administrative messages, such as renewals, Subscribe-Notify transmits only half as many messages as a repeated Request-Response. This is perfectly illustrated when for exemple a user wants to follow a course in our system. 
