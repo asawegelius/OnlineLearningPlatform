@@ -6,7 +6,7 @@
 | 1.0       |  added part about ORM  |13-05-16 |  Åsa Wegelius |
 | 1.1       |  added intro and a small part about jersey  |  28/05/2016       |  Clovis Lebret             |
 | 1.2       |  added conclusion and added a small part in integration patterns  |  30/05/2016       |  Clovis Lebret             |
-
+| 1.3       |  completed the report  |  30/05/2016       |  Clovis Lebret             |
 ###1.3	Approvals
 
 
