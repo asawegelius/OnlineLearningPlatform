@@ -41,9 +41,12 @@
 2. Table of Contents  
 3. Introduction
 4.  Integration  
-  4.2	Object Relational Mapping 
+  4.2	Object Relational Mapping
   4.3	Jersey Services   
 5.	Integration patterns 
+  5.1  Conversation pattern
+  5.2  Integration style
+  5.3  Messaging system
 6. Conclusion
 7. Appendices  
   7.2	References
