@@ -508,7 +508,7 @@ We then implemented most of the basic CRUD operation over all of our entities ac
 Web service-oriented architectures put interaction into the spotlight and will most of the time implement lots of different  integration patterns.
 
 ###5.1 Conversation patterns
-A conversation pattern provide a catalog of common scenarios and offer integration solutions on specific design problems, but the good thing is that they put focus on those particular design intents and trade-offs. 
+A conversation pattern provide a catalog of common scenarios and offer integration solutions on specific design problems, but the good thing is that they put focus on those particular design intents and trade-offs.
 ####A. Request-Reply
  ![Request-Reply](http://puu.sh/pauVm/9cd509f9db.png "Request-Reply pattern")
  
@@ -521,12 +521,51 @@ This is a very simple interaction between two systems, which mimics a procedure 
 ####B. Subscribe-Notify 
  ![Subscribe-Notify](http://puu.sh/pavGH/9cbada7007.png "Subscribe-Notify pattern")
 
-•    Subscriber expresses interest in receiving notifications
+•   Subscriber expresses interest in receiving notifications
 
-•    Subscriber receives messages until a stop condition is reached : sends a stop request
+•   Subscriber receives messages until a stop condition is reached : sends a stop request
 
 Subscribe-Notify assumes that the originator can receive inbound messages. It makes more efficient use of network resources  than repeated Request-Response. Not counting administrative messages, such as renewals, Subscribe-Notify transmits only half as many messages as a repeated Request-Response. This is perfectly illustrated when for exemple a user wants to follow a course in our system. 
-	
+
+###5.2 Integration Styles
+####A. Remote Procedure Invocation
+ ![File Transfer](http://puu.sh/pbKwd/dad33c252b.png "File Transfer")
+
+•   Have each application produce files containing information that other applications need to consume. 
+
+•   Integrators take the responsibility of transforming files into different formats. 
+
+•   Produce the files at regular intervals according to the nature of the business
+
+An important decision with files is what format to use. Which is why we chose XML, Json and plain text files to communicate between client and server.
+
+####B. Remote Procedure Invocation
+ ![Remote Procedure Invocation](http://puu.sh/pbEJF/343402d197.png "Remote Procedure Invocation")
+ 
+•   Develop each application as a large-scale object or component with encapsulated data. 
+
+•   Provide an interface to allow other applications to interact with the running application. 
+
+Remote Procedure Invocation applies the principle of encapsulation to integrating applications. If an application needs some information that is owned by another application, it asks that application directly. If one application needs to modify the data of another, then it does so by making a call to the other application. In our application this call is made through the REST service calling DAO methods.
+
+###5.3 Messaging system
+####A. Message Chanel
+ ![Message Chanel](http://puu.sh/pbJXQ/8faf881ad8.png "Message Chanel")
+ 
+•   Connect the applications using a Message Channel
+
+•   Select a sender and a reciever
+
+When an application has information to communicate, it doesn't just fling the information into the messaging system, it adds the information to a particular Message Channel. An application receiving information doesn't just pick it up at random from the messaging system; it retrieves the information from a particular Message Channel. The architechture we used uses the server as sender and the client as receiver. Both use the same REST channel : URI.
+
+####B. Message
+ ![Message](http://puu.sh/pbKji/b6af4a6a90.png "Message")
+ 
+•   Package the information into a Message, a data record that the messaging system can transmit through a message channel.
+
+Thus any data that is to be transmitted via a messaging system must be converted into one or more messages that can be sent through messaging channels.
+
+
 ##6. Conclusion
 To conclude this report, we would say we were successful in the application of system integration concepts to our web service application. At the time of this writing, the project does not entirely fulfill our own requirements for what the application should do, but there are no technical barriers to fulfilling them. It has simply been due to a shortage of available development time. We are confident that, given another sprint’s worth of time, we would have implemented all of the desired functionalities. The technologies we have been using so far have been really interesting to work with and were successful in showing off the main points of this course. Web services proved themselves great at exposing software functionality to customers and integrating heterogeneous platforms using open and commonly accepted Internet protocols.
 
